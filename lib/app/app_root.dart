@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
-import 'package:shiritori/ui/home/home.dart';
+import 'package:shiritori/ui/main/main.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot();
@@ -18,7 +18,7 @@ class AppRoot extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      home: const HomeScreen(),
+      home: MainContainer(),
     );
   }
 }

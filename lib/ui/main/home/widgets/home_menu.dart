@@ -78,53 +78,64 @@ class _PlayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final cardTheme = theme.cardTheme;
+    final textTheme = theme.textTheme;
 
     return Opacity(
       opacity: onTap != null ? 1.0 : 0.5,
-      child: ScaleButton(
+      child: ScaleButton.builder(
         onTap: onTap,
-        child: DefaultStylingColor(
-          color: color,
-          child: Card(
-            child: SizedBox.fromSize(
-              size: const Size.square(164.0),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      subtitle.toUpperCase(),
-                      style: textTheme.subtitle2,
-                    ),
-                    const _SubtitleLine(),
-                    verticalMargin4,
-                    Text(
-                      title,
-                      maxLines: 1,
-                      softWrap: false,
-                      overflow: TextOverflow.fade,
-                      style: textTheme.headline5,
-                    ),
-                    const Spacer(),
-                    DefaultTextStyle.merge(
-                      style: TextStyle(
-                        fontWeight: textTheme.headline4.fontWeight,
+        builder: (context, scale) {
+          final elevationFactor = (scale - ScaleButton.defaultTappedScale) *
+              (1 / (1 - ScaleButton.defaultTappedScale));
+
+          final elevation = (cardTheme.elevation * (elevationFactor * 0.8)) +
+              (cardTheme.elevation * 0.2);
+
+          return DefaultStylingColor(
+            color: color,
+            child: RawCard(
+              elevation: elevation,
+              child: SizedBox.fromSize(
+                size: const Size.square(164.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        subtitle.toUpperCase(),
+                        style: textTheme.subtitle2,
                       ),
-                      child: AbsoluteTextIconTheme(
-                        size: 56.0,
-                        color: color,
-                        child: icon,
+                      const _SubtitleLine(),
+                      verticalMargin4,
+                      Text(
+                        title,
+                        maxLines: 1,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
+                        style: textTheme.headline5,
                       ),
-                    ),
-                  ],
+                      const Spacer(),
+                      DefaultTextStyle.merge(
+                        style: TextStyle(
+                          fontWeight: textTheme.headline4.fontWeight,
+                        ),
+                        child: AbsoluteTextIconTheme(
+                          size: 56.0,
+                          color: color,
+                          child: icon,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

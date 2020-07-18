@@ -4,22 +4,46 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shiritori/theme/theme.dart';
 
+typedef ScaleButtonBuilder = Widget Function(
+  BuildContext context,
+  double scale,
+);
+
 class ScaleButton extends StatefulWidget {
   const ScaleButton({
     Key key,
-    this.tappedScale = 0.95,
+    this.tappedScale = defaultTappedScale,
     @required this.onTap,
     @required this.child,
-  })  : assert(
+  })  : builder = null,
+        assert(child != null),
+        assert(
           tappedScale != null && tappedScale >= 0.0 && tappedScale <= 1.0,
           'tappedScale must not be null '
           'and must be between 0.0 and 1.0 (inclusive).',
         ),
         super(key: key);
 
+  const ScaleButton.builder({
+    Key key,
+    this.tappedScale = defaultTappedScale,
+    @required this.onTap,
+    @required this.builder,
+  })  : child = null,
+        assert(builder != null),
+        assert(
+          tappedScale != null && tappedScale >= 0.0 && tappedScale <= 1.0,
+          'tappedScale must not be null '
+          'and must be between 0.0 and 1.0 (inclusive).',
+        ),
+        super(key: key);
+
+  static const defaultTappedScale = 0.95;
+
   final double tappedScale;
   final VoidCallback onTap;
   final Widget child;
+  final ScaleButtonBuilder builder;
 
   @override
   _ScaleButtonState createState() => _ScaleButtonState();
@@ -36,7 +60,7 @@ class ScaleButton extends StatefulWidget {
 
 class _ScaleButtonState extends State<ScaleButton>
     with SingleTickerProviderStateMixin {
-  static const _tapCurve = AppTheme.defaultCurve;
+  static const _tapCurve = AppTheme.curveDefault;
 
   AnimationController _controller;
   Animation<double> _tapAnimation;
@@ -76,9 +100,7 @@ class _ScaleButtonState extends State<ScaleButton>
 
   @override
   Widget build(BuildContext context) {
-    if (widget.onTap == null) {
-      return widget.child;
-    }
+    final enabled = widget.onTap != null;
 
     return AnimatedBuilder(
       animation: _tapAnimation,
@@ -86,15 +108,14 @@ class _ScaleButtonState extends State<ScaleButton>
         return Transform.scale(
           alignment: Alignment.center,
           scale: _tapAnimation.value,
-          child: child,
+          child: GestureDetector(
+            onTapDown: !enabled ? null : _onTapDown,
+            onTapUp: !enabled ? null : _onTapUp,
+            onTapCancel: !enabled ? null : _onTapCancel,
+            child: widget.child ?? widget.builder(context, _tapAnimation.value),
+          ),
         );
       },
-      child: GestureDetector(
-        onTapDown: _onTapDown,
-        onTapUp: _onTapUp,
-        onTapCancel: _onTapCancel,
-        child: widget.child,
-      ),
     );
   }
 }
