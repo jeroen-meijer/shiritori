@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shiritori/ui/main/main.dart';
 import 'package:shiritori/ui/main/widgets/widgets.dart';
 import 'package:shiritori/ui/routes/routes.dart';
+import 'package:shiritori/utils/utils.dart';
 
 class MainContainer extends StatelessWidget {
   final _navigatorKey = GlobalKey<NavigatorState>();
+  final _routeNotifier = RouteNotifier<ZoomPageRoute>();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class MainContainer extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Background(
-            navigatorKey: _navigatorKey,
+            routeNotifier: _routeNotifier,
           ),
           SafeArea(
             child: WillPopScope(
@@ -22,6 +24,7 @@ class MainContainer extends StatelessWidget {
               },
               child: Navigator(
                 key: _navigatorKey,
+                observers: [_routeNotifier],
                 onGenerateRoute: (_) {
                   return ZoomPageRoute(
                     builder: (_) => const HomeScreen(),

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:ui' as ui;
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,6 +29,30 @@ class Images extends Equatable {
 
   // Bitmap assets
   static const backgroundMain = Images._bitmap('background_main');
+
+  /// Preloads the background image and returns the resulting [ui.Image].
+  static Future<ui.Image> loadBackground() async {
+    final completer = Completer<ui.Image>();
+    final imageStream =
+        AssetImage(backgroundMain.path).resolve(ImageConfiguration.empty);
+
+    ImageStreamListener listener;
+
+    listener = ImageStreamListener(
+      (imageInfo, synchronousCall) {
+        imageStream.removeListener(listener);
+        completer.complete(imageInfo.image);
+      },
+      onError: (exception, stackTrace) {
+        imageStream.removeListener(listener);
+        completer.completeError(exception);
+      },
+    );
+
+    imageStream.addListener(listener);
+
+    return completer.future;
+  }
 
   /// Produces a widget that displays the associated asset.
   _ImageAssetView call({

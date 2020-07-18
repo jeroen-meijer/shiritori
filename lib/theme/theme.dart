@@ -106,5 +106,7 @@ abstract class AppTheme {
   static const cyan = Color(0xFF6DE2BA);
   static const green = Color(0xFF77D65A);
 
-  static const curveDefault = Curves.easeOutCubic;
+  static const curveDefault = Curves.easeOutQuint;
+
+  static const durationAnimationDefault = Duration(milliseconds: 400);
 }

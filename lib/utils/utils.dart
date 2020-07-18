@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:meta/meta.dart';
 
+export 'route_notifier.dart';
+
 // Typedefs
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 typedef FutureValueChanged<T> = FutureOr<void> Function(T value);

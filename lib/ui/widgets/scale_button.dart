@@ -70,7 +70,7 @@ class _ScaleButtonState extends State<ScaleButton>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 250),
     );
     _tapAnimation = CurvedAnimation(
       parent: _controller,

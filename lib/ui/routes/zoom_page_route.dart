@@ -6,7 +6,7 @@ class ZoomPageRoute extends PageRouteBuilder {
     @required final WidgetBuilder builder,
   })  : assert(builder != null),
         super(
-          transitionDuration: const Duration(milliseconds: 350),
+          transitionDuration: AppTheme.durationAnimationDefault,
           transitionsBuilder: (context, animationIn, animationOut, child) {
             final curve = AppTheme.curveDefault;
             final reverseCurve = curve.flipped;
@@ -31,7 +31,7 @@ class ZoomPageRoute extends PageRouteBuilder {
               //   the behavior expected of `curve` (unflipped), and the
               //   opacity will start with a fast dropoff and then slowly
               //   settles.
-              curve: curve,
+              curve: reverseCurve,
               reverseCurve: curve,
             );
             final scaleAnimationIn = CurvedAnimation(
