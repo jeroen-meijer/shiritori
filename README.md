@@ -1,6 +1,27 @@
 # Shiritori - Flutter App
 
-The japanese game Shiritori for iOS, Android and web.
+The Japanese game Shiritori for iOS, Android and web.
+
+Work in progress, does not work yet.
+
+## Highlights
+
+- Well-composed modern UI.
+- Context-aware theming.
+- Full Intl localization.
+- Custom animations.
+
+## TODO
+
+Here are some things I still need/want to implement.
+
+- Actually being able to play the game.
+- Backend integration to play against other players preferably using Firebase.
+- More pretty animations.
+
+### Credits
+
+As an exercise, I tried to copy this [beautiful UI mockup](https://dribbble.com/shots/5836646-Quiz-iOS-app-Animation) done by [Mike from Creative Mints](https://dribbble.com/creativemints). Give 'em some love.
 
 ## Getting Started
 
