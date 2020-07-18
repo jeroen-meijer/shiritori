@@ -1,0 +1,70 @@
+name: shiritori
+description: The japanese game Shiritori.
+version: 1.0.0
+
+publish_to: "none"
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: 1.19.0-4.3.pre
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  equatable: 1.2.2
+  flutter_svg: 0.17.4
+  font_awesome_flutter: 8.8.1
+  intl: 0.16.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  effective_dart: 1.2.3
+  intl_translation: 0.17.9
+  pedantic: 1.9.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/png/
+    - assets/images/svg/
+  fonts:
+    - family: HurmeGeometricSans
+      fonts:
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_Hairline.otf
+          weight: 100
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_HairlineItalic.otf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_Thin.otf
+          weight: 200
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_ThinItalic.otf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_Light.otf
+          weight: 300
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_LightItalic.otf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans.otf
+          weight: 400
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_Italic.otf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_SemiBoldItalic.otf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_Bold.otf
+          weight: 700
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_BoldItalic.otf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_Black.otf
+          weight: 900
+        - asset: assets/fonts/HurmeGeometricSans/HurmeGeometricSans_BlackItalic.otf
+          weight: 900
+          style: italic

@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    // Highly recommended
+    "Dart-Code.dart-code",
+    "Dart-Code.flutter",
+    "streetsidesoftware.code-spell-checker",
+    // Optional
+    "Nash.awesome-flutter-snippets",
+    "jeroen-meijer.pubspec-assist",
+    "BendixMa.dart-data-class-generator"
+  ]
+}

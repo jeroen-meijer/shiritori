@@ -1,0 +1,84 @@
+{
+  "welcomeHeader": "Welcome back,\n{name}.",
+  "@welcomeHeader": {
+    "description": "Welcome message displayed at the top of the screen that greets the user.",
+    "type": "text",
+    "placeholders": {
+      "name": {
+        "example": "Jay"
+      }
+    }
+  },
+  "guessesStatisticTitle": "Guesses",
+  "@guessesStatisticTitle": {
+    "description": "The header for the statistic showing the number of guesses the user has made in total.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pointsStatisticTitle": "Points",
+  "@pointsStatisticTitle": {
+    "description": "The header for the statistic showing the number of points the user has in total.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "rankStatisticTitle": "Rank",
+  "@rankStatisticTitle": {
+    "description": "The header for the statistic showing the rank of the user compared to all other users.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "quickPlayCardTitle": "Quick Play",
+  "@quickPlayCardTitle": {
+    "description": "Title on the Quick Play card that allows the user to start a quick play match.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "quickPlayCardSubtitle": "New",
+  "@quickPlayCardSubtitle": {
+    "description": "Subtitle on the Quick Play card that indicates it is a new game mode.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "multiplayerCardTitle": "Multiplayer",
+  "@multiplayerCardTitle": {
+    "description": "Title on the Multiplayer card that allows the user to start a multiplayer match.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "multiplayerCardSubtitle": "Play with friends",
+  "@multiplayerCardSubtitle": {
+    "description": "Subtitle on the Multiplayer card that indicates the user can play with friends.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsCardTitle": "Stats",
+  "@statsCardTitle": {
+    "description": "Title on the Stats card that allows the user to view their stats and rank compared to other users.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statsCardSubtitle": "Ranking",
+  "@statsCardSubtitle": {
+    "description": "Subtitle on the Stats card that indicates the user can see their ranking.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsCardTitle": "Settings",
+  "@settingsCardTitle": {
+    "description": "Title on the Settings card that allows the user to view their settings.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsCardSubtitle": "Customize",
+  "@settingsCardSubtitle": {
+    "description": "Subtitle on the Settings card that indicates the user can customize their settings.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "snackBarConfirmButton": "OK",
+  "@snackBarConfirmButton": {
+    "description": "Button text displayed on a snackbar that confirms and dismisses it.",
+    "type": "text",
+    "placeholders": {}
+  }
+}
