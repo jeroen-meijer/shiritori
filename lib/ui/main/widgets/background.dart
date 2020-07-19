@@ -25,7 +25,7 @@ class _BackgroundState extends State<Background>
     with
         SingleTickerProviderStateMixin,
         RouteNotifierStateMixin<ZoomPageRoute, Background> {
-  static const _curve = AppTheme.curveDefault;
+  static const _curve = Curves.easeOutCubic;
 
   AnimationController _animationController;
   Animation<double> _animation;
@@ -40,7 +40,7 @@ class _BackgroundState extends State<Background>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: AppTheme.durationAnimationDefault * 1.5,
+      duration: AppTheme.durationAnimationDefault,
       lowerBound: 0.0,
       // Can be increased to animate multiple stages.
       upperBound: 1.0,
@@ -82,6 +82,9 @@ class _BackgroundState extends State<Background>
     }
 
     log('  animating forward (routeDepth: $_routeDepth)');
+    if (_animationController.isAnimating) {
+      _animationController.stop(canceled: true);
+    }
     _animationController.animateTo(_routeDepth.toDouble());
   }
 
@@ -96,6 +99,9 @@ class _BackgroundState extends State<Background>
 
     log('  animating back (routeDepth: $_routeDepth)');
 
+    if (_animationController.isAnimating) {
+      _animationController.stop(canceled: true);
+    }
     _animationController.animateBack(_routeDepth.toDouble());
   }
 

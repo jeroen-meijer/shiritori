@@ -20,6 +20,7 @@ abstract class AppTheme {
 
   static const _elevation = 18.0;
   static const cardTheme = CardTheme(
+    color: white,
     elevation: _elevation,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(radiusCardDefault),
@@ -108,5 +109,5 @@ abstract class AppTheme {
 
   static const curveDefault = Curves.easeOutQuint;
 
-  static const durationAnimationDefault = Duration(milliseconds: 400);
+  static const durationAnimationDefault = Duration(milliseconds: 600);
 }
