@@ -5,10 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch",
+      "name": "Launch app",
       "request": "launch",
       "type": "dart",
-      "console": "terminal"
+      "program": "app/lib/main.dart"
+    },
+    {
+      "name": "Run dict parser (example.xml)",
+      "program": "bin/dict_parser.dart",
+      "request": "launch",
+      "type": "dart",
+      "args": ["example.xml"]
     }
   ]
 }

@@ -1,12 +1,15 @@
 #!/bin/sh
 set -e
 
+pushd app
 echo 'Running flutter analyze...'
 flutter analyze
 echo 'Running flutter format...'
 flutter format --line-length 80 --set-exit-if-changed .
 echo 'Extracting intl ARBs...'
 flutter pub run intl_translation:extract_to_arb --suppress-last-modified --output-dir=lib/intl/arb lib/intl/strings/*.dart
+
+popd
 
 echo ''
 echo 'Done.'

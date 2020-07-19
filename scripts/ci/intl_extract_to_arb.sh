@@ -2,7 +2,11 @@
 
 set -e
 
+pushd app
+
 flutter pub run intl_translation:extract_to_arb --suppress-last-modified --output-dir=lib/intl/arb lib/intl/strings/*.dart
+
+popd
 
 if [ -z "$(git status --porcelain)" ]; then
   exit 0

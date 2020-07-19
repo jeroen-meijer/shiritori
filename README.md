@@ -2,16 +2,42 @@
 
 The Japanese game Shiritori for iOS, Android and web.
 
-Work in progress, does not work yet.
+**Proof of concept and work in progress -- does not work yet.**
 
 ## Highlights
 
-- Well-composed modern UI.
+- Well-composed [modern UI](https://dribbble.com/shots/5836646-Quiz-iOS-app-Animation).
 - Context-aware theming.
 - Full Intl localization.
 - Custom animations.
 
-## TODO
+# How to launch
+
+The client can be found in the `app/` directory.
+Either open this project in your editor and run it through your
+IDE, or go to the `app/` folder and run the app manually.
+
+```bash
+cd app/
+flutter run
+```
+
+A dictionary parser can be found in the `/dict_parser` directory.
+It currently only supports parsing the Japanese `JMdict_e` document,
+but can be refactored to support more languages and formats relatively easily.
+
+A script is included that compiles the parser to native and then runs it against
+the included `JMdict_e.xml` file.
+
+**Warning: the `JMdict_e.xml` file is extremely large (~30M lines).**
+**Opening it in an editor may make your text editor lag or crash altogether.**
+
+Run the dict_parser by using the included script:
+```bash
+./scripts/run_dict_parser.sh
+```
+
+# TODO
 
 Here are some things I still need/want to implement.
 

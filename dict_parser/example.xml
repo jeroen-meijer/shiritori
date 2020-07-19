@@ -1,0 +1,1602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE JMdict [
+  <!ELEMENT JMdict (entry*)>
+  <!ELEMENT entry (ent_seq, k_ele*, r_ele+, sense+)>
+  <!ELEMENT ent_seq (#PCDATA)>
+  <!ELEMENT k_ele (keb, ke_inf*, ke_pri*)>
+  <!ELEMENT keb (#PCDATA)>
+  <!ELEMENT ke_inf (#PCDATA)>
+  <!ELEMENT ke_pri (#PCDATA)>
+  <!ELEMENT r_ele (reb, re_nokanji?, re_restr*, re_inf*, re_pri*)>
+  <!ELEMENT reb (#PCDATA)>
+  <!ELEMENT re_nokanji (#PCDATA)>
+  <!ELEMENT re_restr (#PCDATA)>
+  <!ELEMENT re_inf (#PCDATA)>
+  <!ELEMENT re_pri (#PCDATA)>
+  <!ELEMENT sense (stagk*, stagr*, pos*, xref*, ant*, field*, misc*, s_inf*, lsource*, dial*, gloss*)>
+  <!ELEMENT stagk (#PCDATA)>
+  <!ELEMENT stagr (#PCDATA)>
+  <!ELEMENT xref (#PCDATA)*>
+  <!ELEMENT ant (#PCDATA)*>
+  <!ELEMENT pos (#PCDATA)>
+  <!ELEMENT field (#PCDATA)>
+  <!ELEMENT misc (#PCDATA)>
+  <!ELEMENT lsource (#PCDATA)>
+  <!ATTLIST lsource xml:lang CDATA "eng">
+  <!ATTLIST lsource ls_type CDATA #IMPLIED>
+  <!ATTLIST lsource ls_wasei CDATA #IMPLIED>
+  <!ELEMENT dial (#PCDATA)>
+  <!ELEMENT gloss (#PCDATA | pri)*>
+  <!ATTLIST gloss xml:lang CDATA "eng">
+  <!ATTLIST gloss g_gend CDATA #IMPLIED>
+  <!ATTLIST gloss g_type CDATA #IMPLIED>
+  <!ELEMENT pri (#PCDATA)>
+  <!ELEMENT s_inf (#PCDATA)>
+  <!ENTITY MA "martial arts term">
+  <!ENTITY X "rude or X-rated term (not displayed in educational software)">
+  <!ENTITY abbr "abbreviation">
+  <!ENTITY adj-i "adjective (keiyoushi)">
+  <!ENTITY adj-ix "adjective (keiyoushi) - yoi/ii class">
+  <!ENTITY adj-na "adjectival nouns or quasi-adjectives (keiyodoshi)">
+  <!ENTITY adj-no "nouns which may take the genitive case particle `no'">
+  <!ENTITY adj-pn "pre-noun adjectival (rentaishi)">
+  <!ENTITY adj-t "`taru' adjective">
+  <!ENTITY adj-f "noun or verb acting prenominally">
+  <!ENTITY adv "adverb (fukushi)">
+  <!ENTITY adv-to "adverb taking the `to' particle">
+  <!ENTITY arch "archaism">
+  <!ENTITY ateji "ateji (phonetic) reading">
+  <!ENTITY aux "auxiliary">
+  <!ENTITY aux-v "auxiliary verb">
+  <!ENTITY aux-adj "auxiliary adjective">
+  <!ENTITY Buddh "Buddhist term">
+  <!ENTITY chem "chemistry term">
+  <!ENTITY chn "children's language">
+  <!ENTITY col "colloquialism">
+  <!ENTITY comp "computer terminology">
+  <!ENTITY conj "conjunction">
+  <!ENTITY cop "copula">
+  <!ENTITY ctr "counter">
+  <!ENTITY derog "derogatory">
+  <!ENTITY eK "exclusively kanji">
+  <!ENTITY ek "exclusively kana">
+  <!ENTITY exp "expressions (phrases, clauses, etc.)">
+  <!ENTITY fam "familiar language">
+  <!ENTITY fem "female term or language">
+  <!ENTITY food "food term">
+  <!ENTITY geom "geometry term">
+  <!ENTITY gikun "gikun (meaning as reading) or jukujikun (special kanji reading)">
+  <!ENTITY hon "honorific or respectful (sonkeigo) language">
+  <!ENTITY hum "humble (kenjougo) language">
+  <!ENTITY iK "word containing irregular kanji usage">
+  <!ENTITY id "idiomatic expression">
+  <!ENTITY ik "word containing irregular kana usage">
+  <!ENTITY int "interjection (kandoushi)">
+  <!ENTITY io "irregular okurigana usage">
+  <!ENTITY iv "irregular verb">
+  <!ENTITY ling "linguistics terminology">
+  <!ENTITY m-sl "manga slang">
+  <!ENTITY male "male term or language">
+  <!ENTITY male-sl "male slang">
+  <!ENTITY math "mathematics">
+  <!ENTITY mil "military">
+  <!ENTITY n "noun (common) (futsuumeishi)">
+  <!ENTITY n-adv "adverbial noun (fukushitekimeishi)">
+  <!ENTITY n-suf "noun, used as a suffix">
+  <!ENTITY n-pref "noun, used as a prefix">
+  <!ENTITY n-t "noun (temporal) (jisoumeishi)">
+  <!ENTITY num "numeric">
+  <!ENTITY oK "word containing out-dated kanji">
+  <!ENTITY obs "obsolete term">
+  <!ENTITY obsc "obscure term">
+  <!ENTITY ok "out-dated or obsolete kana usage">
+  <!ENTITY oik "old or irregular kana form">
+  <!ENTITY on-mim "onomatopoeic or mimetic word">
+  <!ENTITY pn "pronoun">
+  <!ENTITY poet "poetical term">
+  <!ENTITY pol "polite (teineigo) language">
+  <!ENTITY pref "prefix">
+  <!ENTITY proverb "proverb">
+  <!ENTITY prt "particle">
+  <!ENTITY physics "physics terminology">
+  <!ENTITY quote "quotation">
+  <!ENTITY rare "rare">
+  <!ENTITY sens "sensitive">
+  <!ENTITY sl "slang">
+  <!ENTITY suf "suffix">
+  <!ENTITY uK "word usually written using kanji alone">
+  <!ENTITY uk "word usually written using kana alone">
+  <!ENTITY unc "unclassified">
+  <!ENTITY yoji "yojijukugo">
+  <!ENTITY v1 "Ichidan verb">
+  <!ENTITY v1-s "Ichidan verb - kureru special class">
+  <!ENTITY v2a-s "Nidan verb with 'u' ending (archaic)">
+  <!ENTITY v4h "Yodan verb with `hu/fu' ending (archaic)">
+  <!ENTITY v4r "Yodan verb with `ru' ending (archaic)">
+  <!ENTITY v5aru "Godan verb - -aru special class">
+  <!ENTITY v5b "Godan verb with `bu' ending">
+  <!ENTITY v5g "Godan verb with `gu' ending">
+  <!ENTITY v5k "Godan verb with `ku' ending">
+  <!ENTITY v5k-s "Godan verb - Iku/Yuku special class">
+  <!ENTITY v5m "Godan verb with `mu' ending">
+  <!ENTITY v5n "Godan verb with `nu' ending">
+  <!ENTITY v5r "Godan verb with `ru' ending">
+  <!ENTITY v5r-i "Godan verb with `ru' ending (irregular verb)">
+  <!ENTITY v5s "Godan verb with `su' ending">
+  <!ENTITY v5t "Godan verb with `tsu' ending">
+  <!ENTITY v5u "Godan verb with `u' ending">
+  <!ENTITY v5u-s "Godan verb with `u' ending (special class)">
+  <!ENTITY v5uru "Godan verb - Uru old class verb (old form of Eru)">
+  <!ENTITY vz "Ichidan verb - zuru verb (alternative form of -jiru verbs)">
+  <!ENTITY vi "intransitive verb">
+  <!ENTITY vk "Kuru verb - special class">
+  <!ENTITY vn "irregular nu verb">
+  <!ENTITY vr "irregular ru verb, plain form ends with -ri">
+  <!ENTITY vs "noun or participle which takes the aux. verb suru">
+  <!ENTITY vs-c "su verb - precursor to the modern suru">
+  <!ENTITY vs-s "suru verb - special class">
+  <!ENTITY vs-i "suru verb - included">
+  <!ENTITY kyb "Kyoto-ben">
+  <!ENTITY osb "Osaka-ben">
+  <!ENTITY ksb "Kansai-ben">
+  <!ENTITY ktb "Kantou-ben">
+  <!ENTITY tsb "Tosa-ben">
+  <!ENTITY thb "Touhoku-ben">
+  <!ENTITY tsug "Tsugaru-ben">
+  <!ENTITY kyu "Kyuushuu-ben">
+  <!ENTITY rkb "Ryuukyuu-ben">
+  <!ENTITY nab "Nagano-ben">
+  <!ENTITY hob "Hokkaido-ben">
+  <!ENTITY vt "transitive verb">
+  <!ENTITY vulg "vulgar expression or word">
+  <!ENTITY adj-kari "`kari' adjective (archaic)">
+  <!ENTITY adj-ku "`ku' adjective (archaic)">
+  <!ENTITY adj-shiku "`shiku' adjective (archaic)">
+  <!ENTITY adj-nari "archaic/formal form of na-adjective">
+  <!ENTITY n-pr "proper noun">
+  <!ENTITY v-unspec "verb unspecified">
+  <!ENTITY v4k "Yodan verb with `ku' ending (archaic)">
+  <!ENTITY v4g "Yodan verb with `gu' ending (archaic)">
+  <!ENTITY v4s "Yodan verb with `su' ending (archaic)">
+  <!ENTITY v4t "Yodan verb with `tsu' ending (archaic)">
+  <!ENTITY v4n "Yodan verb with `nu' ending (archaic)">
+  <!ENTITY v4b "Yodan verb with `bu' ending (archaic)">
+  <!ENTITY v4m "Yodan verb with `mu' ending (archaic)">
+  <!ENTITY v2k-k "Nidan verb (upper class) with `ku' ending (archaic)">
+  <!ENTITY v2g-k "Nidan verb (upper class) with `gu' ending (archaic)">
+  <!ENTITY v2t-k "Nidan verb (upper class) with `tsu' ending (archaic)">
+  <!ENTITY v2d-k "Nidan verb (upper class) with `dzu' ending (archaic)">
+  <!ENTITY v2h-k "Nidan verb (upper class) with `hu/fu' ending (archaic)">
+  <!ENTITY v2b-k "Nidan verb (upper class) with `bu' ending (archaic)">
+  <!ENTITY v2m-k "Nidan verb (upper class) with `mu' ending (archaic)">
+  <!ENTITY v2y-k "Nidan verb (upper class) with `yu' ending (archaic)">
+  <!ENTITY v2r-k "Nidan verb (upper class) with `ru' ending (archaic)">
+  <!ENTITY v2k-s "Nidan verb (lower class) with `ku' ending (archaic)">
+  <!ENTITY v2g-s "Nidan verb (lower class) with `gu' ending (archaic)">
+  <!ENTITY v2s-s "Nidan verb (lower class) with `su' ending (archaic)">
+  <!ENTITY v2z-s "Nidan verb (lower class) with `zu' ending (archaic)">
+  <!ENTITY v2t-s "Nidan verb (lower class) with `tsu' ending (archaic)">
+  <!ENTITY v2d-s "Nidan verb (lower class) with `dzu' ending (archaic)">
+  <!ENTITY v2n-s "Nidan verb (lower class) with `nu' ending (archaic)">
+  <!ENTITY v2h-s "Nidan verb (lower class) with `hu/fu' ending (archaic)">
+  <!ENTITY v2b-s "Nidan verb (lower class) with `bu' ending (archaic)">
+  <!ENTITY v2m-s "Nidan verb (lower class) with `mu' ending (archaic)">
+  <!ENTITY v2y-s "Nidan verb (lower class) with `yu' ending (archaic)">
+  <!ENTITY v2r-s "Nidan verb (lower class) with `ru' ending (archaic)">
+  <!ENTITY v2w-s "Nidan verb (lower class) with `u' ending and `we' conjugation (archaic)">
+  <!ENTITY archit "architecture term">
+  <!ENTITY astron "astronomy, etc. term">
+  <!ENTITY baseb "baseball term">
+  <!ENTITY biol "biology term">
+  <!ENTITY bot "botany term">
+  <!ENTITY bus "business term">
+  <!ENTITY econ "economics term">
+  <!ENTITY engr "engineering term">
+  <!ENTITY finc "finance term">
+  <!ENTITY geol "geology, etc. term">
+  <!ENTITY law "law, etc. term">
+  <!ENTITY mahj "mahjong term">
+  <!ENTITY med "medicine, etc. term">
+  <!ENTITY music "music term">
+  <!ENTITY Shinto "Shinto term">
+  <!ENTITY shogi "shogi term">
+  <!ENTITY sports "sports term">
+  <!ENTITY sumo "sumo term">
+  <!ENTITY zool "zoology term">
+  <!ENTITY joc "jocular, humorous term">
+  <!ENTITY anat "anatomical term">
+  <!ENTITY Christn "Christian term">
+  <!ENTITY net-sl "Internet slang">
+  <!ENTITY dated "dated term">
+  <!ENTITY hist "historical term">
+  <!ENTITY litf "literary or formal term">
+  <!ENTITY surname "family or surname">
+  <!ENTITY place "place name">
+  <!ENTITY unclass "unclassified name">
+  <!ENTITY company "company name">
+  <!ENTITY product "product name">
+  <!ENTITY work "work of art, literature, music, etc. name">
+  <!ENTITY person "full name of a particular person">
+  <!ENTITY given "given name or forename, gender not specified">
+  <!ENTITY station "railway station">
+  <!ENTITY organization "organization name">
+]>
+<JMdict>
+  <entry>
+    <ent_seq>2845602</ent_seq>
+    <k_ele>
+      <keb>無症状感染</keb>
+    </k_ele>
+    <r_ele>
+      <reb>むしょうじょうかんせん</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>test!</pos>
+      <gloss>asymptomatic spread (of an infectious disease)</gloss>
+      <gloss>silent infection</gloss>
+      <gloss>subclinical infection</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>2845603</ent_seq>
+    <k_ele>
+      <keb>如何なもの</keb>
+    </k_ele>
+    <r_ele>
+      <reb>いかがなもの</reb>
+    </r_ele>
+    <sense>
+      <pos>&exp;</pos>
+      <pos>&n;</pos>
+      <misc>&uk;</misc>
+      <s_inf>used rhetorically; most commonly as ~か</s_inf>
+      <gloss>something one finds questionable</gloss>
+      <gloss>something one finds fault with</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>2845604</ent_seq>
+    <k_ele>
+      <keb>山菜採り</keb>
+    </k_ele>
+    <k_ele>
+      <keb>山菜取り</keb>
+    </k_ele>
+    <r_ele>
+      <reb>さんさいとり</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>gathering edible wild plants</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>2845605</ent_seq>
+    <k_ele>
+      <keb>無症状者</keb>
+    </k_ele>
+    <r_ele>
+      <reb>むしょうじょうしゃ</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>person who shows no symptoms (of an infectious disease)</gloss>
+      <gloss>asymptomatic person</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>2845606</ent_seq>
+    <k_ele>
+      <keb>如何</keb>
+      <ke_pri>spec1</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>いかが</reb>
+      <re_pri>spec1</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&adv;</pos>
+      <misc>&uk;</misc>
+      <gloss>how</gloss>
+      <gloss>in what way</gloss>
+      <gloss>how about</gloss>
+    </sense>
+    <sense>
+      <pos>&adj-na;</pos>
+      <misc>&uk;</misc>
+      <gloss>questionable</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>2845608</ent_seq>
+    <k_ele>
+      <keb>不当判決</keb>
+    </k_ele>
+    <r_ele>
+      <reb>ふとうはんけつ</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>unfair ruling</gloss>
+      <gloss>unfair verdict</gloss>
+      <gloss>unjust decision</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>2845609</ent_seq>
+    <k_ele>
+      <keb>スプレー糊</keb>
+    </k_ele>
+    <r_ele>
+      <reb>スプレーのり</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <misc>&uk;</misc>
+      <gloss>spray glue</gloss>
+      <gloss>spray adhesive</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470560</ent_seq>
+    <k_ele>
+      <keb>膿</keb>
+    </k_ele>
+    <r_ele>
+      <reb>うみ</reb>
+    </r_ele>
+    <r_ele>
+      <reb>のう</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>pus</gloss>
+    </sense>
+    <sense>
+      <stagr>うみ</stagr>
+      <gloss>corruption</gloss>
+      <gloss>rot</gloss>
+      <gloss>evils</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470570</ent_seq>
+    <k_ele>
+      <keb>膿む</keb>
+    </k_ele>
+    <r_ele>
+      <reb>うむ</reb>
+    </r_ele>
+    <sense>
+      <pos>&v5m;</pos>
+      <pos>&vi;</pos>
+      <gloss>to fester</gloss>
+      <gloss>to form pus</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470580</ent_seq>
+    <k_ele>
+      <keb>膿疱</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のうほう</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>pustule</gloss>
+      <gloss>pustula</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470590</ent_seq>
+    <k_ele>
+      <keb>膿瘍</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のうよう</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>boil</gloss>
+      <gloss>abscess</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470600</ent_seq>
+    <k_ele>
+      <keb>農</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf05</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のう</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf05</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>farming</gloss>
+      <gloss>agriculture</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470610</ent_seq>
+    <k_ele>
+      <keb>農園</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf16</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうえん</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf16</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>plantation</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470620</ent_seq>
+    <k_ele>
+      <keb>農家</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf03</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうか</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf03</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>farmer</gloss>
+      <gloss>farming family</gloss>
+    </sense>
+    <sense>
+      <gloss>farmhouse</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470630</ent_seq>
+    <k_ele>
+      <keb>農学</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf30</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうがく</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf30</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>(science of) agriculture</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470640</ent_seq>
+    <k_ele>
+      <keb>農閑期</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf45</ke_pri>
+      <ke_pri>spec2</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうかんき</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf45</re_pri>
+      <re_pri>spec2</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>slack season for farmers</gloss>
+      <gloss>leisure season for farmers</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470650</ent_seq>
+    <k_ele>
+      <keb>農協</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf04</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうきょう</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf04</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <xref>農業協同組合</xref>
+      <misc>&abbr;</misc>
+      <gloss>agricultural cooperative</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470660</ent_seq>
+    <k_ele>
+      <keb>農業</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf01</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうぎょう</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf01</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&adj-no;</pos>
+      <gloss>agriculture</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470670</ent_seq>
+    <k_ele>
+      <keb>農工</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf28</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうこう</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf28</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>agriculture and industry</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470680</ent_seq>
+    <k_ele>
+      <keb>農耕</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf21</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうこう</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf21</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>farming</gloss>
+      <gloss>agriculture</gloss>
+      <gloss>cultivation</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470690</ent_seq>
+    <k_ele>
+      <keb>農作業</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf18</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうさぎょう</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf18</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>farmwork</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470700</ent_seq>
+    <k_ele>
+      <keb>農産</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf22</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうさん</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf22</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>agricultural products</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470710</ent_seq>
+    <k_ele>
+      <keb>農産物</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf06</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうさんぶつ</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf06</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>agricultural produce</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470720</ent_seq>
+    <k_ele>
+      <keb>農場</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf10</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうじょう</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf10</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>farm (agriculture)</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470730</ent_seq>
+    <k_ele>
+      <keb>農村</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf04</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうそん</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf04</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>agricultural community</gloss>
+      <gloss>farm village</gloss>
+    </sense>
+    <sense>
+      <pos>&adj-no;</pos>
+      <gloss>rural</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470740</ent_seq>
+    <k_ele>
+      <keb>農地</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf07</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうち</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf07</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>agricultural land</gloss>
+      <gloss>farmland</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470750</ent_seq>
+    <k_ele>
+      <keb>農奴</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のうど</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>serf</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470760</ent_seq>
+    <k_ele>
+      <keb>農夫</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf46</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうふ</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf46</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>(male) farmer</gloss>
+      <gloss>peasant</gloss>
+      <gloss>farmhand</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470770</ent_seq>
+    <k_ele>
+      <keb>農民</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf04</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうみん</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf04</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&adj-no;</pos>
+      <gloss>farmer</gloss>
+      <gloss>peasant</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470780</ent_seq>
+    <k_ele>
+      <keb>農薬</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf04</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうやく</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf04</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&adj-no;</pos>
+      <gloss>agricultural chemical (i.e. pesticide, herbicide, fungicide, etc.)</gloss>
+      <gloss>agrochemical</gloss>
+      <gloss>agrichemical</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470790</ent_seq>
+    <k_ele>
+      <keb>農林</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf07</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>のうりん</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf07</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>agriculture and forestry</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470800</ent_seq>
+    <k_ele>
+      <keb>農林水産大臣</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のうりんすいさんだいじん</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>Minister of Agriculture, Forestry and Fisheries</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470810</ent_seq>
+    <k_ele>
+      <keb>覗き</keb>
+    </k_ele>
+    <k_ele>
+      <keb>覘き</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のぞき</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&adj-no;</pos>
+      <gloss>peep</gloss>
+      <gloss>peeping</gloss>
+    </sense>
+    <sense>
+      <pos>&n;</pos>
+      <xref>覗き機関</xref>
+      <misc>&abbr;</misc>
+      <gloss>peep show</gloss>
+      <gloss g_type="expl">device with lens mounted on a stand or in a box to view enlarged pictures</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470820</ent_seq>
+    <k_ele>
+      <keb>覗き見</keb>
+    </k_ele>
+    <k_ele>
+      <keb>のぞき見</keb>
+    </k_ele>
+    <k_ele>
+      <keb>覗きみ</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のぞきみ</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&vs;</pos>
+      <gloss>peeking</gloss>
+      <gloss>peeping (e.g. through a hole, narrow gap)</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470830</ent_seq>
+    <k_ele>
+      <keb>覗き込む</keb>
+    </k_ele>
+    <k_ele>
+      <keb>覗きこむ</keb>
+    </k_ele>
+    <k_ele>
+      <keb>のぞき込む</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のぞきこむ</reb>
+    </r_ele>
+    <sense>
+      <pos>&v5m;</pos>
+      <pos>&vt;</pos>
+      <gloss>to look into</gloss>
+      <gloss>to peer in</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470840</ent_seq>
+    <k_ele>
+      <keb>覗く</keb>
+      <ke_pri>ichi1</ke_pri>
+    </k_ele>
+    <k_ele>
+      <keb>覘く</keb>
+    </k_ele>
+    <k_ele>
+      <keb>窺く</keb>
+    </k_ele>
+    <k_ele>
+      <keb>臨く</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のぞく</reb>
+      <re_pri>ichi1</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&v5k;</pos>
+      <pos>&vt;</pos>
+      <gloss>to peek (through a keyhole, gap, etc.)</gloss>
+    </sense>
+    <sense>
+      <gloss>to look down into (a ravine, etc.)</gloss>
+    </sense>
+    <sense>
+      <gloss>to peek into (a shop, bookstore, etc.)</gloss>
+    </sense>
+    <sense>
+      <gloss>to sneak a look at</gloss>
+      <gloss>to take a quick look at</gloss>
+    </sense>
+    <sense>
+      <gloss>to peep (through a telescope, microscope, etc.)</gloss>
+    </sense>
+    <sense>
+      <pos>&v5k;</pos>
+      <pos>&vi;</pos>
+      <gloss>to stick out (a scarf from a collar, etc.)</gloss>
+      <gloss>to peek through (sky through a forest canopy, etc.)</gloss>
+    </sense>
+    <sense>
+      <pos>&v5k;</pos>
+      <pos>&vt;</pos>
+      <gloss>to examine (an expression)</gloss>
+      <gloss>to study (a face)</gloss>
+    </sense>
+    <sense>
+      <pos>&v5k;</pos>
+      <pos>&vi;</pos>
+      <xref>臨む・2</xref>
+      <misc>&arch;</misc>
+      <s_inf>esp. 臨く</s_inf>
+      <gloss>to face</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470850</ent_seq>
+    <k_ele>
+      <keb>覗き魔</keb>
+    </k_ele>
+    <k_ele>
+      <keb>のぞき魔</keb>
+    </k_ele>
+    <k_ele>
+      <keb>覗魔</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のぞきま</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>peeping tom</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470860</ent_seq>
+    <k_ele>
+      <keb>蚤</keb>
+    </k_ele>
+    <r_ele>
+      <reb>のみ</reb>
+    </r_ele>
+    <r_ele>
+      <reb>ノミ</reb>
+      <re_nokanji />
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>flea</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470870</ent_seq>
+    <k_ele>
+      <keb>巴</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf18</ke_pri>
+    </k_ele>
+    <k_ele>
+      <keb>鞆絵</keb>
+    </k_ele>
+    <r_ele>
+      <reb>ともえ</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf18</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>tomoe</gloss>
+      <gloss>heraldic design composed of two or more interlocked comma-shaped figures</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470880</ent_seq>
+    <k_ele>
+      <keb>巴瓦</keb>
+    </k_ele>
+    <r_ele>
+      <reb>ともえがわら</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>comma-pattern tile</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470890</ent_seq>
+    <k_ele>
+      <keb>巴旦杏</keb>
+    </k_ele>
+    <r_ele>
+      <reb>はたんきょう</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>plum</gloss>
+      <gloss>almond</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470900</ent_seq>
+    <k_ele>
+      <keb>巴投げ</keb>
+    </k_ele>
+    <r_ele>
+      <reb>ともえなげ</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>overhead throw in judo</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470910</ent_seq>
+    <k_ele>
+      <keb>把握</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf13</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はあく</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf13</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&vs;</pos>
+      <gloss>grasp</gloss>
+      <gloss>catch</gloss>
+      <gloss>understanding</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470920</ent_seq>
+    <k_ele>
+      <keb>把持</keb>
+    </k_ele>
+    <r_ele>
+      <reb>はじ</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&vs;</pos>
+      <gloss>grasp</gloss>
+      <gloss>hold</gloss>
+      <gloss>grip</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470930</ent_seq>
+    <k_ele>
+      <keb>播州</keb>
+    </k_ele>
+    <r_ele>
+      <reb>ばんしゅう</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>old name for part of Hyogo prefecture</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470940</ent_seq>
+    <k_ele>
+      <keb>覇気</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf38</ke_pri>
+      <ke_pri>spec2</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はき</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf38</re_pri>
+      <re_pri>spec2</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>spirit</gloss>
+      <gloss>drive</gloss>
+      <gloss>vigour</gloss>
+      <gloss>vigor</gloss>
+    </sense>
+    <sense>
+      <gloss>ambition</gloss>
+      <gloss>aspiration</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470950</ent_seq>
+    <k_ele>
+      <keb>覇権</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf14</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はけん</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf14</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&adj-no;</pos>
+      <gloss>hegemony</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470960</ent_seq>
+    <k_ele>
+      <keb>覇者</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf14</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はしゃ</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf14</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>supreme ruler</gloss>
+      <gloss>conqueror</gloss>
+    </sense>
+    <sense>
+      <gloss>champion</gloss>
+      <gloss>winner</gloss>
+      <gloss>titleholder</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470970</ent_seq>
+    <k_ele>
+      <keb>波</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf04</ke_pri>
+    </k_ele>
+    <k_ele>
+      <keb>浪</keb>
+    </k_ele>
+    <k_ele>
+      <keb>濤</keb>
+    </k_ele>
+    <r_ele>
+      <reb>なみ</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf04</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>wave</gloss>
+    </sense>
+    <sense>
+      <misc>&id;</misc>
+      <gloss>ups and downs</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470980</ent_seq>
+    <k_ele>
+      <keb>波間に</keb>
+    </k_ele>
+    <r_ele>
+      <reb>なみまに</reb>
+    </r_ele>
+    <sense>
+      <pos>&adv;</pos>
+      <xref>波間・なみま</xref>
+      <gloss>between the waves</gloss>
+      <gloss>in the waves</gloss>
+      <gloss>on the waves</gloss>
+      <gloss>behind the waves</gloss>
+      <gloss>beneath the waves</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1470990</ent_seq>
+    <k_ele>
+      <keb>波及</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf12</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はきゅう</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf12</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&vs;</pos>
+      <gloss>spread</gloss>
+      <gloss>extension</gloss>
+      <gloss>influence</gloss>
+      <gloss>aftereffect</gloss>
+      <gloss>ripple</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471000</ent_seq>
+    <k_ele>
+      <keb>波止場</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf43</ke_pri>
+      <ke_pri>spec2</ke_pri>
+    </k_ele>
+    <k_ele>
+      <keb>波戸場</keb>
+    </k_ele>
+    <r_ele>
+      <reb>はとば</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf43</re_pri>
+      <re_pri>spec2</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>wharf</gloss>
+      <gloss>quay</gloss>
+      <gloss>landing-stage</gloss>
+      <gloss>jetty</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471010</ent_seq>
+    <k_ele>
+      <keb>波乗り</keb>
+    </k_ele>
+    <r_ele>
+      <reb>なみのり</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&vs;</pos>
+      <gloss>surfing</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471020</ent_seq>
+    <k_ele>
+      <keb>波線</keb>
+    </k_ele>
+    <r_ele>
+      <reb>はせん</reb>
+    </r_ele>
+    <r_ele>
+      <reb>なみせん</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>wavy line</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471030</ent_seq>
+    <k_ele>
+      <keb>波打ち際</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf38</ke_pri>
+    </k_ele>
+    <k_ele>
+      <keb>波打際</keb>
+    </k_ele>
+    <k_ele>
+      <keb>波うちぎわ</keb>
+    </k_ele>
+    <k_ele>
+      <keb>浪打際</keb>
+    </k_ele>
+    <k_ele>
+      <keb>浪打ち際</keb>
+    </k_ele>
+    <r_ele>
+      <reb>なみうちぎわ</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf38</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>water's edge</gloss>
+      <gloss>beach</gloss>
+      <gloss>foreshore</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471040</ent_seq>
+    <k_ele>
+      <keb>波打つ</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf45</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>なみうつ</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf45</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&v5t;</pos>
+      <pos>&vi;</pos>
+      <gloss>to dash against (of waves)</gloss>
+      <gloss>to billow</gloss>
+      <gloss>to roll</gloss>
+    </sense>
+    <sense>
+      <gloss>to wave (e.g. in the wind)</gloss>
+      <gloss>to heave</gloss>
+      <gloss>to pound (of a heart)</gloss>
+      <gloss>to undulate</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471050</ent_seq>
+    <k_ele>
+      <keb>波打つ髪</keb>
+    </k_ele>
+    <r_ele>
+      <reb>なみうつかみ</reb>
+    </r_ele>
+    <sense>
+      <pos>&exp;</pos>
+      <pos>&n;</pos>
+      <gloss>wavy hair</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471060</ent_seq>
+    <k_ele>
+      <keb>波長</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf23</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はちょう</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf23</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>wavelength</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471070</ent_seq>
+    <k_ele>
+      <keb>波頭</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf45</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>なみがしら</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf45</re_pri>
+    </r_ele>
+    <r_ele>
+      <reb>はとう</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>wave crest</gloss>
+      <gloss>whitecaps</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471080</ent_seq>
+    <k_ele>
+      <keb>波動</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf37</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はどう</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf37</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&adj-no;</pos>
+      <gloss>wave motion</gloss>
+      <gloss>undulation</gloss>
+      <gloss>surge</gloss>
+    </sense>
+    <sense>
+      <field>&physics;</field>
+      <gloss>wave</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471090</ent_seq>
+    <k_ele>
+      <keb>波紋</keb>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf07</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はもん</reb>
+      <re_pri>news1</re_pri>
+      <re_pri>nf07</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>ripple</gloss>
+      <gloss>ring on the water</gloss>
+    </sense>
+    <sense>
+      <gloss>repercussions</gloss>
+    </sense>
+    <sense>
+      <field>&music;</field>
+      <gloss>Japanese slit drum</gloss>
+      <gloss g_type="expl">instrument made of iron with slits on top; makes a rippling sound</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471100</ent_seq>
+    <k_ele>
+      <keb>波浪</keb>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf37</ke_pri>
+      <ke_pri>spec2</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はろう</reb>
+      <re_pri>news2</re_pri>
+      <re_pri>nf37</re_pri>
+      <re_pri>spec2</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <gloss>waves</gloss>
+      <gloss>billows</gloss>
+      <gloss>surge</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471110</ent_seq>
+    <k_ele>
+      <keb>波瀾万丈</keb>
+    </k_ele>
+    <k_ele>
+      <keb>波乱万丈</keb>
+    </k_ele>
+    <r_ele>
+      <reb>はらんばんじょう</reb>
+    </r_ele>
+    <sense>
+      <pos>&adj-na;</pos>
+      <pos>&adj-no;</pos>
+      <pos>&n;</pos>
+      <misc>&yoji;</misc>
+      <gloss>stormy and full of drama</gloss>
+      <gloss>many drastic events in the course of events</gloss>
+      <gloss>full of ups and downs</gloss>
+      <gloss>with many vicissitudes</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471120</ent_seq>
+    <k_ele>
+      <keb>派</keb>
+      <ke_pri>ichi1</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>は</reb>
+      <re_pri>ichi1</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&n-suf;</pos>
+      <gloss>clique</gloss>
+      <gloss>group</gloss>
+      <gloss>coterie</gloss>
+    </sense>
+    <sense>
+      <xref>党派・とうは</xref>
+      <gloss>(political) faction</gloss>
+      <gloss>wing</gloss>
+      <gloss>party</gloss>
+      <gloss>camp</gloss>
+    </sense>
+    <sense>
+      <xref>流派・りゅうは</xref>
+      <gloss>school</gloss>
+    </sense>
+    <sense>
+      <xref>宗派</xref>
+      <gloss>sect</gloss>
+      <gloss>denomination</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471130</ent_seq>
+    <k_ele>
+      <keb>派遣</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf01</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はけん</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf01</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&vs;</pos>
+      <gloss>dispatch</gloss>
+      <gloss>despatch</gloss>
+      <gloss>deployment</gloss>
+    </sense>
+    <sense>
+      <pos>&n;</pos>
+      <xref>派遣社員</xref>
+      <xref>派遣労働者</xref>
+      <misc>&abbr;</misc>
+      <gloss>temporary employee (esp. from an agency)</gloss>
+      <gloss>temporary worker</gloss>
+      <gloss>agency temp</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471140</ent_seq>
+    <k_ele>
+      <keb>派手</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news1</ke_pri>
+      <ke_pri>nf08</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はで</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news1</re_pri>
+      <re_pri>nf08</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&adj-na;</pos>
+      <pos>&n;</pos>
+      <gloss>showy</gloss>
+      <gloss>loud</gloss>
+      <gloss>gay</gloss>
+      <gloss>flashy</gloss>
+      <gloss>gaudy</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471150</ent_seq>
+    <k_ele>
+      <keb>派生</keb>
+      <ke_pri>ichi1</ke_pri>
+      <ke_pri>news2</ke_pri>
+      <ke_pri>nf46</ke_pri>
+    </k_ele>
+    <r_ele>
+      <reb>はせい</reb>
+      <re_pri>ichi1</re_pri>
+      <re_pri>news2</re_pri>
+      <re_pri>nf46</re_pri>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <pos>&vs;</pos>
+      <gloss>derivation</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471160</ent_seq>
+    <k_ele>
+      <keb>派生語</keb>
+    </k_ele>
+    <r_ele>
+      <reb>はせいご</reb>
+    </r_ele>
+    <sense>
+      <pos>&n;</pos>
+      <field>&ling;</field>
+      <gloss>derivative (word)</gloss>
+    </sense>
+  </entry>
+  <entry>
+    <ent_seq>1471170</ent_seq>
+    <k_ele>
+      <keb>派生的</keb>
+    </k_ele>
+    <r_ele>
+      <reb>はせいてき</reb>
+    </r_ele>
+    <sense>
+      <pos>&adj-na;</pos>
+      <gloss>derivative</gloss>
+      <gloss>secondary</gloss>
+    </sense>
+  </entry>
+</JMdict>
