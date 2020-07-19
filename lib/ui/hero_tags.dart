@@ -8,5 +8,5 @@ class HeroTags {
   //   return 'hero-tag-1-$arg';
   // };
 
-  static const quickPlayHeader = 'hero-quick-play-header';
+  static const singleplayerHeader = 'hero-quick-play-header';
 }

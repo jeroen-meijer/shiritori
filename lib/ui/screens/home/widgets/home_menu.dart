@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
-import 'package:shiritori/ui/screens/quick_play/quick_play.dart';
+import 'package:shiritori/ui/screens/game/game.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
 
 class HomeMenu extends StatelessWidget {
@@ -25,12 +25,12 @@ class HomeMenu extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 _PlayCard(
-                  title: Text(intl.quickPlayCardTitle),
-                  subtitle: Text(intl.quickPlayCardSubtitle),
-                  color: AppTheme.colorQuickPlay,
+                  title: Text(intl.singleplayerCardTitle),
+                  subtitle: Text(intl.singleplayerCardSubtitle),
+                  color: AppTheme.colorSingleplayer,
                   icon: const Text('遊ぶ'),
                   expandedChildBuilder: (context) {
-                    return QuickPlayScreen();
+                    return GameScreen();
                   },
                 ),
                 _PlayCard(

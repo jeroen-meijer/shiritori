@@ -4,20 +4,19 @@ import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
 
-class QuickPlayScreen extends StatelessWidget {
+class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final intl = ShiritoriLocalizations.of(context).quickPlay;
+    final intl = ShiritoriLocalizations.of(context).game;
     final uiIntl = ShiritoriLocalizations.of(context).ui;
-    final textTheme = Theme.of(context).textTheme;
 
     return DefaultStylingColor(
-      color: AppTheme.colorQuickPlay,
+      color: AppTheme.colorSingleplayer,
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            ShiritoriSliverNavigationBar(
-              title: Text(intl.title),
+            AppSliverNavigationBar(
+              title: Text(intl.singleplayerTitle),
               leading: TextButton(
                 onTap: Navigator.of(context).pop,
                 child: Text(uiIntl.back),

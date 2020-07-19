@@ -112,7 +112,7 @@ abstract class AppTheme {
   static const colorButtonBackgroundSecondary = white;
   static const colorButtonForegroundSecondary = blue;
 
-  static const colorQuickPlay = orange;
+  static const colorSingleplayer = orange;
 
   static const elevationDefault = 18.0;
   static const elevationDisabled = elevationDefault / 3;
@@ -122,5 +122,5 @@ abstract class AppTheme {
   );
 
   static const curveDefault = Curves.easeOutQuint;
-  static const durationAnimationDefault = Duration(milliseconds: 350);
+  static const durationAnimationDefault = Duration(milliseconds: 500);
 }

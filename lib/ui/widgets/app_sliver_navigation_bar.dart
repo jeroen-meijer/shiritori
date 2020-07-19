@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ShiritoriSliverNavigationBar extends StatelessWidget {
-  ShiritoriSliverNavigationBar({
+class AppSliverNavigationBar extends StatelessWidget {
+  AppSliverNavigationBar({
     @required this.title,
     this.leading,
     this.trailing,

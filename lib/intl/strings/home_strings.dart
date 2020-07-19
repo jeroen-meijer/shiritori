@@ -39,20 +39,20 @@ class HomeStrings {
     );
   }
 
-  String get quickPlayCardTitle {
+  String get singleplayerCardTitle {
     return Intl.message(
-      'Quick Play',
-      name: 'quickPlayCardTitle',
-      desc: 'Title on the Quick Play card that '
+      'Singleplayer',
+      name: 'singleplayerCardTitle',
+      desc: 'Title on the Singleplayer card that '
           'allows the user to start a quick play match.',
     );
   }
 
-  String get quickPlayCardSubtitle {
+  String get singleplayerCardSubtitle {
     return Intl.message(
-      'PLAY AGAINST CPU',
-      name: 'quickPlayCardSubtitle',
-      desc: 'Subtitle on the Quick Play card that '
+      'AGAINST CPU',
+      name: 'singleplayerCardSubtitle',
+      desc: 'Subtitle on the Singleplayer card that '
           'indicates it is a new game mode. '
           'Should be all capitals if applicable.',
     );
@@ -69,7 +69,7 @@ class HomeStrings {
 
   String get multiplayerCardSubtitle {
     return Intl.message(
-      'PLAY WITH FRIENDS',
+      'WITH FRIENDS',
       name: 'multiplayerCardSubtitle',
       desc: 'Subtitle on the Multiplayer card that '
           'indicates the user can play with friends. '
@@ -113,6 +113,15 @@ class HomeStrings {
       desc: 'Subtitle on the Settings card that '
           'indicates the user can customize their settings. '
           'Should be all capitals if applicable.',
+    );
+  }
+
+  String get quickPlayButtonTitle {
+    return Intl.message(
+      'Quick Play',
+      name: 'quickPlayButtonTitle',
+      desc: 'Text on the Quick Play button that '
+          'instantly starts a singleplayer CPU match.',
     );
   }
 }

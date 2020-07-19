@@ -1,7 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:shiritori/theme/theme.dart';
-import 'package:shiritori/ui/widgets/widgets.dart';
 
 class ExpandingRouteButton extends StatelessWidget {
   const ExpandingRouteButton({
@@ -21,6 +20,7 @@ class ExpandingRouteButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(14.0),
       child: OpenContainer(
+        transitionDuration: AppTheme.durationAnimationDefault,
         openBuilder: (context, close) {
           return routeBuilder?.call(context);
         },
@@ -33,18 +33,16 @@ class ExpandingRouteButton extends StatelessWidget {
         closedBuilder: (context, open) {
           return InkWell(
             onTap: !_enabled ? null : open,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                minWidth: double.infinity,
-                minHeight: 64.0,
-              ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 64.0,
               child: Center(
                 child: DefaultTextStyle(
                   style: Theme.of(context).textTheme.button.copyWith(
-                    color: AppTheme.colorButtonForegroundPrimary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24.0,
-                  ),
+                        color: AppTheme.colorButtonForegroundPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0,
+                      ),
                   child: child,
                 ),
               ),
