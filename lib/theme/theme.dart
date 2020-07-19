@@ -10,6 +10,8 @@ abstract class AppTheme {
       dividerTheme: dividerTheme,
       fontFamily: Fonts.hurmeGeometricSans,
       scaffoldBackgroundColor: veryLightGrey,
+      splashColor: lightBlue,
+      highlightColor: Colors.transparent,
       textTheme: textTheme,
     );
   }
@@ -18,10 +20,9 @@ abstract class AppTheme {
     buttonColor: blue,
   );
 
-  static const _elevation = 18.0;
   static const cardTheme = CardTheme(
     color: white,
-    elevation: _elevation,
+    elevation: elevationDefault,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(radiusCardDefault),
     ),
@@ -77,12 +78,12 @@ abstract class AppTheme {
     ),
     subtitle1: TextStyle(
       color: blue,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.bold,
       letterSpacing: _letterSpacing,
     ),
     subtitle2: TextStyle(
       color: blue,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.bold,
       letterSpacing: _letterSpacing,
     ),
   );
@@ -105,9 +106,21 @@ abstract class AppTheme {
   static const cyan = Color(0xFF6DE2BA);
   static const green = Color(0xFF77D65A);
 
+  static const colorButtonBackgroundPrimary = blue;
+  static const colorButtonBackgroundPrimaryDisabled = grey;
+  static const colorButtonForegroundPrimary = white;
+  static const colorButtonBackgroundSecondary = white;
+  static const colorButtonForegroundSecondary = blue;
+
+  static const colorQuickPlay = orange;
+
+  static const elevationDefault = 18.0;
+  static const elevationDisabled = elevationDefault / 3;
   static const radiusCardDefault = Radius.circular(16.0);
+  static const shapeDefault = RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(radiusCardDefault),
+  );
 
   static const curveDefault = Curves.easeOutQuint;
-
-  static const durationAnimationDefault = Duration(milliseconds: 300);
+  static const durationAnimationDefault = Duration(milliseconds: 350);
 }

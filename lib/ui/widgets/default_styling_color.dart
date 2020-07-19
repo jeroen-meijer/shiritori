@@ -5,8 +5,7 @@ class DefaultStylingColor extends StatelessWidget {
     Key key,
     @required this.color,
     @required this.child,
-  })  : assert(color != null),
-        assert(child != null),
+  })  : assert(child != null),
         super(key: key);
 
   final Color color;
@@ -18,6 +17,10 @@ class DefaultStylingColor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (color == null) {
+      return child;
+    }
+
     return IconTheme.merge(
       data: IconThemeData(color: color),
       child: DividerTheme(

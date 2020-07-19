@@ -31,6 +31,7 @@ class ShiritoriLocalizations {
 
   HomeStrings get home => HomeStrings();
   UiStrings get ui => UiStrings();
+  QuickPlayStrings get quickPlay => QuickPlayStrings();
 }
 
 class _ShiritoriLocalizationsDelegate

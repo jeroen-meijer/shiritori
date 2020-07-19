@@ -33,9 +33,9 @@
     "type": "text",
     "placeholders": {}
   },
-  "quickPlayCardSubtitle": "New",
+  "quickPlayCardSubtitle": "PLAY AGAINST CPU",
   "@quickPlayCardSubtitle": {
-    "description": "Subtitle on the Quick Play card that indicates it is a new game mode.",
+    "description": "Subtitle on the Quick Play card that indicates it is a new game mode. Should be all capitals if applicable.",
     "type": "text",
     "placeholders": {}
   },
@@ -45,9 +45,9 @@
     "type": "text",
     "placeholders": {}
   },
-  "multiplayerCardSubtitle": "Play with friends",
+  "multiplayerCardSubtitle": "PLAY WITH FRIENDS",
   "@multiplayerCardSubtitle": {
-    "description": "Subtitle on the Multiplayer card that indicates the user can play with friends.",
+    "description": "Subtitle on the Multiplayer card that indicates the user can play with friends. Should be all capitals if applicable.",
     "type": "text",
     "placeholders": {}
   },
@@ -57,9 +57,9 @@
     "type": "text",
     "placeholders": {}
   },
-  "statsCardSubtitle": "Ranking",
+  "statsCardSubtitle": "RANKING",
   "@statsCardSubtitle": {
-    "description": "Subtitle on the Stats card that indicates the user can see their ranking.",
+    "description": "Subtitle on the Stats card that indicates the user can see their ranking. Should be all capitals if applicable.",
     "type": "text",
     "placeholders": {}
   },
@@ -69,9 +69,9 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsCardSubtitle": "Customize",
+  "settingsCardSubtitle": "CUSTOMIZE",
   "@settingsCardSubtitle": {
-    "description": "Subtitle on the Settings card that indicates the user can customize their settings.",
+    "description": "Subtitle on the Settings card that indicates the user can customize their settings. Should be all capitals if applicable.",
     "type": "text",
     "placeholders": {}
   },

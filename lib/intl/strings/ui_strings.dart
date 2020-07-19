@@ -9,4 +9,14 @@ class UiStrings {
           'that confirms and dismisses it.',
     );
   }
+
+  String get back {
+    return Intl.message(
+      'BACK',
+      name: 'back',
+      desc: 'Button text displayed on back buttons '
+          'that confirms and dismisses it. '
+          'Should be all capitals if applicable.',
+    );
+  }
 }

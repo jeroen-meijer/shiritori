@@ -5,7 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
-import 'package:shiritori/ui/main/main.dart';
+import 'package:shiritori/ui/routes/routes.dart';
+import 'package:shiritori/ui/screens/home/home.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({
@@ -27,7 +28,18 @@ class AppRoot extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        home: MainContainer(),
+        onGenerateRoute: (settings) {
+          if (settings.name == Navigator.defaultRouteName) {
+            return AppRoute(
+              settings: settings,
+              builder: (context) {
+                return const HomeScreen();
+              },
+            );
+          }
+
+          return null;
+        },
       ),
     );
   }

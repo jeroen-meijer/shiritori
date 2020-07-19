@@ -50,7 +50,7 @@ class HomeStrings {
 
   String get quickPlayCardSubtitle {
     return Intl.message(
-      'PALY AGAINST CPU',
+      'PLAY AGAINST CPU',
       name: 'quickPlayCardSubtitle',
       desc: 'Subtitle on the Quick Play card that '
           'indicates it is a new game mode. '
