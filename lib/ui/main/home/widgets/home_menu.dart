@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
+import 'package:shiritori/ui/main/quick_play/quick_play.dart';
+import 'package:shiritori/ui/routes/routes.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
 
 class HomeMenu extends StatelessWidget {
@@ -20,15 +22,24 @@ class HomeMenu extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _PlayCard(
-              title: intl.quickPlayCardTitle,
-              subtitle: intl.quickPlayCardSubtitle,
+              title: Text(intl.quickPlayCardTitle),
+              subtitle: Text(intl.quickPlayCardSubtitle),
               color: AppTheme.orange,
               icon: const Text('遊ぶ'),
-              onTap: () {},
+              onTap: (context) {
+                Navigator.of(context).push(
+                  RoundedClipRoute(
+                    builder: (context) => QuickPlayScreen(),
+                    expandFrom: context,
+                    border: null,
+                    transitionDuration: AppTheme.durationAnimationDefault * 1.5,
+                  ),
+                );
+              },
             ),
             _PlayCard(
-              title: intl.multiplayerCardTitle,
-              subtitle: intl.multiplayerCardSubtitle,
+              title: Text(intl.multiplayerCardTitle),
+              subtitle: Text(intl.multiplayerCardSubtitle),
               color: AppTheme.lightBlue,
               icon: const Icon(FontAwesomeIcons.globeAmericas),
               onTap: null,
@@ -40,18 +51,18 @@ class HomeMenu extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _PlayCard(
-              title: intl.statsCardTitle,
-              subtitle: intl.statsCardSubtitle,
+              title: Text(intl.statsCardTitle),
+              subtitle: Text(intl.statsCardSubtitle),
               color: AppTheme.pink,
               icon: const Icon(FontAwesomeIcons.signal),
               onTap: null,
             ),
             _PlayCard(
-              title: intl.settingsCardTitle,
-              subtitle: intl.settingsCardSubtitle,
+              title: Text(intl.settingsCardTitle),
+              subtitle: Text(intl.settingsCardSubtitle),
               color: AppTheme.grey,
               icon: const Icon(FontAwesomeIcons.cog),
-              onTap: () {},
+              onTap: (context) {},
             ),
           ],
         ),
@@ -70,11 +81,11 @@ class _PlayCard extends StatelessWidget {
     @required this.onTap,
   }) : super(key: key);
 
-  final String title;
-  final String subtitle;
+  final Widget title;
+  final Widget subtitle;
   final Color color;
   final Widget icon;
-  final VoidCallback onTap;
+  final ValueChanged<BuildContext> onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +96,7 @@ class _PlayCard extends StatelessWidget {
     return Opacity(
       opacity: onTap != null ? 1.0 : 0.5,
       child: ScaleButton.builder(
-        onTap: onTap,
+        onTap: onTap == null ? null : () => onTap(context),
         builder: (context, scale) {
           final elevationFactor = (scale - ScaleButton.defaultTappedScale) *
               (1 / (1 - ScaleButton.defaultTappedScale));
@@ -105,18 +116,18 @@ class _PlayCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        subtitle.toUpperCase(),
+                      DefaultTextStyle.merge(
                         style: textTheme.subtitle2,
+                        child: subtitle,
                       ),
                       const _SubtitleLine(),
                       verticalMargin4,
-                      Text(
-                        title,
+                      DefaultTextStyle.merge(
                         maxLines: 1,
                         softWrap: false,
                         overflow: TextOverflow.fade,
                         style: textTheme.headline5,
+                        child: title,
                       ),
                       const Spacer(),
                       DefaultTextStyle.merge(

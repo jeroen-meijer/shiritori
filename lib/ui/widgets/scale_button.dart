@@ -90,8 +90,14 @@ class _ScaleButtonState extends State<ScaleButton>
   }
 
   Future<void> _onTapUp(TapUpDetails details) async {
-    widget.onTap();
-    _controller.reverse();
+    try {
+      widget.onTap();
+      // ignore: avoid_catches_without_on_clauses
+    } catch (e) {
+      rethrow;
+    } finally {
+      _controller.reverse();
+    }
   }
 
   Future<void> _onTapCancel() async {

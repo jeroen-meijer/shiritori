@@ -40,7 +40,7 @@ class _BackgroundState extends State<Background>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: AppTheme.durationAnimationDefault,
+      duration: AppTheme.durationAnimationDefault * 1.5,
       lowerBound: 0.0,
       // Can be increased to animate multiple stages.
       upperBound: 1.0,
@@ -54,13 +54,6 @@ class _BackgroundState extends State<Background>
 
   @override
   void didPush(Route route, Route previousRoute) {
-    log(
-      '!!! didPush '
-      'route: ${route?.runtimeType} (${route?.settings?.name}) | '
-      'previousRoute: ${previousRoute?.runtimeType} '
-      '(${previousRoute?.settings?.name})',
-    );
-
     if (route.isFirst) {
       return;
     }
@@ -70,34 +63,14 @@ class _BackgroundState extends State<Background>
 
   @override
   void didPop(Route route, Route previousRoute) {
-    log(
-      '!!! didPop '
-      'route: ${route?.runtimeType} (${route?.settings?.name}) | '
-      'previousRoute: ${previousRoute?.runtimeType} '
-      '(${previousRoute?.settings?.name})',
-    );
-
     _tryAnimateBackwardOnce();
   }
 
   @override
-  void didRemove(Route route, Route previousRoute) {
-    log(
-      'didRemove '
-      'route: ${route?.runtimeType} (${route?.settings?.name}) | '
-      'previousRoute: ${previousRoute?.runtimeType} '
-      '(${previousRoute?.settings?.name})',
-    );
-  }
+  void didRemove(Route route, Route previousRoute) {}
 
   @override
-  void didReplace({Route newRoute, Route oldRoute}) {
-    log(
-      'didReplace '
-      'newRoute: ${newRoute?.runtimeType} (${newRoute?.settings?.name}) | '
-      'oldRoute: ${oldRoute?.runtimeType} (${oldRoute?.settings?.name})',
-    );
-  }
+  void didReplace({Route newRoute, Route oldRoute}) {}
 
   void _tryAnimateForwardOnce() {
     log('_tryAnimateForwardOnce');
@@ -134,15 +107,9 @@ class _BackgroundState extends State<Background>
       builder: (context, child) {
         final value = _animation.value;
 
-        return Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: Opacity(
-            opacity: 1.0 - value,
-            child: Transform.scale(
-              scale: 1.0 + (value * 0.6),
-              child: child,
-            ),
-          ),
+        return Transform.scale(
+          scale: 1.0 + (value * 0.6),
+          child: child,
         );
       },
       child: RawImage(

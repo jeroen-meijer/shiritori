@@ -17,20 +17,21 @@ class MainContainer extends StatelessWidget {
           Background(
             routeNotifier: _routeNotifier,
           ),
-          SafeArea(
-            child: WillPopScope(
-              onWillPop: () async {
-                return !await _navigatorKey.currentState?.maybePop();
+          WillPopScope(
+            onWillPop: () async {
+              return !await _navigatorKey.currentState?.maybePop();
+            },
+            child: Navigator(
+              key: _navigatorKey,
+              observers: [
+                _routeNotifier,
+                HeroController(),
+              ],
+              onGenerateRoute: (_) {
+                return ZoomPageRoute(
+                  builder: (_) => const HomeScreen(),
+                );
               },
-              child: Navigator(
-                key: _navigatorKey,
-                observers: [_routeNotifier],
-                onGenerateRoute: (_) {
-                  return ZoomPageRoute(
-                    builder: (_) => const HomeScreen(),
-                  );
-                },
-              ),
             ),
           ),
         ],

@@ -50,10 +50,11 @@ class HomeStrings {
 
   String get quickPlayCardSubtitle {
     return Intl.message(
-      'Play against CPU',
+      'PALY AGAINST CPU',
       name: 'quickPlayCardSubtitle',
       desc: 'Subtitle on the Quick Play card that '
-          'indicates it is a new game mode.',
+          'indicates it is a new game mode. '
+          'Should be all capitals if applicable.',
     );
   }
 
@@ -68,10 +69,11 @@ class HomeStrings {
 
   String get multiplayerCardSubtitle {
     return Intl.message(
-      'Play with friends',
+      'PLAY WITH FRIENDS',
       name: 'multiplayerCardSubtitle',
       desc: 'Subtitle on the Multiplayer card that '
-          'indicates the user can play with friends.',
+          'indicates the user can play with friends. '
+          'Should be all capitals if applicable.',
     );
   }
 
@@ -87,10 +89,11 @@ class HomeStrings {
 
   String get statsCardSubtitle {
     return Intl.message(
-      'Ranking',
+      'RANKING',
       name: 'statsCardSubtitle',
       desc: 'Subtitle on the Stats card that '
-          'indicates the user can see their ranking.',
+          'indicates the user can see their ranking. '
+          'Should be all capitals if applicable.',
     );
   }
 
@@ -105,10 +108,11 @@ class HomeStrings {
 
   String get settingsCardSubtitle {
     return Intl.message(
-      'Customize',
+      'CUSTOMIZE',
       name: 'settingsCardSubtitle',
       desc: 'Subtitle on the Settings card that '
-          'indicates the user can customize their settings.',
+          'indicates the user can customize their settings. '
+          'Should be all capitals if applicable.',
     );
   }
 }

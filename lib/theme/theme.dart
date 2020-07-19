@@ -22,9 +22,7 @@ abstract class AppTheme {
   static const cardTheme = CardTheme(
     elevation: _elevation,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(16.0),
-      ),
+      borderRadius: BorderRadius.all(radiusCardDefault),
     ),
   );
 
@@ -105,6 +103,8 @@ abstract class AppTheme {
   static const lightestBlue = Color(0xFF78E2FC);
   static const cyan = Color(0xFF6DE2BA);
   static const green = Color(0xFF77D65A);
+
+  static const radiusCardDefault = Radius.circular(16.0);
 
   static const curveDefault = Curves.easeOutQuint;
 
