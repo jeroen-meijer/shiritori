@@ -109,5 +109,5 @@ abstract class AppTheme {
 
   static const curveDefault = Curves.easeOutQuint;
 
-  static const durationAnimationDefault = Duration(milliseconds: 600);
+  static const durationAnimationDefault = Duration(milliseconds: 300);
 }

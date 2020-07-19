@@ -1,31 +1,34 @@
 import 'dart:developer';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-// import 'package:shiritori/assets/assets.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/routes/routes.dart';
 import 'package:shiritori/utils/utils.dart';
 
-class Background extends StatefulWidget {
-  const Background({
+class ZoomContainer extends StatefulWidget {
+  const ZoomContainer({
     Key key,
     @required this.routeNotifier,
-  })  : assert(routeNotifier != null),
+    this.scaleFactor = 1.0,
+    @required this.child,
+  })  : assert(scaleFactor != null),
+        assert(routeNotifier != null),
         super(key: key);
 
   final RouteNotifier<ZoomPageRoute> routeNotifier;
+  final double scaleFactor;
+  final Widget child;
 
   @override
-  _BackgroundState createState() => _BackgroundState();
+  _ZoomContainerState createState() => _ZoomContainerState();
 }
 
-class _BackgroundState extends State<Background>
+class _ZoomContainerState extends State<ZoomContainer>
     with
         SingleTickerProviderStateMixin,
-        RouteNotifierStateMixin<ZoomPageRoute, Background> {
-  static const _curve = Curves.easeOutCubic;
+        RouteNotifierStateMixin<ZoomPageRoute, ZoomContainer> {
+  static const _zoomInCurve = Curves.easeInOut;
+  static const _zoomOutCurve = Curves.easeOutCubic;
 
   AnimationController _animationController;
   Animation<double> _animation;
@@ -47,8 +50,8 @@ class _BackgroundState extends State<Background>
     );
     _animation = CurvedAnimation(
       parent: _animationController,
-      curve: _curve,
-      reverseCurve: _curve.flipped,
+      curve: _zoomInCurve,
+      reverseCurve: _zoomOutCurve.flipped,
     );
   }
 
@@ -107,21 +110,18 @@ class _BackgroundState extends State<Background>
 
   @override
   Widget build(BuildContext context) {
-    final backgroundImage = Provider.of<ui.Image>(context, listen: false);
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
-        final value = _animation.value;
+        // FIXME: Super hacky, but works ¯\_(ツ)_/¯
+        final value = _animation.value % 1.0;
 
         return Transform.scale(
-          scale: 1.0 + (value * 0.6),
+          scale: 1.0 + ((value * 0.6) * widget.scaleFactor),
           child: child,
         );
       },
-      child: RawImage(
-        image: backgroundImage,
-        fit: BoxFit.cover,
-      ),
+      child: widget.child,
     );
   }
 }

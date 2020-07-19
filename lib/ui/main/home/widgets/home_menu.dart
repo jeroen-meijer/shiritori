@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/main/quick_play/quick_play.dart';
-import 'package:shiritori/ui/routes/routes.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
 
 class HomeMenu extends StatelessWidget {

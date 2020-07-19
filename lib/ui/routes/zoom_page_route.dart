@@ -18,8 +18,6 @@ class ZoomPageRoute extends PageRouteBuilder {
             );
             final opacityAnimationOut = CurvedAnimation(
               parent: animationOut.drive(Tween(begin: 1.0, end: 0.0)),
-              // TODO: Determine best looking approach.
-              //
               // Note: in practice, this curve is flipped because of how the
               //   value is used within the transition.
               //
