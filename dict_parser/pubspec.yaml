@@ -10,9 +10,9 @@ environment:
 dependencies:
   shared_models:
     path: ../shared_models
-  meta: 1.2.2
+  meta: 1.1.8
   sqlite3: 0.1.4
-  xml: 4.3.0
+  xml: 4.2.0
 
 dev_dependencies:
   effective_dart: 1.2.3

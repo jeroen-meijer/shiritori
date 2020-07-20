@@ -5,6 +5,8 @@ import 'package:dict_parser/utils.dart';
 import 'package:shared_models/shared_models.dart';
 import 'package:xml/xml.dart';
 
+const _wordCountLimit = 20000;
+
 // TODO: Move to config wrapper class for better compatibilty with other dicts.
 const _nounTag = '&n;';
 const _spellingElementPath = ['k_ele', 'keb'];
@@ -43,26 +45,29 @@ Future<void> main(List<String> args) async {
   });
 
   _time('Parsing nouns');
-  final nouns = xmlNouns.map((noun) {
-    final spellings = noun
-        .findAllElementsDeep(_spellingElementPath)
-        .mapEachToText()
-        .toList(growable: false);
-    final phoneticSpellings = noun
-        .findAllElementsDeep(_phoneticSpellingElementPath)
-        .mapEachToText()
-        .toList(growable: false);
-    final definitions = noun
-        .findAllElementsDeep(_definitionsElementPath)
-        .mapEachToText()
-        .toList(growable: false);
+  final nouns = xmlNouns
+      .map((noun) {
+        final spellings = noun
+            .findAllElementsDeep(_spellingElementPath)
+            .mapEachToText()
+            .toList(growable: false);
+        final phoneticSpellings = noun
+            .findAllElementsDeep(_phoneticSpellingElementPath)
+            .mapEachToText()
+            .toList(growable: false);
+        final definitions = noun
+            .findAllElementsDeep(_definitionsElementPath)
+            .mapEachToText()
+            .toList(growable: false);
 
-    return WordEntry(
-      spellings: spellings,
-      phoneticSpellings: phoneticSpellings,
-      definitions: definitions,
-    );
-  }).toList(growable: false);
+        return WordEntry(
+          spellings: spellings,
+          phoneticSpellings: phoneticSpellings,
+          definitions: definitions,
+        );
+      })
+      .take(_wordCountLimit)
+      .toList(growable: false);
   _stopTime();
 
   _time('Indexing into dictionary...');
@@ -79,8 +84,7 @@ Future<void> main(List<String> args) async {
   _stopTime();
 
   final exportFile = File(
-    '${xmlFileName.split('.').first}_'
-    '${DateTime.now().millisecondsSinceEpoch}.json',
+    'dict_${dictionary.language.code}.json',
   );
 
   _time('Exporting to file (${exportFile.path})');

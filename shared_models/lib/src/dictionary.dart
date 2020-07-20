@@ -1,11 +1,15 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
-
 import 'package:shared_models/shared_models.dart';
 
+part 'dictionary.g.dart';
+
 @immutable
+@JsonSerializable()
 class Dictionary extends Equatable {
-  const Dictionary._({
+  const Dictionary({
+    @required this.language,
     @required this.indicies,
     @required this.entries,
   });
@@ -14,6 +18,9 @@ class Dictionary extends Equatable {
     @required Language language,
     @required List<WordEntry> entries,
   }) {
+    assert(language != null);
+    assert(entries != null);
+
     final indicies = <String, Set<int>>{};
 
     for (var index = 0; index < entries.length; index++) {
@@ -31,39 +38,20 @@ class Dictionary extends Equatable {
       }
     }
 
-    return Dictionary._(
+    return Dictionary(
+      language: language,
       indicies: indicies,
       entries: entries,
     );
   }
 
+  final Language language;
   final Map<String, Set<int>> indicies;
   final List<WordEntry> entries;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'indicies': indicies.map((key, indicies) {
-        return MapEntry<String, List<int>>(
-          key,
-          indicies.toList(growable: false),
-        );
-      }),
-      'entries': entries?.map((x) => x?.toJson())?.toList(),
-    };
-  }
-
-  static Dictionary fromJson(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return Dictionary._(
-      indicies: Map<String, Set<int>>.from(
-        map['indicies'] as Map<String, Set<int>>,
-      ),
-      entries: List<WordEntry>.from(
-        (map['entries'] as List<Map<String, dynamic>>)?.map(WordEntry.fromJson),
-      ),
-    );
-  }
+  factory Dictionary.fromJson(Map<String, dynamic> json) =>
+      _$DictionaryFromJson(json);
+  Map<String, dynamic> toJson() => _$DictionaryToJson(this);
 
   @override
   bool get stringify => true;

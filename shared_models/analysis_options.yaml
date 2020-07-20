@@ -9,7 +9,7 @@ linter:
     prefer_single_quotes: true
     public_member_api_docs: false
     sort_child_properties_last: true
-    sort_constructors_first: true
+    sort_constructors_first: false
     unawaited_futures: true
 analyzer:
   exclude:

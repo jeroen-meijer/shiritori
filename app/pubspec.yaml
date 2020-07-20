@@ -13,11 +13,14 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  shared_models:
+    path: ../shared_models
   animations: ^1.1.1
   equatable: 1.2.2
   flutter_svg: 0.17.4
   font_awesome_flutter: 8.8.1
   intl: 0.16.1
+  meta: 1.1.8
   provider: ^4.3.1
 
 dev_dependencies:
@@ -32,6 +35,7 @@ flutter:
   assets:
     - assets/images/png/
     - assets/images/svg/
+    - assets/dicts/
   fonts:
     - family: HurmeGeometricSans
       fonts:

@@ -6,10 +6,23 @@ import 'package:shiritori/app/app.dart';
 import 'assets/assets.dart';
 
 void main() async {
-  log('Initializing binding...');
+  log('Initializing bindings...');
+  
+  final initStopwatch = Stopwatch()..start();
   WidgetsFlutterBinding.ensureInitialized();
   log('Loading background image...');
   final backgroundImage = await Images.loadBackground();
-  log('Initialization done.');
-  runApp(AppRoot(backgroundImage: backgroundImage));
+  log('Loading dictionaries...');
+  final dictionaries = await Dictionaries.loadFromDisk();
+  initStopwatch.stop();
+  
+  final seconds = (initStopwatch.elapsedMilliseconds / 1000).toStringAsFixed(3);
+  log('Initialization done. (took $seconds seconds)');
+
+  runApp(
+    AppRoot(
+      backgroundImage: backgroundImage,
+      dictionaries: dictionaries,
+    ),
+  );
 }

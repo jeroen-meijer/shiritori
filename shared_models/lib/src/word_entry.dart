@@ -1,7 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
+part 'word_entry.g.dart';
+
 @immutable
+@JsonSerializable()
 class WordEntry extends Equatable {
   const WordEntry({
     @required final List<String> spellings,
@@ -15,24 +19,9 @@ class WordEntry extends Equatable {
   final List<String> phoneticSpellings;
   final List<String> definitions;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'spellings': spellings,
-      'phonetic_spellings': phoneticSpellings,
-      'definitions': definitions,
-    };
-  }
-
-  static WordEntry fromJson(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return WordEntry(
-      spellings: List<String>.from(map['spellings'] as List<String>),
-      phoneticSpellings:
-          List<String>.from(map['phonetic_spellings'] as List<String>),
-      definitions: List<String>.from(map['definitions'] as List<String>),
-    );
-  }
+  factory WordEntry.fromJson(Map<String, dynamic> json) =>
+      _$WordEntryFromJson(json);
+  Map<String, dynamic> toJson() => _$WordEntryToJson(this);
 
   @override
   bool get stringify => true;

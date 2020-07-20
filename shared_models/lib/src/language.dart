@@ -1,7 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
+part 'language.g.dart';
+
 @immutable
+@JsonSerializable()
 class Language extends Equatable {
   const Language(this.code, this.name);
 
@@ -11,23 +15,9 @@ class Language extends Equatable {
   static const english = Language('en', 'English');
   static const japanese = Language('ja', '日本語');
 
-  Map<String, dynamic> toJson() {
-    return {
-      'code': code,
-      'name': name,
-    };
-  }
-
-  static Language fromJson(Map<String, dynamic> map) {
-    if (map == null) {
-      return null;
-    }
-
-    return Language(
-      map['code'] as String,
-      map['name'] as String,
-    );
-  }
+  factory Language.fromJson(Map<String, dynamic> json) =>
+      _$LanguageFromJson(json);
+  Map<String, dynamic> toJson() => _$LanguageToJson(this);
 
   @override
   bool get stringify => true;
