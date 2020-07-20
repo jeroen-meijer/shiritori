@@ -6,6 +6,7 @@ import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
 
+/// TEMPORARILY A SEARCH SCREEN FOR DICTIONARIES
 class GameScreen extends StatefulWidget {
   GameScreen({
     Key key,
@@ -20,19 +21,42 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  static const _query = 'しお';
-
-  List<WordEntry> _searchResults;
+  var _searchResults = <WordEntry>{};
 
   @override
   void initState() {
     super.initState();
-    _searchResults = widget.dictionary.searchWord(_query);
+  }
+
+  void onChangeQuery(String query) {
+    setState(() {
+      _searchResults = widget.dictionary.searchWord(query);
+    });
+  }
+
+  String get _formattedSearchResult {
+    if (_searchResults.isEmpty) {
+      'No word found...';
+    }
+
+    final sb = StringBuffer();
+
+    sb.writeln('${_searchResults.length} words found!\n');
+
+    for (final word in _searchResults) {
+      sb.writeln('${[...word.spellings, word.phoneticSpellings].join(', ')}');
+      for (final definition in word.definitions) {
+        sb.writeln(' - $definition');
+      }
+      sb.writeln();
+    }
+
+    return sb.toString();
   }
 
   @override
   Widget build(BuildContext context) {
-    final intl = ShiritoriLocalizations.of(context).game;
+    // final intl = ShiritoriLocalizations.of(context).game;
     final uiIntl = ShiritoriLocalizations.of(context).ui;
 
     return Provider<Dictionary>.value(
@@ -40,21 +64,48 @@ class _GameScreenState extends State<GameScreen> {
       child: DefaultStylingColor(
         color: AppTheme.colorSingleplayer,
         child: Scaffold(
+          resizeToAvoidBottomInset: true,
+          resizeToAvoidBottomPadding: true,
           body: CustomScrollView(
+            physics: const NeverScrollableScrollPhysics(),
             slivers: [
               AppSliverNavigationBar(
-                title: Text(intl.singleplayerTitle),
+                // title: Text(intl.singleplayerTitle),
+                title: const Text('Dictionary Test'),
                 leading: TextButton(
                   onTap: Navigator.of(context).pop,
                   child: Text(uiIntl.back),
                 ),
               ),
               SliverFillRemaining(
-                child: Center(
-                  child: Text(
-                    'Selected dictionary: ${widget.dictionary}\n'
-                    'Information for the word $_query:\n'
-                    '$_searchResults',
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: Text(_formattedSearchResult),
+                      ),
+                      verticalMargin12,
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextField(
+                          autocorrect: false,
+                          minLines: 1,
+                          maxLines: 1,
+                          decoration: InputDecoration(
+                            errorText: _searchResults.isNotEmpty
+                                ? null
+                                : 'No word found.',
+                            labelText: 'Word Query',
+                            hintText: 'ことば',
+                          ),
+                          onChanged: onChangeQuery,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

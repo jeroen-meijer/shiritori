@@ -51,14 +51,14 @@ class Dictionary extends Equatable {
   final Map<String, Set<int>> indicies;
   final List<WordEntry> entries;
 
-  List<WordEntry> searchWord(String query) {
+  Set<WordEntry> searchWord(String query) {
     log('SEARCH');
     final queryIndicies = indicies[query];
     if (queryIndicies == null) {
-      return null;
+      return {};
     }
 
-    return queryIndicies.map((index) => entries[index]).toList(growable: false);
+    return queryIndicies.map((index) => entries[index]).toSet();
   }
 
   factory Dictionary.fromJson(Map<String, dynamic> json) =>
