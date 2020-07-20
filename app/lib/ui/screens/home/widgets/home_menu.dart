@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shiritori/assets/assets.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/screens/game/game.dart';
@@ -30,7 +31,9 @@ class HomeMenu extends StatelessWidget {
                   color: AppTheme.colorSingleplayer,
                   icon: const Text('遊ぶ'),
                   expandedChildBuilder: (context) {
-                    return GameScreen();
+                    return GameScreen(
+                      dictionary: Dictionaries.of(context).japanese,
+                    );
                   },
                 ),
                 _PlayCard(
@@ -98,63 +101,57 @@ class _PlayCard extends StatelessWidget {
           aspectRatio: 1,
           child: Opacity(
             opacity: expandedChildBuilder != null ? 1.0 : 0.5,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                log('$constraints');
-
-                return OpenContainer(
-                  tappable: false,
-                  transitionDuration: AppTheme.durationAnimationDefault,
-                  openBuilder: (context, close) {
-                    return expandedChildBuilder?.call(context);
-                  },
-                  closedColor: cardTheme.color,
-                  closedShape: cardTheme.shape,
-                  closedElevation: cardTheme.elevation,
-                  closedBuilder: (context, open) {
-                    return ScaleButton(
-                      onTap: !enabled ? null : open,
-                      child: Material(
-                        type: MaterialType.transparency,
-                        child: DefaultStylingColor(
-                          color: color,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                DefaultTextStyle.merge(
-                                  style: textTheme.subtitle2,
-                                  child: subtitle,
-                                ),
-                                const SubtitleLine(),
-                                verticalMargin4,
-                                DefaultTextStyle.merge(
-                                  maxLines: 1,
-                                  softWrap: false,
-                                  overflow: TextOverflow.fade,
-                                  style: textTheme.headline5,
-                                  child: title,
-                                ),
-                                const Spacer(),
-                                DefaultTextStyle.merge(
-                                  style: TextStyle(
-                                    fontWeight: textTheme.headline4.fontWeight,
-                                  ),
-                                  child: AbsoluteTextIconTheme(
-                                    size: 56.0,
-                                    color: color,
-                                    child: icon,
-                                  ),
-                                ),
-                              ],
+            child: OpenContainer(
+              tappable: false,
+              transitionDuration: AppTheme.durationAnimationDefault,
+              openBuilder: (context, close) {
+                return expandedChildBuilder?.call(context);
+              },
+              closedColor: cardTheme.color,
+              closedShape: cardTheme.shape,
+              closedElevation: cardTheme.elevation,
+              closedBuilder: (context, open) {
+                return ScaleButton(
+                  onTap: !enabled ? null : open,
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: DefaultStylingColor(
+                      color: color,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            DefaultTextStyle.merge(
+                              style: textTheme.subtitle2,
+                              child: subtitle,
                             ),
-                          ),
+                            const SubtitleLine(),
+                            verticalMargin4,
+                            DefaultTextStyle.merge(
+                              maxLines: 1,
+                              softWrap: false,
+                              overflow: TextOverflow.fade,
+                              style: textTheme.headline5,
+                              child: title,
+                            ),
+                            const Spacer(),
+                            DefaultTextStyle.merge(
+                              style: TextStyle(
+                                fontWeight: textTheme.headline4.fontWeight,
+                              ),
+                              child: AbsoluteTextIconTheme(
+                                size: 56.0,
+                                color: color,
+                                child: icon,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 );
               },
             ),

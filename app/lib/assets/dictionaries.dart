@@ -6,6 +6,8 @@ import 'package:meta/meta.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_models/shared_models.dart';
 
+export 'package:shared_models/shared_models.dart';
+
 @immutable
 class Dictionaries {
   const Dictionaries({
@@ -18,6 +20,10 @@ class Dictionaries {
 
   List<Language> get supportedLanguages {
     return all.map((dict) => dict.language).toList();
+  }
+
+  static Dictionaries of(BuildContext context) {
+    return Provider.of<Dictionaries>(context, listen: false);
   }
 
   static Future<Dictionary> _loadDictionaryFromDisk(Language language) async {
@@ -36,12 +42,6 @@ class Dictionaries {
     return Dictionaries(
       japanese: japanese,
     );
-  }
-}
-
-extension DictionariesX on Dictionaries {
-  static Dictionaries of(BuildContext context) {
-    return Provider.of<Dictionaries>(context, listen: false);
   }
 }
 

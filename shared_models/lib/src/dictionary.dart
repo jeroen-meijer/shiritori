@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
@@ -49,12 +51,25 @@ class Dictionary extends Equatable {
   final Map<String, Set<int>> indicies;
   final List<WordEntry> entries;
 
+  List<WordEntry> searchWord(String query) {
+    log('SEARCH');
+    final queryIndicies = indicies[query];
+    if (queryIndicies == null) {
+      return null;
+    }
+
+    return queryIndicies.map((index) => entries[index]).toList(growable: false);
+  }
+
   factory Dictionary.fromJson(Map<String, dynamic> json) =>
       _$DictionaryFromJson(json);
   Map<String, dynamic> toJson() => _$DictionaryToJson(this);
 
   @override
-  bool get stringify => true;
+  String toString() {
+    return 'Dictionary for language ${language.code} '
+        '(${indicies.length} indicies, ${entries.length} entries)';
+  }
 
   @override
   List<Object> get props => [indicies, entries];

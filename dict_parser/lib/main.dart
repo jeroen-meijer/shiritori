@@ -5,7 +5,7 @@ import 'package:dict_parser/utils.dart';
 import 'package:shared_models/shared_models.dart';
 import 'package:xml/xml.dart';
 
-const _wordCountLimit = 20000;
+const _wordCountLimit = 50000;
 
 // TODO: Move to config wrapper class for better compatibilty with other dicts.
 const _nounTag = '&n;';
