@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shiritori/assets/assets.dart';
+import 'package:shiritori/backend/backend.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/screens/game/game.dart';
@@ -53,7 +53,12 @@ class HomeScreen extends StatelessWidget {
                       ExpandingRouteButton(
                         routeBuilder: (context) {
                           return GameScreen(
-                            dictionary: Dictionaries.of(context).japanese,
+                            game: Game.startNew(
+                              SingleplayerGameSettings(
+                                dictionary: Dictionaries.of(context).japanese,
+                                answeringDuration: const Duration(seconds: 10),
+                              ),
+                            ),
                           );
                         },
                         child: Text(intl.quickPlayButtonTitle),

@@ -15,13 +15,17 @@ dependencies:
     sdk: flutter
   shared_models:
     path: ../shared_models
-  animations: ^1.1.1
+  kana:
+    git:
+      url: git://github.com/jeroen-meijer/kana.git
+  animations: 1.1.1
+  avatar_glow: 1.2.0
   equatable: 1.2.2
   flutter_svg: 0.17.4
   font_awesome_flutter: 8.8.1
   intl: 0.16.1
   meta: 1.1.8
-  provider: ^4.3.1
+  provider: 4.3.1
 
 dev_dependencies:
   flutter_test:

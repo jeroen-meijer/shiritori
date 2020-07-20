@@ -22,7 +22,9 @@ class HomeHeader extends StatelessWidget {
               width: double.infinity,
               child: Text(
                 intl.welcomeHeader('Jeroen'),
-                style: textTheme.headline3,
+                style: textTheme.headline3.copyWith(
+                  color: AppTheme.white,
+                ),
               ),
             ),
           ),

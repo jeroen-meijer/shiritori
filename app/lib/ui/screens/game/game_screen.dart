@@ -1,117 +1,79 @@
+import 'dart:async';
+
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shiritori/assets/assets.dart';
-import 'package:shiritori/intl/intl.dart';
-import 'package:shiritori/theme/theme.dart';
-import 'package:shiritori/ui/widgets/widgets.dart';
+import 'package:shiritori/backend/backend.dart';
+import 'package:shiritori/ui/screens/game/pages/pages.dart';
 
 /// TEMPORARILY A SEARCH SCREEN FOR DICTIONARIES
 class GameScreen extends StatefulWidget {
   GameScreen({
     Key key,
-    @required this.dictionary,
-  })  : assert(dictionary != null),
+    @required this.game,
+  })  : assert(game != null),
         super(key: key);
 
-  final Dictionary dictionary;
+  final Game game;
 
   @override
   _GameScreenState createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
-  var _searchResults = <WordEntry>{};
+  static const _playCountdownSeconds = 3;
+
+  Timer _playCountdownTimer;
 
   @override
   void initState() {
     super.initState();
-  }
 
-  void onChangeQuery(String query) {
-    setState(() {
-      _searchResults = widget.dictionary.searchWord(query);
+    // Delaying the timer to sync up better with the surrounding animation.
+    Future.delayed(const Duration(milliseconds: 300), () {
+      _playCountdownTimer = Timer.periodic(
+        const Duration(seconds: 1),
+        (_) => _onPlayCountdownTimerTick(),
+      );
     });
   }
 
-  String get _formattedSearchResult {
-    if (_searchResults.isEmpty) {
-      'No word found...';
+  @override
+  void dispose() {
+    _playCountdownTimer?.cancel();
+    super.dispose();
+  }
+
+  void _onPlayCountdownTimerTick() {
+    setState(() {});
+    if (_playCountdownTimer.tick == _playCountdownSeconds) {
+      _playCountdownTimer.cancel();
     }
+  }
 
-    final sb = StringBuffer();
-
-    sb.writeln('${_searchResults.length} words found!\n');
-
-    for (final word in _searchResults) {
-      sb.writeln('${[...word.spellings, word.phoneticSpellings].join(', ')}');
-      for (final definition in word.definitions) {
-        sb.writeln(' - $definition');
-      }
-      sb.writeln();
-    }
-
-    return sb.toString();
+  int get _playCountdownSecondsRemaining {
+    return _playCountdownSeconds - (_playCountdownTimer?.tick ?? 0);
   }
 
   @override
   Widget build(BuildContext context) {
-    // final intl = ShiritoriLocalizations.of(context).game;
-    final uiIntl = ShiritoriLocalizations.of(context).ui;
-
-    return Provider<Dictionary>.value(
-      value: widget.dictionary,
-      child: DefaultStylingColor(
-        color: AppTheme.colorSingleplayer,
-        child: Scaffold(
-          resizeToAvoidBottomInset: true,
-          resizeToAvoidBottomPadding: true,
-          body: CustomScrollView(
-            physics: const NeverScrollableScrollPhysics(),
-            slivers: [
-              AppSliverNavigationBar(
-                // title: Text(intl.singleplayerTitle),
-                title: const Text('Dictionary Test'),
-                leading: TextButton(
-                  onTap: Navigator.of(context).pop,
-                  child: Text(uiIntl.back),
-                ),
-              ),
-              SliverFillRemaining(
-                child: Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Expanded(
-                        child: Text(_formattedSearchResult),
-                      ),
-                      verticalMargin12,
-                      SizedBox(
-                        width: double.infinity,
-                        child: TextField(
-                          autocorrect: false,
-                          minLines: 1,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            errorText: _searchResults.isNotEmpty
-                                ? null
-                                : 'No word found.',
-                            labelText: 'Word Query',
-                            hintText: 'ことば',
-                          ),
-                          onChanged: onChangeQuery,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+    return Provider<Game>.value(
+      value: widget.game,
+      child: PageTransitionSwitcher(
+        transitionBuilder: (child, animation, secondaryAnimation) {
+          return SharedAxisTransition(
+            transitionType: SharedAxisTransitionType.vertical,
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          );
+        },
+        child: _playCountdownSecondsRemaining > 0
+            ? CountdownPage(
+                secondsRemaining: _playCountdownSecondsRemaining,
+              )
+            : const InGamePage(),
       ),
     );
   }

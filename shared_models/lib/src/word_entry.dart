@@ -19,6 +19,11 @@ class WordEntry extends Equatable {
   final List<String> phoneticSpellings;
   final List<String> definitions;
 
+  List<String> get allSpellings => [
+        ...spellings,
+        ...phoneticSpellings,
+      ];
+
   factory WordEntry.fromJson(Map<String, dynamic> json) =>
       _$WordEntryFromJson(json);
   Map<String, dynamic> toJson() => _$WordEntryToJson(this);

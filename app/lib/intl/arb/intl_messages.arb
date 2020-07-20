@@ -1,4 +1,22 @@
 {
+  "singleplayerTitle": "Singleplayer",
+  "@singleplayerTitle": {
+    "description": "The header for the Singleplayer page. Usually, this string should be the same as HomeStrings.singleplayerCardTitle.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "multiplayerTitle": "Multiplayer",
+  "@multiplayerTitle": {
+    "description": "The header for the Multiplayer page. Usually, this string should be the same as HomeStrings.multiplayerCardTitle.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "getReady": "Get Ready...",
+  "@getReady": {
+    "description": "Text indicating a match is about to start and the player needs to start paying attention and get themselves ready.",
+    "type": "text",
+    "placeholders": {}
+  },
   "welcomeHeader": "Welcome back,\n{name}.",
   "@welcomeHeader": {
     "description": "Welcome message displayed at the top of the screen that greets the user.",
@@ -27,15 +45,15 @@
     "type": "text",
     "placeholders": {}
   },
-  "quickPlayCardTitle": "Quick Play",
-  "@quickPlayCardTitle": {
-    "description": "Title on the Quick Play card that allows the user to start a quick play match.",
+  "singleplayerCardTitle": "Singleplayer",
+  "@singleplayerCardTitle": {
+    "description": "Title on the Singleplayer card that allows the user to start a quick play match.",
     "type": "text",
     "placeholders": {}
   },
-  "quickPlayCardSubtitle": "PLAY AGAINST CPU",
-  "@quickPlayCardSubtitle": {
-    "description": "Subtitle on the Quick Play card that indicates it is a new game mode. Should be all capitals if applicable.",
+  "singleplayerCardSubtitle": "AGAINST CPU",
+  "@singleplayerCardSubtitle": {
+    "description": "Subtitle on the Singleplayer card that indicates it is a new game mode. Should be all capitals if applicable.",
     "type": "text",
     "placeholders": {}
   },
@@ -45,7 +63,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "multiplayerCardSubtitle": "PLAY WITH FRIENDS",
+  "multiplayerCardSubtitle": "WITH FRIENDS",
   "@multiplayerCardSubtitle": {
     "description": "Subtitle on the Multiplayer card that indicates the user can play with friends. Should be all capitals if applicable.",
     "type": "text",
@@ -75,9 +93,21 @@
     "type": "text",
     "placeholders": {}
   },
+  "quickPlayButtonTitle": "Quick Play",
+  "@quickPlayButtonTitle": {
+    "description": "Text on the Quick Play button that instantly starts a singleplayer CPU match.",
+    "type": "text",
+    "placeholders": {}
+  },
   "snackBarConfirmButton": "OK",
   "@snackBarConfirmButton": {
     "description": "Button text displayed on a snackbar that confirms and dismisses it.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "back": "BACK",
+  "@back": {
+    "description": "Button text displayed on back buttons that confirms and dismisses it. Should be all capitals if applicable.",
     "type": "text",
     "placeholders": {}
   }

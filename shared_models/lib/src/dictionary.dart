@@ -52,7 +52,7 @@ class Dictionary extends Equatable {
   final List<WordEntry> entries;
 
   Set<WordEntry> searchWord(String query) {
-    log('SEARCH');
+    log('SEARCH "$query"');
     final queryIndicies = indicies[query];
     if (queryIndicies == null) {
       return {};

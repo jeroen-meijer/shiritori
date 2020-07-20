@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_models/shared_models.dart';
+import 'package:shiritori/assets/assets.dart';
 
 export 'package:shared_models/shared_models.dart';
 
@@ -27,8 +28,7 @@ class Dictionaries {
   }
 
   static Future<Dictionary> _loadDictionaryFromDisk(Language language) async {
-    final dictText =
-        await rootBundle.loadString('assets/dicts/dict_${language.code}.json');
+    final dictText = await rootBundle.loadString(dictionaryFiles[language]);
     final dictJson = json.decode(dictText) as Map<String, dynamic>;
 
     final dict = Dictionary.fromJson(dictJson);

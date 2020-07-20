@@ -1,8 +1,7 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:meta/meta.dart';
-
-export 'route_notifier.dart';
 
 // Typedefs
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
@@ -17,13 +16,18 @@ Mapper<dynamic, T> castDynamic<T>() => (value) => value as T;
 
 // Classes
 class Tuple<T1, T2> {
-  const Tuple(this.first, this.second);
+  const Tuple(this.left, this.right);
 
-  final T1 first;
-  final T2 second;
+  final T1 left;
+  final T2 right;
 }
 
 // Extensions
+extension TupleListUtils<T1, T2> on List<Tuple<T1, T2>> {
+  List<T1> get allLefts => map((t) => t.left).toList();
+  List<T2> get allRights => map((t) => t.right).toList();
+}
+
 extension NumUtils on num {
   int roundToNearest(int rounding) {
     return (this / rounding).round() * rounding;
@@ -80,17 +84,17 @@ extension IterableUtils<T> on Iterable<T> {
     }
   }
 
-  T get random {
-    return (List<T>.from(this)..shuffle()).first;
-  }
-
-  Iterable<T> safeWhere(bool Function(T element) test) {
+  Iterable<T> whereOrEmpty(bool Function(T element) test) {
     try {
       return where(test);
       // ignore: avoid_catching_errors
     } on StateError {
       return <T>[];
     }
+  }
+
+  T firstWhereOrNull(bool Function(T element) test) {
+    return firstWhere(test, orElse: () => null);
   }
 
   Iterable<T> intersperse(T element) sync* {
@@ -113,9 +117,41 @@ extension ListUtils<T> on List<T> {
 
     return null;
   }
+
+  T get random {
+    return elementAt(Random().nextInt(length));
+  }
 }
 
 extension StringUtils on String {
+  /// Divides this [String] into two parts.
+  ///
+  /// The first part contains all the characters string from index `0` until
+  /// [index] (exclusively). The seconds part contains the remaining characters.
+  ///
+  /// This means an [index] of `0` will return a [Tuple] with an empty string
+  /// on the `left` and the entire string on the `right`.
+  /// An [index] of the length of this [String] will return a [Tuple] with the
+  /// entire string on the `left` and an empty string on the `right`.
+  Tuple<String, String> divide(int index) {
+    assert(index >= 0 && index <= length);
+
+    return Tuple(
+      chars.sublist(0, index).join(),
+      chars.sublist(index).join(),
+    );
+  }
+
+  /// Divides this [String] into two parts with the entire string except for the
+  /// last character on the `left` and the last character on the `right`.
+  Tuple<String, String> chipOffLast() {
+    return divide(length - 1);
+  }
+
+  List<String> get chars => split('');
+
+  String get reversed => chars.reversed.join();
+
   bool containsAny(Iterable<String> candidates) {
     if (candidates.isEmpty) {
       return false;

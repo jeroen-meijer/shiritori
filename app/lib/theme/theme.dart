@@ -6,6 +6,7 @@ abstract class AppTheme {
   static ThemeData get themeDataLight {
     return ThemeData(
       buttonTheme: buttonTheme,
+      canvasColor: veryLightGrey,
       cardTheme: cardTheme,
       dividerTheme: dividerTheme,
       fontFamily: Fonts.hurmeGeometricSans,
@@ -36,19 +37,19 @@ abstract class AppTheme {
   static const _letterSpacing = -0.5;
   static const textTheme = TextTheme(
     headline1: TextStyle(
-      color: white,
+      color: blue,
       fontWeight: FontWeight.bold,
       height: 1.0,
       letterSpacing: _letterSpacing,
     ),
     headline2: TextStyle(
-      color: white,
+      color: blue,
       height: 1.0,
       fontWeight: FontWeight.bold,
       letterSpacing: _letterSpacing,
     ),
     headline3: TextStyle(
-      color: white,
+      color: blue,
       height: 1.0,
       fontWeight: FontWeight.bold,
       letterSpacing: _letterSpacing,
@@ -67,23 +68,38 @@ abstract class AppTheme {
     ),
     headline6: TextStyle(
       color: blue,
+      fontSize: 22,
       height: 1.0,
       fontWeight: FontWeight.bold,
       letterSpacing: _letterSpacing,
     ),
-    overline: TextStyle(
-      color: blue,
-      fontWeight: FontWeight.bold,
-      letterSpacing: _letterSpacing,
+    bodyText1: TextStyle(
+      fontSize: 20,
+    ),
+    bodyText2: TextStyle(
+      fontSize: 18,
     ),
     subtitle1: TextStyle(
       color: blue,
+      fontSize: 20,
       fontWeight: FontWeight.bold,
       letterSpacing: _letterSpacing,
     ),
     subtitle2: TextStyle(
       color: blue,
+      fontSize: 18,
       fontWeight: FontWeight.bold,
+      letterSpacing: _letterSpacing,
+    ),
+    caption: TextStyle(
+      color: blue,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      letterSpacing: _letterSpacing,
+    ),
+    overline: TextStyle(
+      color: blue,
+      fontSize: 14,
       letterSpacing: _letterSpacing,
     ),
   );
@@ -114,7 +130,7 @@ abstract class AppTheme {
 
   static const colorSingleplayer = orange;
 
-  static const elevationDefault = 18.0;
+  static const elevationDefault = 8.0;
   static const elevationDisabled = elevationDefault / 3;
   static const radiusCardDefault = Radius.circular(16.0);
   static const shapeDefault = RoundedRectangleBorder(

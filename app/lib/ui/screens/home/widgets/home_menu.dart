@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:shiritori/assets/assets.dart';
+import 'package:shiritori/backend/backend.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/screens/game/game.dart';
@@ -32,7 +30,12 @@ class HomeMenu extends StatelessWidget {
                   icon: const Text('遊ぶ'),
                   expandedChildBuilder: (context) {
                     return GameScreen(
-                      dictionary: Dictionaries.of(context).japanese,
+                      game: Game.startNew(
+                        SingleplayerGameSettings(
+                          dictionary: Dictionaries.of(context).japanese,
+                          answeringDuration: const Duration(seconds: 10),
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -124,7 +127,7 @@ class _PlayCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             DefaultTextStyle.merge(
-                              style: textTheme.subtitle2,
+                              style: textTheme.caption,
                               child: subtitle,
                             ),
                             const SubtitleLine(),

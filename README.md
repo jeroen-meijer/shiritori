@@ -42,6 +42,7 @@ Run the dict_parser by using the included script:
 Here are some things I still need/want to implement.
 
 - Actually being able to play the game.
+- Kana-insensitive word search (i.e., refactor and improve `package:kana`)
 - Backend integration to play against other players preferably using Firebase.
 - More pretty animations.
 
