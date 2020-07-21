@@ -31,6 +31,8 @@ class _InGamePageState extends State<InGamePage> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomPadding: true,
       body: Center(
         child: Theme(
           data: theme.copyWith(
@@ -43,7 +45,9 @@ class _InGamePageState extends State<InGamePage> {
             ),
           ),
           child: WordEntryDetailsCard(
-            wordEntry: game.settings.dictionary.searchWord('大学').first,
+            wordEntry: game.settings.dictionary
+                .searchWord(game.guessesByPlayerIndex[1].last)
+                .first,
           ),
         ),
       ),

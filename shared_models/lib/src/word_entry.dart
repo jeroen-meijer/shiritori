@@ -15,8 +15,16 @@ class WordEntry extends Equatable {
         phoneticSpellings = phoneticSpellings ?? const [],
         definitions = definitions ?? const [];
 
+  /// In Japanese: Kanji spellings. May be empty.
   final List<String> spellings;
+
+  /// In Japanese: Kana spellings.
+  ///
+  /// Is guaranteed to not be empty and contain at least a single full Hiragana
+  /// version.
   final List<String> phoneticSpellings;
+
+  /// A list of definitions for this word.
   final List<String> definitions;
 
   List<String> get allSpellings => [

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kana/kana.dart';
 import 'package:shiritori/backend/backend.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
@@ -13,47 +12,7 @@ class WordEntryDetailsCard extends StatelessWidget {
 
   final WordEntry wordEntry;
 
-  /// Picks the most suitable spelling from a collection of options.
-  ///
-  /// 1. Picks for the first spelling that is fully written in Kana.
-  /// 2. If none can be found, it picks the first spelling that has both the
-  ///    most characters written in Kana and has a Kana character at the end.
-  ///
-  /// The result is converted into Hiragana and returned.
-  ///
-  String _pickMostSuitableSpelling(List<String> spellings) {
-    assert(spellings != null);
-    assert(spellings.isNotEmpty);
-
-    final kanaCharsPerSpelling = spellings.map((spelling) {
-      final kanaChars = spelling.split('').fold<int>(0, (acc, cur) {
-        return acc + (isCharHiragana(cur) || isCharKatakana(cur) ? 1 : 0);
-      });
-
-      return Tuple(spelling, kanaChars);
-    }).toList();
-
-    kanaCharsPerSpelling
-        .sort((tuple1, tuple2) => tuple2.right.compareTo(tuple1.right));
-
-    final result = kanaCharsPerSpelling
-        .firstWhere(
-          (tuple) => tuple.left.length == tuple.right,
-          orElse: () => kanaCharsPerSpelling.first,
-        )
-        .left;
-
-    return toHiragana(result);
-  }
-
-  String get primarySpelling {
-    final spellings = [
-      ...wordEntry.phoneticSpellings,
-      ...wordEntry.spellings,
-    ];
-
-    return _pickMostSuitableSpelling(spellings);
-  }
+  String get primarySpelling => wordEntry.mostSuitableSpelling;
 
   List<String> get secondarySpellings {
     return List<String>.of(wordEntry.phoneticSpellings)

@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 import 'package:provider/provider.dart';
 import 'package:shiritori/backend/backend.dart';
+import 'package:shiritori/utils/utils.dart';
 
 class Game {
   const Game({
@@ -14,7 +15,13 @@ class Game {
   factory Game.startNew(GameSettings settings) {
     return Game(
       settings: settings,
-      guessesByPlayerIndex: {0: {}, 1: {}},
+      guessesByPlayerIndex: {
+        0: {},
+        1: {
+          if (settings is SingleplayerGameSettings && settings.startWithCpuMove)
+            settings.dictionary.entries.random.phoneticSpellings.random,
+        }
+      },
       winningPlayerIndex: null,
     );
   }

@@ -8,7 +8,9 @@ abstract class GameSettings {
     @required this.dictionary,
     @required this.answeringDuration,
     @required this.enemyType,
-  });
+  })  : assert(dictionary != null),
+        assert(answeringDuration != null),
+        assert(enemyType != null);
 
   final Dictionary dictionary;
   final Duration answeringDuration;
@@ -20,7 +22,10 @@ class SingleplayerGameSettings implements GameSettings {
   const SingleplayerGameSettings({
     @required this.dictionary,
     @required this.answeringDuration,
-  });
+    this.startWithCpuMove = true,
+  })  : assert(dictionary != null),
+        assert(answeringDuration != null),
+        assert(startWithCpuMove != null);
 
   @override
   final Dictionary dictionary;
@@ -30,6 +35,8 @@ class SingleplayerGameSettings implements GameSettings {
 
   @override
   final GameEnemyType enemyType = GameEnemyType.singleplayer;
+
+  final bool startWithCpuMove;
 }
 
 @immutable
@@ -37,7 +44,8 @@ class MultiplayerGameSettings implements GameSettings {
   const MultiplayerGameSettings({
     @required this.dictionary,
     @required this.answeringDuration,
-  });
+  })  : assert(dictionary != null),
+        assert(answeringDuration != null);
 
   @override
   final Dictionary dictionary;

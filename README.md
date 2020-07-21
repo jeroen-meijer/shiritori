@@ -46,6 +46,9 @@ Here are some things I still need/want to implement.
 - Backend integration to play against other players preferably using Firebase.
 - More pretty animations.
 
+*Note: though I originally built this to only work with the Japanese language, I did keep the option of expanding this to work with other languages in mind. Therefore, it should not be too difficult to change the parser and client to use multiple languages.*
+*The above also goes for multiplayer functionality.*
+
 ### Credits
 
 As an exercise, I tried to copy this [beautiful UI mockup](https://dribbble.com/shots/5836646-Quiz-iOS-app-Animation) done by [Mike from Creative Mints](https://dribbble.com/creativemints). Give 'em some love.
