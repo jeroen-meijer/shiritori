@@ -1,0 +1,89 @@
+name: CI
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1.3.0
+        with:
+          channel: beta
+          flutter-version: 1.20.0-7.2.pre
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+      - name: Format
+        run: flutter format --dry-run --set-exit-if-changed .
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+      - name: Analyze
+        run: flutter analyze
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+      - name: Check intl ARBs
+        run: ./tool/ci/intl_extract_to_arb.sh
+
+      - name: Build APK
+        run: flutter build apk --release
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+  dict_parser:
+    runs-on: ubuntu-latest
+    container:
+      image: google/dart:2.8.4
+    env:
+      WORKING_DIRECTORY: ./dict_parser
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: pub get
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+      - name: Format
+        run: dartfmt --dry-run --set-exit-if-changed .
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+      - name: Analyze
+        run: dartanalyzer --fatal-infos --fatal-warnings lib
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+  shared_models:
+    runs-on: ubuntu-latest
+    container:
+      image: google/dart:2.8.4
+    env:
+      WORKING_DIRECTORY: ./shared_models
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: pub get
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+      - name: Format
+        run: dartfmt --dry-run --set-exit-if-changed .
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+      - name: Analyze
+        run: dartanalyzer --fatal-infos --fatal-warnings lib
+        working-directory: ${{ env.WORKING_DIRECTORY }}

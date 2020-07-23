@@ -6,7 +6,7 @@ publish_to: "none"
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
-  flutter: 1.19.0-4.3.pre
+  flutter: 1.20.0-7.2.pre
 
 dependencies:
   flutter:
@@ -15,15 +15,13 @@ dependencies:
     sdk: flutter
   shared_models:
     path: ../shared_models
-  kana:
-    git:
-      url: git://github.com/jeroen-meijer/kana.git
   animations: 1.1.1
   avatar_glow: 1.2.0
   equatable: 1.2.2
-  flutter_svg: 0.17.4
+  flutter_svg: 0.18.0
   font_awesome_flutter: 8.8.1
   intl: 0.16.1
+  kana_kit: 1.0.3+3
   meta: 1.1.8
   provider: 4.3.1
 
@@ -31,7 +29,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   effective_dart: 1.2.3
-  intl_translation: 0.17.9
+  intl_translation: 0.17.10
   pedantic: 1.9.0
 
 flutter:

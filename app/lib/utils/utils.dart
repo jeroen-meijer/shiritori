@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:meta/meta.dart';
+import 'package:equatable/equatable.dart';
 
 // Typedefs
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
@@ -14,48 +14,51 @@ typedef IndexValueChanged<T> = void Function(int index, T value);
 Mapper<T, T> id<T>() => (value) => value;
 Mapper<dynamic, T> castDynamic<T>() => (value) => value as T;
 
-// Classes
-class Tuple<T1, T2> {
+/// {@template tuple}
+/// A data class that contains two elements ([left] and [right]).
+/// {@endtemplate}
+class Tuple<T1, T2> extends Equatable {
+  /// {@macro tuple}
   const Tuple(this.left, this.right);
 
+  /// The first element.
   final T1 left;
+
+  /// The second element.
   final T2 right;
+
+  @override
+  bool get stringify => true;
+
+  @override
+  List<Object> get props => [left, right];
 }
 
-// Extensions
-extension TupleListUtils<T1, T2> on List<Tuple<T1, T2>> {
-  List<T1> get allLefts => map((t) => t.left).toList();
-  List<T2> get allRights => map((t) => t.right).toList();
+/// Extensions that make handling collections of [Tuple]s more convenient.
+extension TupleIterableUtils<T1, T2> on Iterable<Tuple<T1, T2>> {
+  /// Returns a new [Iterator<T1>] that contains all `left` elements.
+  Iterable<T1> get allLefts => map((t) => t.left);
+
+  /// Returns a new [Iterator<T2>] that contains all `right` elements.
+  Iterable<T2> get allRights => map((t) => t.right);
 }
 
+/// Extensions that make handling collections of [num]s more convenient.
 extension NumUtils on num {
+  /// Rounds this [num] to the nearest [rounding].
+  ///
+  /// When rounding can go both up or down, rounding up is preferred.
+  ///
+  /// ```dart
+  /// 1.roundToNearest(5); // 0
+  /// 2.roundToNearest(5); // 0
+  /// 3.roundToNearest(5); // 5
+  /// 4.roundToNearest(5); // 5
+  ///
+  /// 13.roundToNearest(2); // 14
+  /// ```
   int roundToNearest(int rounding) {
     return (this / rounding).round() * rounding;
-  }
-
-  String _getStringPadding({
-    @required int amount,
-    String paddingCharacter = '0',
-  }) {
-    final padAmount = amount - toString().length;
-    return paddingCharacter * (padAmount < 0 ? 0 : padAmount);
-  }
-
-  String padLeft({
-    @required int amount,
-    String paddingCharacter = '0',
-  }) {
-    return _getStringPadding(
-            amount: amount, paddingCharacter: paddingCharacter) +
-        toString();
-  }
-
-  String padRight({
-    @required int amount,
-    String paddingCharacter = '0',
-  }) {
-    return toString() +
-        _getStringPadding(amount: amount, paddingCharacter: paddingCharacter);
   }
 }
 
@@ -109,20 +112,20 @@ extension IterableUtils<T> on Iterable<T> {
   }
 }
 
+/// Extensions that make handling [List]s more convenient.
 extension ListUtils<T> on List<T> {
+  /// Gets the element at [index]. If no element exists, returns `null` instead.
   T elementOrNullAt(int index) {
-    if (asMap().containsKey(index)) {
-      return elementAt(index);
-    }
-
-    return null;
+    return asMap()[index];
   }
 
+  /// Gets a random element from this [List].
   T get random {
     return elementAt(Random().nextInt(length));
   }
 }
 
+/// Extensions that make handling [String]s more convenient.
 extension StringUtils on String {
   /// Divides this [String] into two parts.
   ///
@@ -148,10 +151,34 @@ extension StringUtils on String {
     return divide(length - 1);
   }
 
+  /// Returns a list of every character in this `String`.
   List<String> get chars => split('');
 
+  /// Returns the reverse of this string.
+  ///
+  /// ```dart
+  /// "Hello".reversed; // "olleH"
+  /// ```
   String get reversed => chars.reversed.join();
 
+  /// The code unit for the first character in this `String`.
+  ///
+  /// Shorthand for [codeUnitAt(0)].
+  int get code {
+    return codeUnitAt(0);
+  }
+
+  /// Indicates if this entire `String` only contains uppercase letters.
+  bool get isUpperCase {
+    return this == toUpperCase();
+  }
+
+  /// Indicates if this entire `String` only contains lowercase letters.
+  bool get isLowerCase {
+    return this == toLowerCase();
+  }
+
+  /// Returns `true` if this string contains any of the [candidates].
   bool containsAny(Iterable<String> candidates) {
     if (candidates.isEmpty) {
       return false;

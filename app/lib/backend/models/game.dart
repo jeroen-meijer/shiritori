@@ -19,7 +19,7 @@ class Game {
         0: {},
         1: {
           if (settings is SingleplayerGameSettings && settings.startWithCpuMove)
-            settings.dictionary.entries.random.phoneticSpellings.random,
+            settings.dictionary.entries.random.mostSuitableSpelling,
         }
       },
       winningPlayerIndex: null,

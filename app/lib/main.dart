@@ -14,6 +14,7 @@ void main() async {
   log('Loading background image...');
   final backgroundImage = await Images.loadBackground();
   log('Loading dictionaries...');
+  // Poor phone :(
   final dictionaries = await Dictionaries.loadFromDisk();
   initStopwatch.stop();
 

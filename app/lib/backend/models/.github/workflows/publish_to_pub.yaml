@@ -1,0 +1,26 @@
+name: Publish
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    container:
+      image: google/dart:2.8.4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: pub get
+
+      - name: Publish
+        run: |
+          echo "Copy credentials"
+          mkdir -p ~/.pub-cache
+          echo "$CREDENTIAL_JSON" > ~/.pub-cache/credentials.json 
+          echo "Run pub publish --force"
+          pub publish --force
+        env:
+          CREDENTIAL_JSON: ${{ secrets.CREDENTIAL_JSON }}

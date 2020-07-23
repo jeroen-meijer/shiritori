@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dict_parser/utils.dart';
+import 'package:kana_kit/kana_kit.dart';
 import 'package:shared_models/shared_models.dart';
 import 'package:xml/xml.dart';
 
@@ -27,6 +28,8 @@ Future<void> main(List<String> args) async {
     exit(1);
   }
 
+  const kanaKit = KanaKit();
+
   final xmlFileName = args.first;
   final xmlFile = File(xmlFileName);
 
@@ -41,7 +44,14 @@ Future<void> main(List<String> args) async {
         .findAllElements('pos')
         .map((posElement) => posElement.text);
 
-    return posData.contains(_nounTag);
+    if (!posData.contains(_nounTag)) {
+      return false;
+    }
+
+    final phoneticSpellingsData =
+        entry.findAllElementsDeep(_phoneticSpellingElementPath);
+
+    return phoneticSpellingsData.isNotEmpty;
   });
 
   _time('Parsing nouns');
@@ -51,10 +61,18 @@ Future<void> main(List<String> args) async {
             .findAllElementsDeep(_spellingElementPath)
             .mapEachToText()
             .toList(growable: false);
-        final phoneticSpellings = noun
+
+        final phoneticSpellingsRaw = noun
             .findAllElementsDeep(_phoneticSpellingElementPath)
             .mapEachToText()
-            .toList(growable: false);
+            .toSet();
+        final phoneticSpellings = {
+          for (final spelling in phoneticSpellingsRaw) ...[
+            spelling,
+            kanaKit.toHiragana(spelling),
+          ],
+        }.toList(growable: false);
+
         final definitions = noun
             .findAllElementsDeep(_definitionsElementPath)
             .mapEachToText()
