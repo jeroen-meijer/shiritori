@@ -27,6 +27,16 @@ class Tuple<T1, T2> extends Equatable {
   /// The second element.
   final T2 right;
 
+  /// Returns a new [Tuple] with [fn] called on [left].
+  Tuple<R, T2> mapLeft<R>(R Function(T1 value) fn) {
+    return Tuple(fn(left), right);
+  }
+
+  /// Returns a new [Tuple] with [fn] called on [right].
+  Tuple<T1, R> mapRight<R>(R Function(T2 value) fn) {
+    return Tuple(left, fn(right));
+  }
+
   @override
   bool get stringify => true;
 
@@ -100,6 +110,45 @@ extension IterableUtils<T> on Iterable<T> {
     return firstWhere(test, orElse: () => null);
   }
 
+  /// Gets the element at [index]. If no element exists, returns `null` instead.
+  T elementOrNullAt(int index) {
+    return index >= length ? null : elementAt(index);
+  }
+
+  T firstRandomWhere(
+    bool Function(T element) test, {
+    T Function() orElse,
+  }) {
+    final indicies = List.generate(length, (index) => index)..shuffle();
+    final matchingIndex =
+        indicies.firstWhereOrNull((index) => test(elementAt(index)));
+
+    if (matchingIndex != null) {
+      return elementAt(matchingIndex);
+    }
+
+    if (orElse != null) {
+      return orElse();
+    }
+
+    throw StateError('No element matching test');
+  }
+
+  /// Gets a random element from this [Iterable].
+  T get random {
+    return elementAt(Random().nextInt(length));
+  }
+
+  /// Gets a random element from this [Iterable].
+  ///
+  /// If [isEmpty], returns `null`.
+  T get randomOrNull {
+    if (isEmpty) {
+      return null;
+    }
+    return random;
+  }
+
   Iterable<T> intersperse(T element) sync* {
     final iterator = this.iterator;
     if (iterator.moveNext()) {
@@ -112,16 +161,37 @@ extension IterableUtils<T> on Iterable<T> {
   }
 }
 
-/// Extensions that make handling [List]s more convenient.
-extension ListUtils<T> on List<T> {
-  /// Gets the element at [index]. If no element exists, returns `null` instead.
-  T elementOrNullAt(int index) {
-    return asMap()[index];
+/// Extensions that make handling [Iterable]s of [Iterable]s more convenient.
+extension NestedIterableUtils<T> on Iterable<Iterable<T>> {
+  Iterable<List<T>> zip() sync* {
+    if (isEmpty) return;
+    final iterators = map((e) => e.iterator).toList(growable: false);
+    while (iterators.every((e) => e.moveNext())) {
+      yield iterators.map((e) => e.current).toList(growable: false);
+    }
   }
 
-  /// Gets a random element from this [List].
-  T get random {
-    return elementAt(Random().nextInt(length));
+  /// Yields every element in an alternating fashion.
+  ///
+  ///
+  /// ```dart
+  /// [
+  ///   ['a', 'b', 'c', 'd', 'e'],
+  ///   ['x', 'y', 'z'],
+  /// ].alternate() // ['a', 'x', 'b', 'y', 'c', 'z', 'd', 'e']
+  /// ```
+  Iterable<T> alternate() sync* {
+    var index = 0;
+
+    while (any((iterable) => iterable.length > index)) {
+      for (final iterable in this) {
+        final element = iterable.elementOrNullAt(index);
+        if (element != null) {
+          yield element;
+        }
+      }
+      index++;
+    }
   }
 }
 

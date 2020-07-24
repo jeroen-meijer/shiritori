@@ -3,12 +3,12 @@
 pre_commit_flutter() {
   echo "\nRunning pre-commit script for Flutter in $1\n"
   pushd $1
-  echo "Running flutter analyze..."
-  flutter analyze
-  echo "Running flutter format..."
-  flutter format --line-length 80 --set-exit-if-changed .
   echo "Extracting intl ARBs..."
   flutter pub run intl_translation:extract_to_arb --suppress-last-modified --output-dir=lib/intl/arb lib/intl/strings/*.dart
+  echo "Running flutter format..."
+  flutter format --line-length 80 --set-exit-if-changed .
+  echo "Running flutter analyze..."
+  flutter analyze
   popd
   echo "\nDone\n"
 }

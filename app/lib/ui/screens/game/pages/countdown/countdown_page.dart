@@ -1,20 +1,15 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shiritori/backend/backend.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
 
 class CountdownPage extends StatelessWidget {
-  const CountdownPage({
-    Key key,
-    @required this.secondsRemaining,
-  })  : assert(secondsRemaining != null),
-        super(key: key);
+  const CountdownPage({Key key}) : super(key: key);
 
-  final int secondsRemaining;
-
-  Color get _countdownGlowColor {
+  Color _getGlowColor(int secondsRemaining) {
     if (secondsRemaining == 1) {
       return AppTheme.green;
     } else if (secondsRemaining == 2) {
@@ -26,9 +21,13 @@ class CountdownPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final game = context.watch<Game>();
+    final secondsRemaining = context.watch<int>();
+
     final intl = ShiritoriLocalizations.of(context).game;
     final textTheme = Theme.of(context).textTheme;
-    final game = Game.of(context);
+
+    final glowColor = _getGlowColor(secondsRemaining);
 
     return Scaffold(
       body: Column(
@@ -64,7 +63,7 @@ class CountdownPage extends StatelessWidget {
                 endRadius: 100,
                 duration: const Duration(seconds: 1),
                 repeatPauseDuration: Duration.zero,
-                glowColor: _countdownGlowColor,
+                glowColor: glowColor,
                 child: Material(
                   elevation: AppTheme.elevationDisabled,
                   animationDuration: const Duration(milliseconds: 150),

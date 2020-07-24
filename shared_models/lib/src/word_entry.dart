@@ -18,10 +18,10 @@ class WordEntry extends Equatable {
   /// In Japanese: Kanji spellings. May be empty.
   final List<String> spellings;
 
-  /// In Japanese: Kana spellings.
+  /// In Japanese: Hiragana spellings.
   ///
-  /// Is guaranteed to not be empty and contain at least a single full Hiragana
-  /// version.
+  /// Is guaranteed to not be empty and contain at least one full Hiragana
+  /// version that does not end with an invalid character (ん).
   final List<String> phoneticSpellings;
 
   /// A list of definitions for this word.

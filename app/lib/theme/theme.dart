@@ -108,6 +108,9 @@ abstract class AppTheme {
   static const veryLightGrey = Color(0xFFF2F5FA);
   static const lightGrey = Color(0xFFAFBEDA);
   static const grey = Color(0xFF666889);
+  static const darkGrey = Color(0xFF222222);
+  static const veryDarkGrey = Color(0xFF111111);
+  static const black = Color(0xFF000000);
 
   static const lightYellow = Color(0xFFE0D984);
   static const yellow = Color(0xFFFFE263);

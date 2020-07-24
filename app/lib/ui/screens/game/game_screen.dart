@@ -4,18 +4,10 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shiritori/backend/backend.dart';
 import 'package:shiritori/ui/screens/game/pages/pages.dart';
 
-/// TEMPORARILY A SEARCH SCREEN FOR DICTIONARIES
 class GameScreen extends StatefulWidget {
-  GameScreen({
-    Key key,
-    @required this.game,
-  })  : assert(game != null),
-        super(key: key);
-
-  final Game game;
+  const GameScreen({Key key}) : super(key: key);
 
   @override
   _GameScreenState createState() => _GameScreenState();
@@ -58,23 +50,21 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<Game>.value(
-      value: widget.game,
-      child: PageTransitionSwitcher(
-        transitionBuilder: (child, animation, secondaryAnimation) {
-          return SharedAxisTransition(
-            transitionType: SharedAxisTransitionType.vertical,
-            animation: animation,
-            secondaryAnimation: secondaryAnimation,
-            child: child,
-          );
-        },
-        child: _playCountdownSecondsRemaining > 0
-            ? CountdownPage(
-                secondsRemaining: _playCountdownSecondsRemaining,
-              )
-            : const InGamePage(),
-      ),
+    return PageTransitionSwitcher(
+      transitionBuilder: (child, animation, secondaryAnimation) {
+        return SharedAxisTransition(
+          transitionType: SharedAxisTransitionType.vertical,
+          animation: animation,
+          secondaryAnimation: secondaryAnimation,
+          child: child,
+        );
+      },
+      child: _playCountdownSecondsRemaining > 0
+          ? Provider.value(
+              value: _playCountdownSecondsRemaining,
+              child: const CountdownPage(),
+            )
+          : const InGamePage(),
     );
   }
 }

@@ -225,6 +225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
+  kana_kit:
+    dependency: "direct main"
+    description:
+      name: kana_kit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3+3"
   logging:
     dependency: transitive
     description:

@@ -29,6 +29,7 @@ Future<void> main(List<String> args) async {
   }
 
   const kanaKit = KanaKit();
+  final language = Language.japanese;
 
   final xmlFileName = args.first;
   final xmlFile = File(xmlFileName);
@@ -38,42 +39,45 @@ Future<void> main(List<String> args) async {
   _stopTime();
 
   final xmlEntries = doc.getElement('JMdict').findAllElements('entry');
-  final xmlNouns = xmlEntries.where((entry) {
-    final posData = entry
-        .getElement('sense')
-        .findAllElements('pos')
-        .map((posElement) => posElement.text);
-
-    if (!posData.contains(_nounTag)) {
-      return false;
-    }
-
-    final phoneticSpellingsData =
-        entry.findAllElementsDeep(_phoneticSpellingElementPath);
-
-    return phoneticSpellingsData.isNotEmpty;
-  });
 
   _time('Parsing nouns');
-  final nouns = xmlNouns
-      .map((noun) {
-        final spellings = noun
+  final nouns = xmlEntries
+      .map<WordEntry>((entry) {
+        final posData = entry
+            .getElement('sense')
+            .findAllElements('pos')
+            .map((posElement) => posElement.text);
+        if (!posData.contains(_nounTag)) {
+          return null;
+        }
+
+        final spellings = entry
             .findAllElementsDeep(_spellingElementPath)
             .mapEachToText()
             .toList(growable: false);
 
-        final phoneticSpellingsRaw = noun
+        final phoneticSpellingsRaw = entry
             .findAllElementsDeep(_phoneticSpellingElementPath)
             .mapEachToText()
             .toSet();
+        if (phoneticSpellingsRaw.isEmpty) {
+          return null;
+        }
+
         final phoneticSpellings = {
-          for (final spelling in phoneticSpellingsRaw) ...[
-            spelling,
-            kanaKit.toHiragana(spelling),
-          ],
+          for (final spelling in phoneticSpellingsRaw) ...{
+            if (kanaKit.isKana(spelling)) ...{
+              spelling,
+              kanaKit.toHiragana(spelling),
+            }
+          },
         }.toList(growable: false);
 
-        final definitions = noun
+        if (phoneticSpellings.any(language.validate) == false) {
+          return null;
+        }
+
+        final definitions = entry
             .findAllElementsDeep(_definitionsElementPath)
             .mapEachToText()
             .toList(growable: false);
@@ -84,13 +88,14 @@ Future<void> main(List<String> args) async {
           definitions: definitions,
         );
       })
+      .where((noun) => noun != null)
       .take(_wordCountLimit)
       .toList(growable: false);
   _stopTime();
 
   _time('Indexing into dictionary...');
   final dictionary = Dictionary.fromEntries(
-    language: Language.japanese,
+    language: language,
     entries: nouns,
   );
   _stopTime();

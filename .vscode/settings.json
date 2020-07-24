@@ -6,6 +6,6 @@
     "**/*.code-search": true,
     "app/assets/dicts/**/*": true,
     "dict_parser/*.json": true,
-    "dict_parser/*.xml": true,
+    "dict_parser/*.xml": true
   }
 }

@@ -1,1 +1,1 @@
-export 'word_entry_details_card.dart';
+export 'guess_details_card.dart';

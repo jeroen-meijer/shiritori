@@ -11,7 +11,10 @@ Dictionary _$DictionaryFromJson(Map<String, dynamic> json) {
     language: json['language'] == null
         ? null
         : Language.fromJson(json['language'] as Map<String, dynamic>),
-    indicies: (json['indicies'] as Map<String, dynamic>)?.map(
+    phoneticIndicies: (json['phonetic_indicies'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, (e as List)?.map((e) => e as int)?.toSet()),
+    ),
+    startIndicies: (json['start_indicies'] as Map<String, dynamic>)?.map(
       (k, e) => MapEntry(k, (e as List)?.map((e) => e as int)?.toSet()),
     ),
     entries: (json['entries'] as List)
@@ -24,6 +27,9 @@ Dictionary _$DictionaryFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$DictionaryToJson(Dictionary instance) =>
     <String, dynamic>{
       'language': instance.language?.toJson(),
-      'indicies': instance.indicies?.map((k, e) => MapEntry(k, e?.toList())),
+      'phonetic_indicies':
+          instance.phoneticIndicies?.map((k, e) => MapEntry(k, e?.toList())),
+      'start_indicies':
+          instance.startIndicies?.map((k, e) => MapEntry(k, e?.toList())),
       'entries': instance.entries?.map((e) => e?.toJson())?.toList(),
     };

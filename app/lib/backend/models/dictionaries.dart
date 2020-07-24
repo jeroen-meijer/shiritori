@@ -51,15 +51,3 @@ extension DictionaryX on Dictionary {
     return Provider.of<Dictionary>(context, listen: false);
   }
 }
-
-extension WordEntryX on WordEntry {
-  String get mostSuitableSpelling {
-    return phoneticSpellings.firstWhere(
-      kanaKit.isHiragana,
-      orElse: () => throw StateError(
-        'Phonetic spellings ($phoneticSpellings) '
-        'does not contain a full hiragana version',
-      ),
-    );
-  }
-}

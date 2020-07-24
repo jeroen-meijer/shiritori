@@ -12,13 +12,7 @@ if [ -z "$(git status --porcelain)" ]; then
   exit 0
 else
   echo "Latest intl ARBs have not been pushed."
-  echo "Run this script locally and push it to this branch."
-  echo "  ./scripts/$(basename $0)"
+  echo "Run the pre_commit script locally and push to this branch."
+  echo "  ./tool/pre_commit.sh"
   exit 1
-fi
-
-if [ "$(git diff --exit-code)" ]; then
- 
-else
-  exit 0
 fi

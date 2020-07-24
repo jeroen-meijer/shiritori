@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shiritori/backend/backend.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
@@ -29,13 +30,14 @@ class HomeMenu extends StatelessWidget {
                   color: AppTheme.colorSingleplayer,
                   icon: const Text('遊ぶ'),
                   expandedChildBuilder: (context) {
-                    return GameScreen(
-                      game: Game.startNew(
+                    return ChangeNotifierProvider(
+                      create: (_) => Game.startNew(
                         SingleplayerGameSettings(
                           dictionary: Dictionaries.of(context).japanese,
                           answeringDuration: const Duration(seconds: 10),
                         ),
                       ),
+                      child: const GameScreen(),
                     );
                   },
                 ),
