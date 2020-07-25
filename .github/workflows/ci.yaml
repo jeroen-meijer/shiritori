@@ -9,15 +9,10 @@ jobs:
   app:
     runs-on: ubuntu-latest
     env:
-      WORKING_DIRECTORY: ./app
+      WORKING_DIRECTORY: ./app/
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Install Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
 
       - name: Install Flutter
         uses: subosito/flutter-action@v1.3.0
@@ -40,16 +35,12 @@ jobs:
       - name: Check intl ARBs
         run: ./tool/ci/intl_extract_to_arb.sh
 
-      - name: Build APK
-        run: flutter build apk --release
-        working-directory: ${{ env.WORKING_DIRECTORY }}
-
   dict_parser:
     runs-on: ubuntu-latest
     container:
       image: google/dart:2.8.4
     env:
-      WORKING_DIRECTORY: ./dict_parser
+      WORKING_DIRECTORY: ./dict_parser/
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -71,7 +62,7 @@ jobs:
     container:
       image: google/dart:2.8.4
     env:
-      WORKING_DIRECTORY: ./shared_models
+      WORKING_DIRECTORY: ./shared_models/
     steps:
       - name: Checkout
         uses: actions/checkout@v2
