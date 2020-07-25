@@ -37,7 +37,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ env.BUILD_DIR }}
-          publish_branch: web
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
