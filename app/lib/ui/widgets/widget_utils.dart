@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:shiritori/intl/intl.dart';
-import 'package:shiritori/theme/theme.dart';
 
 const emptyWidget = SizedBox();
 
@@ -67,123 +64,10 @@ class _MediaQueryPadding extends StatelessWidget {
   }
 }
 
-/// Surrounds its [child] with a [SizedBox]
-/// with size `MediaQuery.of(context).size`,
-/// allowing the [child] to fill it.
-class Fill extends StatelessWidget {
-  /// Surrounds its [child] with a [SizedBox]
-  /// with size `MediaQuery.of(context).size`,
-  /// allowing the [child] to fill it.
-  const Fill({
-    Key key,
-    this.child,
-  }) : super(key: key);
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return SizedBox.fromSize(
-      size: size,
-      child: child,
-    );
-  }
-}
-
-void _showSnackBar({
-  @required BuildContext context,
-  @required String message,
-  Duration duration,
-}) {
-  final state = Scaffold.of(context);
-  final intl = ShiritoriLocalizations.of(context).ui;
-
-  state
-    ..removeCurrentSnackBar(reason: SnackBarClosedReason.dismiss)
-    ..showSnackBar(
-      SnackBar(
-        action: SnackBarAction(
-          label: intl.snackBarConfirmButton,
-          textColor: AppTheme.lightBlue,
-          onPressed: () {
-            state.removeCurrentSnackBar(reason: SnackBarClosedReason.dismiss);
-          },
-        ),
-        behavior: SnackBarBehavior.floating,
-        content: Text(message),
-        duration: duration ?? const Duration(seconds: 4),
-      ),
-    );
-}
-
-void _showExceptionSnackBar({
-  @required BuildContext context,
-  @required Exception exception,
-  Duration duration,
-}) {
-  String errorMessage;
-  print(exception.runtimeType);
-  if (exception is PlatformException) {
-    errorMessage = exception.message;
-  } else {
-    errorMessage = exception.toString();
-  }
-  _showSnackBar(
-    message: errorMessage,
-    context: context,
-    duration: duration,
-  );
-}
-
-mixin WidgetUtils on StatelessWidget {
-  void showSnackBar({
-    @required BuildContext context,
-    @required String message,
-    Duration duration,
-  }) {
-    return _showSnackBar(
-      context: context,
-      message: message,
-      duration: duration,
-    );
-  }
-
-  void showExceptionSnackBar({
-    BuildContext context,
-    @required Exception exception,
-    Duration duration,
-  }) {
-    return _showExceptionSnackBar(
-      context: context,
-      exception: exception,
-      duration: duration,
-    );
-  }
-}
-
-mixin StateUtils<T extends StatefulWidget> on State<T> {
-  void showSnackBar({
-    BuildContext context,
-    @required String message,
-    Duration duration,
-  }) {
-    return _showSnackBar(
-      context: context ?? this.context,
-      message: message,
-      duration: duration,
-    );
-  }
-
-  void showExceptionSnackBar({
-    BuildContext context,
-    @required Exception exception,
-    Duration duration,
-  }) {
-    return _showExceptionSnackBar(
-      context: context ?? this.context,
-      exception: exception,
-      duration: duration,
+extension TextStyleUtils on TextStyle {
+  TextStyle copyWithColor(Color Function(Color color) fn) {
+    return copyWith(
+      color: fn(color),
     );
   }
 }

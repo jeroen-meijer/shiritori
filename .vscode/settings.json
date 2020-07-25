@@ -4,8 +4,8 @@
     "**/node_modules": true,
     "**/bower_components": true,
     "**/*.code-search": true,
-    "app/assets/dicts/**/*": true,
+    "**/dict_*.json": true,
     "dict_parser/*.json": true,
     "dict_parser/*.xml": true
-  }
+  },
 }

@@ -27,6 +27,12 @@ class Tuple<T1, T2> extends Equatable {
   /// The second element.
   final T2 right;
 
+  /// Creates a new [Tuple] where [left] and [right] are both set to the
+  /// provided [value].
+  static Tuple<I, I> both<I>(I value) {
+    return Tuple(value, value);
+  }
+
   /// Returns a new [Tuple] with [fn] called on [left].
   Tuple<R, T2> mapLeft<R>(R Function(T1 value) fn) {
     return Tuple(fn(left), right);

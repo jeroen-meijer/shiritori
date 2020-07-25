@@ -10,7 +10,6 @@ class Game extends ChangeNotifier {
     @required this.settings,
     @required this.startingPlayerIndex,
     @required this.guessesByPlayerIndex,
-    this.winningPlayerIndex,
   })  : assert(settings != null),
         assert(startingPlayerIndex != null),
         assert(guessesByPlayerIndex != null);
@@ -19,6 +18,8 @@ class Game extends ChangeNotifier {
     final startWithCpu =
         settings is SingleplayerGameSettings && settings.startWithCpuMove;
     final startingPlayerIndex = startWithCpu ? 1 : 0;
+    final cpuStartingGuess =
+        !startWithCpu ? null : settings.dictionary.entries.random;
 
     return Game(
       settings: settings,
@@ -27,12 +28,15 @@ class Game extends ChangeNotifier {
         0: {},
         1: {
           if (startWithCpu)
-            settings.dictionary.entries.random.phoneticSpellings
-                .where(settings.dictionary.language.validate)
-                .random,
+            Guess(
+              query: cpuStartingGuess.phoneticSpellings
+                  .where(settings.dictionary.language.validate)
+                  .random,
+              validity: GuessValidity.valid,
+              entry: cpuStartingGuess,
+            ),
         }
       },
-      winningPlayerIndex: null,
     );
   }
 
@@ -45,41 +49,106 @@ class Game extends ChangeNotifier {
 
   final GameSettings settings;
   final int startingPlayerIndex;
-  final Map<int, Set<String>> guessesByPlayerIndex;
-  int winningPlayerIndex;
+  final Map<int, Set<Guess>> guessesByPlayerIndex;
 
-  void addGuess(String guess) {
-    assert(guess != null);
+  int get winningPlayerIndex => _winningPlayerIndex;
+  int _winningPlayerIndex;
 
-    final guessValidity = validateGuess(guess);
-    assert(
-      guessValidity.isValid,
-      'Guess ("$guess") is not valid ($guessValidity).',
+  bool get isFinished => _winningPlayerIndex != null;
+
+  Guess _queryToGuess(String query) {
+    void _log(int id, String message) {
+      log(
+        message,
+        name: '_queryToGuess',
+        sequenceNumber: id,
+        time: DateTime.now(),
+      );
+    }
+
+    _log(0, 'query: "$query"');
+
+    final language = settings.dictionary.language;
+
+    _log(1, 'startingCharacterForNextGuess: $startingCharacterForNextGuess');
+    final followsPattern = startingCharacterForNextGuess ==
+        language.selectStartingCharacter(query);
+
+    GuessValidity validity;
+
+    if (!followsPattern) {
+      _log(2, 'doesNotFollowPattern...');
+      validity = GuessValidity.doesNotFollowPattern;
+    }
+
+    final isValidWord = language.validate(query);
+    if (!isValidWord) {
+      _log(3, 'invalidWord...');
+      validity = GuessValidity.invalidWord;
+    }
+
+    final hasBeenGuessed = allGuessesByPlayerIndex.contains(query);
+    if (hasBeenGuessed) {
+      _log(4, 'alreadyGuessed...');
+      validity = GuessValidity.alreadyGuessed;
+    }
+
+    final entries = settings.dictionary.searchWords(query);
+
+    if (entries.isEmpty) {
+      _log(5, 'doesNotExist...');
+      validity = GuessValidity.doesNotExist;
+    }
+
+    validity ??= GuessValidity.valid;
+
+    final guess = Guess(
+      query: query,
+      validity: validity,
+      entry: entries.firstOrNull,
     );
 
-    log('addGuess running...');
+    _log(6, 'guess: $guess');
+
+    return guess;
+  }
+
+  void addGuess(String query) {
+    assert(query != null);
+
+    final guess = _queryToGuess(query);
 
     guessesByPlayerIndex[0] = guessesByPlayerIndex[0]..add(guess);
 
-    final shouldMakeCpuGuess = settings is SingleplayerGameSettings &&
-        (settings as SingleplayerGameSettings).startWithCpuMove;
+    if (guess.isInvalid) {
+      _winningPlayerIndex = 1;
+    } else {
+      final shouldMakeCpuGuess = settings is SingleplayerGameSettings &&
+          (settings as SingleplayerGameSettings).startWithCpuMove;
 
-    if (shouldMakeCpuGuess) {
-      log('shouldMakeCpuGuess...');
-      final startingCharacter = startingCharacterForNextGuess;
-      final nextWord = settings.dictionary
-          .searchWordsThatStartsWith(startingCharacter)
-          .random
-          .phoneticSpellings
-          .whereOrEmpty(settings.dictionary.language.validate)
-          .randomOrNull;
+      if (shouldMakeCpuGuess) {
+        log('shouldMakeCpuGuess...');
+        final startingCharacter = startingCharacterForNextGuess;
+        final nextWord = settings.dictionary
+            .searchWordsThatStartsWith(startingCharacter)
+            .random;
 
-      if (nextWord == null) {
-        // CPU has no guesses left. User wins.
-        winningPlayerIndex = 0;
-      } else {
-        log('add cpu guess...');
-        guessesByPlayerIndex[1] = guessesByPlayerIndex[1]..add(nextWord);
+        if (nextWord == null) {
+          // CPU has no guesses left. User wins.
+          _winningPlayerIndex = 0;
+        } else {
+          log('add cpu guess...');
+          guessesByPlayerIndex[1] = guessesByPlayerIndex[1]
+            ..add(
+              Guess(
+                query: nextWord.phoneticSpellings
+                    .where(settings.dictionary.language.validate)
+                    .random,
+                validity: GuessValidity.valid,
+                entry: nextWord,
+              ),
+            );
+        }
       }
     }
 
@@ -97,32 +166,28 @@ class Game extends ChangeNotifier {
         : 1 - startingPlayerIndex;
   }
 
-  Set<Tuple<int, String>> get allGuessesByPlayerIndex {
+  Set<Tuple<int, Guess>> get allGuessesByPlayerIndex {
+    // A list with two elements, both of which are iterables that contain all
+    // guesses from that respective player.
     var entries = guessesByPlayerIndex.entries
         .map((entry) => entry.value.map((guess) => Tuple(entry.key, guess)))
         .toList();
 
+    // Makes sure that the first list in the entries are the ones of the
+    // starting player.
     if (startingPlayerIndex == 1) {
       entries = entries.reversed.toList();
     }
 
+    // Returns the guesses in alternating fashion.
     return entries.alternate().toSet();
-  }
-
-  Set<Tuple<int, Tuple<String, WordEntry>>>
-      get allGuessesWithWordEntriesByPlayerIndex {
-    return allGuessesByPlayerIndex.map((playerGuess) {
-      return playerGuess.mapRight((guess) {
-        return Tuple(guess, settings.dictionary.searchWords(guess).first);
-      });
-    }).toSet();
   }
 
   /// Returns a [Tuple] with the player index of the last guess and the guess
   /// itself.
   ///
   /// If no guesses have been made yet, this returns `null`.
-  Tuple<int, String> get lastGuess {
+  Tuple<int, Guess> get lastGuess {
     final playerIndex = playerIndexForLastGuess;
     final guess = guessesByPlayerIndex[playerIndex].lastOrNull;
     if (guess == null) {
@@ -133,48 +198,15 @@ class Game extends ChangeNotifier {
   }
 
   String get startingCharacterForNextGuess {
-    final lastGuess = this.lastGuess;
     if (lastGuess == null) {
       return null;
     }
 
-    return settings.dictionary.language.selectEndingCharacter(lastGuess.right);
+    return settings.dictionary.language
+        .selectEndingCharacter(lastGuess.right.query);
   }
 
   String transformGuess(String guess) {
     return settings.dictionary.language.transform(guess);
-  }
-
-  GuessValidity validateGuess(String guess) {
-    log('[${DateTime.now()}] VALIDATING "$guess"');
-    final language = settings.dictionary.language;
-
-    final followsPattern = startingCharacterForNextGuess ==
-        language.selectStartingCharacter(guess);
-
-    if (!followsPattern) {
-      log('doesNotFollowPattern...');
-      return GuessValidity.doesNotFollowPattern;
-    }
-
-    final isValidWord = settings.dictionary.language.validate(guess);
-    if (!isValidWord) {
-      log('invalidWord...');
-      return GuessValidity.invalidWord;
-    }
-
-    final hasBeenGuessed = allGuessesByPlayerIndex.contains(guess);
-    if (hasBeenGuessed) {
-      log('alreadyGuessed...');
-      return GuessValidity.alreadyGuessed;
-    }
-
-    if (settings.dictionary.phoneticIndicies[guess] == null) {
-      log('doesNotExist...');
-      return GuessValidity.doesNotExist;
-    }
-
-    log('valid...');
-    return GuessValidity.valid;
   }
 }

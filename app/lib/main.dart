@@ -7,19 +7,29 @@ import 'package:shiritori/backend/backend.dart';
 import 'assets/assets.dart';
 
 void main() async {
-  log('Initializing bindings...');
+  var level = 0;
+  void _log(String message) {
+    log(
+      message,
+      name: 'main',
+      sequenceNumber: level++,
+      time: DateTime.now(),
+    );
+  }
+
+  _log('Initializing bindings...');
 
   final initStopwatch = Stopwatch()..start();
   WidgetsFlutterBinding.ensureInitialized();
-  log('Loading background image...');
+  _log('Loading background image...');
   final backgroundImage = await Images.loadBackground();
-  log('Loading dictionaries...');
+  _log('Loading dictionaries...');
   // Poor phone :(
   final dictionaries = await Dictionaries.loadFromDisk();
   initStopwatch.stop();
 
   final seconds = (initStopwatch.elapsedMilliseconds / 1000).toStringAsFixed(3);
-  log('Initialization done. (took $seconds seconds)');
+  _log('Initialization done. (took $seconds seconds)');
 
   runApp(
     AppRoot(

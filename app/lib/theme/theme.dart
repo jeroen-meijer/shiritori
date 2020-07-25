@@ -9,6 +9,7 @@ abstract class AppTheme {
       canvasColor: veryLightGrey,
       cardTheme: cardTheme,
       dividerTheme: dividerTheme,
+      floatingActionButtonTheme: floatingActionButtonTheme,
       fontFamily: Fonts.hurmeGeometricSans,
       scaffoldBackgroundColor: veryLightGrey,
       splashColor: lightBlue,
@@ -32,6 +33,12 @@ abstract class AppTheme {
   static const dividerTheme = DividerThemeData(
     thickness: 2.0,
     space: 4.0,
+  );
+
+  static const floatingActionButtonTheme = FloatingActionButtonThemeData(
+    backgroundColor: AppTheme.blue,
+    elevation: elevationDefault,
+    foregroundColor: AppTheme.white,
   );
 
   static const _letterSpacing = -0.5;
