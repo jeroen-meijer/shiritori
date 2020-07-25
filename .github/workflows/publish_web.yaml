@@ -24,6 +24,10 @@ jobs:
         run: flutter pub get
         working-directory: ${{ env.WORKING_DIRECTORY }}
 
+      - name: Enable web support
+        run: flutter config --enable-web
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
       - name: Build
         run: flutter build web --release
         working-directory: ${{ env.WORKING_DIRECTORY }}
