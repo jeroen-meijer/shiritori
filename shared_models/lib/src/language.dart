@@ -13,13 +13,15 @@ class Language extends Equatable {
   const Language({
     @required this.code,
     @required this.name,
-    WordTransformer transform,
+    WordTransformer mapToLanguage,
+    WordTransformer mapFromLanguage,
     WordValidator validate,
     WordTransformer selectStartingCharacter,
     WordTransformer selectEndingCharacter,
   })  : assert(code != null),
         assert(name != null),
-        transform = transform ?? _defaultTransformer,
+        mapToLanguage = mapToLanguage ?? _defaultToLanguageMapper,
+        mapFromLanguage = mapFromLanguage ?? _defaultFromLanguageMapper,
         validate = validate ?? _defaultValidator,
         selectStartingCharacter =
             selectStartingCharacter ?? _defaultStartingCharacterSelector,
@@ -28,13 +30,18 @@ class Language extends Equatable {
 
   final String code;
   final String name;
-  final WordTransformer transform;
+  final WordTransformer mapToLanguage;
+  final WordTransformer mapFromLanguage;
   final WordValidator validate;
   final WordTransformer selectStartingCharacter;
   final WordTransformer selectEndingCharacter;
 
-  static String _defaultTransformer(String input) => input;
+  static String _defaultToLanguageMapper(String input) => input;
+
+  static String _defaultFromLanguageMapper(String input) => input;
+
   static bool _defaultValidator(String input) => true;
+
   static String _defaultStartingCharacterSelector(String input) {
     return input.chars.first;
   }

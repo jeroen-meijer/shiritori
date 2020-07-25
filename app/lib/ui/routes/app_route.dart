@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class AppRoute<T> extends MaterialPageRoute<T> {
+class AppRoute<T> extends PageRoute<T> with MaterialRouteTransitionMixin<T> {
   AppRoute({
-    @required WidgetBuilder builder,
+    @required this.builder,
     RouteSettings settings,
-    bool maintainState = true,
+    this.maintainState = true,
     bool fullscreenDialog = false,
-  }) : super(
-          builder: builder,
+  })  : assert(builder != null),
+        assert(maintainState != null),
+        assert(fullscreenDialog != null),
+        assert(opaque),
+        super(
           settings: settings,
-          maintainState: maintainState,
           fullscreenDialog: fullscreenDialog,
         );
 
@@ -18,4 +20,10 @@ class AppRoute<T> extends MaterialPageRoute<T> {
 
   @override
   bool canTransitionTo(TransitionRoute nextRoute) => true;
+
+  @override
+  final WidgetBuilder builder;
+
+  @override
+  final bool maintainState;
 }

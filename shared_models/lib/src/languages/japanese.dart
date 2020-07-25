@@ -6,8 +6,11 @@ const _smallHiragana = ['ゃ', 'ゅ', 'ょ'];
 final _japanese = Language(
   code: 'ja',
   name: '日本語',
-  transform: (input) {
+  mapToLanguage: (input) {
     return _kanaKit.toHiragana(input);
+  },
+  mapFromLanguage: (input) {
+    return _kanaKit.toRomaji(input);
   },
   validate: (input) {
     final isHiragana = _kanaKit.isHiragana(input);

@@ -56,7 +56,8 @@ class _InGamePageState extends State<InGamePage> {
     }
     setState(() {
       _textController.clear();
-      final transformed = _game.settings.dictionary.language.transform(value);
+      final transformed =
+          _game.settings.dictionary.language.mapToLanguage(value);
       _game.addGuess(transformed);
     });
   }
@@ -81,6 +82,8 @@ class _InGamePageState extends State<InGamePage> {
         index: index,
         guess: playerGuess.right,
         backgroundColor: playerIndex == 1 ? AppTheme.blue : null,
+        animationDirection:
+            playerIndex.isEven ? AxisDirection.left : AxisDirection.right,
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:shiritori/backend/backend.dart';
 import 'package:shiritori/theme/theme.dart';
@@ -7,9 +9,12 @@ class GuessDetailsCard extends StatefulWidget {
   const GuessDetailsCard({
     Key key,
     this.index,
-    this.backgroundColor,
     @required this.guess,
-  }) : super(key: key);
+    this.backgroundColor,
+    this.animationDirection = AxisDirection.up,
+  })  : assert(animationDirection != null),
+        assert(guess != null),
+        super(key: key);
 
   final int index;
 
@@ -17,6 +22,11 @@ class GuessDetailsCard extends StatefulWidget {
   ///
   /// Is overridden if [guess.isInvalid] is `true`.
   final Color backgroundColor;
+
+  /// From what direction this card should animate.
+  ///
+  /// Defaults to [AxisDirection.up].
+  final AxisDirection animationDirection;
 
   final Guess guess;
 
@@ -28,6 +38,7 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
+  Language _language;
   Guess _guess;
   String _highlightedPart;
   String _nonHighlightedPart;
@@ -39,6 +50,11 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
   void initState() {
     super.initState();
 
+    log(
+      'Animation direction for index ${widget.guess.query} (${widget.index}): '
+      '${widget.animationDirection}',
+    );
+
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
@@ -46,10 +62,10 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
 
     final game = Game.of(context, listen: false);
 
+    _language = game.settings.dictionary.language;
     _guess = widget.guess;
 
-    _highlightedPart =
-        game.settings.dictionary.language.selectEndingCharacter(_guess.query);
+    _highlightedPart = _language.selectEndingCharacter(_guess.query);
     _nonHighlightedPart = _guess.query.substring(
       0,
       _guess.query.lastIndexOf(_highlightedPart),
@@ -66,6 +82,12 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
     }
   }
 
+  @override
+  void dispose() {
+    _animationController?.dispose();
+    super.dispose();
+  }
+
   Widget _buildHeader(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
@@ -74,19 +96,22 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
       runSpacing: 4.0,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Text.rich(
-          TextSpan(
-            children: [
-              TextSpan(text: _nonHighlightedPart),
-              TextSpan(
-                style: TextStyle(
-                  color: _guess.isInvalid ? null : AppTheme.orange,
+        Supertitle(
+          supertitle: Text(_language.mapFromLanguage(_guess.query)),
+          child: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: _nonHighlightedPart),
+                TextSpan(
+                  style: TextStyle(
+                    color: _guess.isInvalid ? null : AppTheme.orange,
+                  ),
+                  text: _highlightedPart,
                 ),
-                text: _highlightedPart,
-              ),
-            ],
+              ],
+            ),
+            style: textTheme.headline4,
           ),
-          style: textTheme.headline4,
         ),
         for (final spelling in _secondarySpellings.take(4))
           Text(
@@ -184,18 +209,40 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
           return AnimatedBuilder(
             animation: _animationController,
             builder: (context, child) {
-              final opacityAnimation = _animationController;
+              const offsetDelta = 200.0;
+              final direction = widget.animationDirection;
 
+              var offsetDx = 0.0;
+              if (direction.isLeft) {
+                offsetDx = offsetDelta;
+              } else if (direction.isRight) {
+                offsetDx = offsetDelta * -1;
+              }
+
+              var offsetDy = 0.0;
+              if (direction.isUp) {
+                offsetDy = offsetDelta;
+              } else if (direction.isDown) {
+                offsetDy = offsetDelta * -1;
+              }
+
+              final translationOffset = Offset(offsetDx, offsetDy);
+
+              const curve = Curves.easeOutCubic;
+
+              final opacityAnimation = CurvedAnimation(
+                parent: _animationController,
+                curve: curve,
+              );
               final scaleAnimation = CurvedAnimation(
                 parent: _animationController,
-                curve: AppTheme.curveDefault,
-              ).drive(Tween(begin: 0.3, end: 1.0));
-
+                curve: curve,
+              ).drive(Tween(begin: 0.75, end: 1.0));
               final translationAnimation = CurvedAnimation(
                 parent: _animationController,
-                curve: AppTheme.curveDefault,
+                curve: curve,
               ).drive(Tween<Offset>(
-                begin: const Offset(0.0, 100.0),
+                begin: translationOffset,
                 end: Offset.zero,
               ));
 

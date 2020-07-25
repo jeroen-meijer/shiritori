@@ -78,6 +78,7 @@ extension NumUtils on num {
   }
 }
 
+/// Extensions that make handling collections of [Iterable]s more convenient.
 extension IterableUtils<T> on Iterable<T> {
   T get firstOrNull => isEmpty ? null : first;
 

@@ -35,7 +35,7 @@ packages:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.2"
+    version: "1.2.3"
   ffi:
     dependency: transitive
     description:
@@ -56,7 +56,7 @@ packages:
       name: kana_kit
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3+3"
+    version: "1.0.4"
   meta:
     dependency: "direct main"
     description:

@@ -6,7 +6,7 @@ import 'package:kana_kit/kana_kit.dart';
 import 'package:shared_models/shared_models.dart';
 import 'package:xml/xml.dart';
 
-const _wordCountLimit = 50000;
+const _wordCountLimit = 70000;
 
 // TODO: Move to config wrapper class for better compatibilty with other dicts.
 const _nounTag = '&n;';
@@ -40,7 +40,7 @@ Future<void> main(List<String> args) async {
 
   final xmlEntries = doc.getElement('JMdict').findAllElements('entry');
 
-  _time('Parsing nouns');
+  _time('Parsing nouns (limiting to $_wordCountLimit entries)');
   final nouns = xmlEntries
       .map<WordEntry>((entry) {
         final posData = entry

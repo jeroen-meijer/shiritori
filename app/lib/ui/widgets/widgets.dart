@@ -6,5 +6,6 @@ export 'expanding_route_button.dart';
 export 'raw_card.dart';
 export 'scale_button.dart';
 export 'subtitle_line.dart';
+export 'supertitle.dart';
 export 'text_button.dart';
 export 'widget_utils.dart';

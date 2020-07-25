@@ -71,3 +71,10 @@ extension TextStyleUtils on TextStyle {
     );
   }
 }
+
+extension AxisDirectionUtils on AxisDirection {
+  bool get isDown => this == AxisDirection.down;
+  bool get isLeft => this == AxisDirection.left;
+  bool get isRight => this == AxisDirection.right;
+  bool get isUp => this == AxisDirection.up;
+}

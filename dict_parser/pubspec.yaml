@@ -10,7 +10,7 @@ environment:
 dependencies:
   shared_models:
     path: ../shared_models
-  kana_kit: 1.0.3+3
+  kana_kit: 1.0.4
   meta: 1.1.8
   sqlite3: 0.1.4
   xml: 4.2.0

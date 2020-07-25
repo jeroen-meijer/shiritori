@@ -204,7 +204,7 @@ packages:
       name: kana_kit
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3+3"
+    version: "1.0.4"
   matcher:
     dependency: transitive
     description:

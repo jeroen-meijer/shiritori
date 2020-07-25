@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shiritori/assets/assets.dart';
 
@@ -11,9 +12,10 @@ abstract class AppTheme {
       dividerTheme: dividerTheme,
       floatingActionButtonTheme: floatingActionButtonTheme,
       fontFamily: Fonts.hurmeGeometricSans,
+      highlightColor: Colors.transparent,
+      platform: TargetPlatform.windows,
       scaffoldBackgroundColor: veryLightGrey,
       splashColor: lightBlue,
-      highlightColor: Colors.transparent,
       textTheme: textTheme,
     );
   }
@@ -40,6 +42,8 @@ abstract class AppTheme {
     elevation: elevationDefault,
     foregroundColor: AppTheme.white,
   );
+
+  // TargetPlatform get platform => TargetPlatform.windows;
 
   static const _letterSpacing = -0.5;
   static const textTheme = TextTheme(
@@ -107,7 +111,7 @@ abstract class AppTheme {
     overline: TextStyle(
       color: blue,
       fontSize: 14,
-      letterSpacing: _letterSpacing,
+      letterSpacing: 0,
     ),
   );
 

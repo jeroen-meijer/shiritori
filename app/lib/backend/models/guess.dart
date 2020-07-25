@@ -13,7 +13,7 @@ class Guess extends Equatable {
         assert(validity != null),
         assert(validity == GuessValidity.doesNotExist || entry != null);
 
-  /// The raw string of the guess.
+  /// The raw string of the guess after calling [Language.mapToLanguage] on it.
   ///
   /// If a corresponding [WordEntry] exists, it is set to [entry].
   ///

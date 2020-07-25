@@ -6,6 +6,7 @@
     "**/*.code-search": true,
     "**/dict_*.json": true,
     "dict_parser/*.json": true,
-    "dict_parser/*.xml": true
+    "dict_parser/*.xml": true,
+    "app/build/": true,
   },
 }

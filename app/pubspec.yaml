@@ -21,7 +21,7 @@ dependencies:
   flutter_svg: 0.18.0
   font_awesome_flutter: 8.8.1
   intl: 0.16.1
-  kana_kit: 1.0.3+3
+  kana_kit: 1.0.4
   meta: 1.1.8
   provider: 4.3.1
 

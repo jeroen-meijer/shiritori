@@ -207,6 +207,6 @@ class Game extends ChangeNotifier {
   }
 
   String transformGuess(String guess) {
-    return settings.dictionary.language.transform(guess);
+    return settings.dictionary.language.mapToLanguage(guess);
   }
 }
