@@ -58,7 +58,9 @@
 
 # How to launch
 
-## 1. Run the dictionary parser
+## 1. (Optional) Run the dictionary parser
+
+This repository comes with a pre-made Japanese dictionary file (`app/assets/dicts/dict_ja.json`).
 
 A dictionary parser can be found in the `/dict_parser` directory.
 It currently only supports parsing the Japanese `JMdict_e` document,

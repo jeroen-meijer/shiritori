@@ -7,8 +7,6 @@ on:
 jobs:
   publish_web:
     runs-on: ubuntu-latest
-    container:
-      image: google/dart:2.8.4
     env:
       APP_WORKING_DIRECTORY: ./app/
       BUILD_DIR: ./app/build/web/
@@ -21,9 +19,6 @@ jobs:
         with:
           channel: beta
           flutter-version: 1.20.0-7.2.pre
-
-      - name: Run dict_parser
-        run: ./tool/ci/run_dict_parser.sh
 
       - name: Install app dependencies
         run: flutter pub get
