@@ -17,6 +17,42 @@
     "type": "text",
     "placeholders": {}
   },
+  "restart": "Restart",
+  "@restart": {
+    "description": "Button text displayed on the restart button that, when pressed, will start a new game with the same settings.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidGuessHeader": "Invalid guess",
+  "@invalidGuessHeader": {
+    "description": "The header text shown in a guess card indicating a guess is invalid.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidGuessReasonDoesNotFollowPattern": "This word does not start with the last character of the last guess.",
+  "@invalidGuessReasonDoesNotFollowPattern": {
+    "description": "Text shown below the invalidGuessHeader explaining the guess is invalid because the guess does not follow the intended pattern.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidGuessReasonInvalidWord": "This word ends with an invalid character.",
+  "@invalidGuessReasonInvalidWord": {
+    "description": "Text shown below the invalidGuessHeader explaining the guess is invalid because the guess is an invalid word.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidGuessReasonAlreadyGuessed": "This word has already been guessed.",
+  "@invalidGuessReasonAlreadyGuessed": {
+    "description": "Text shown below the invalidGuessHeader explaining the guess is invalid because the guess has already been guessed before.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidGuessReasonDoesNotExist": "We couldn't find this word in our dictionary.",
+  "@invalidGuessReasonDoesNotExist": {
+    "description": "Text shown below the invalidGuessHeader explaining the guess is invalid because the guessed word does not exist in the dictionary.",
+    "type": "text",
+    "placeholders": {}
+  },
   "welcomeHeader": "Welcome back,\n{name}.",
   "@welcomeHeader": {
     "description": "Welcome message displayed at the top of the screen that greets the user.",

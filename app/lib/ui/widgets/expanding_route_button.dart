@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:shiritori/theme/theme.dart';
+import 'package:shiritori/ui/widgets/widgets.dart';
 
 class ExpandingRouteButton extends StatelessWidget {
   const ExpandingRouteButton({
@@ -31,22 +32,11 @@ class ExpandingRouteButton extends StatelessWidget {
         closedElevation:
             !_enabled ? AppTheme.elevationDisabled : AppTheme.elevationDefault,
         closedBuilder: (context, open) {
-          return InkWell(
+          return WideButton(
+            backgroundColor: null,
+            backgroundColorDisabled: null,
             onTap: !_enabled ? null : open,
-            child: SizedBox(
-              width: double.infinity,
-              height: 64.0,
-              child: Center(
-                child: DefaultTextStyle(
-                  style: Theme.of(context).textTheme.button.copyWith(
-                        color: AppTheme.colorButtonForegroundPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0,
-                      ),
-                  child: child,
-                ),
-              ),
-            ),
+            child: child,
           );
         },
       ),

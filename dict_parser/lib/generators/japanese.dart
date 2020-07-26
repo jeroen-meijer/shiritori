@@ -13,6 +13,15 @@ final _japanese = Generator._(
       phoneticSpellings: ['しつもん'],
       definitions: ['question', 'query'],
     ),
+    const WordEntry(
+      spellings: ['見事'],
+      phoneticSpellings: ['みごと'],
+      definitions: [
+        'splendid; magnificent; excellent; fine; superb; beautiful; admirable',
+        'utter (esp. defeat); total; complete',
+        'something worth seeing; sight; spectacle',
+      ],
+    ),
   ],
   generateEntries: (args) async {
     const _nounTag = '&n;';

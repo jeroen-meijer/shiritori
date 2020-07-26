@@ -8,4 +8,5 @@ export 'scale_button.dart';
 export 'subtitle_line.dart';
 export 'supertitle.dart';
 export 'text_button.dart';
+export 'wide_button.dart';
 export 'widget_utils.dart';

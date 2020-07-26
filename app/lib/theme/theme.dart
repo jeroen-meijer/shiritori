@@ -102,6 +102,11 @@ abstract class AppTheme {
       fontWeight: FontWeight.bold,
       letterSpacing: _letterSpacing,
     ),
+    button: TextStyle(
+      color: colorButtonForegroundPrimary,
+      fontWeight: FontWeight.bold,
+      fontSize: 24.0,
+    ),
     caption: TextStyle(
       color: blue,
       fontSize: 16,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:shiritori/theme/theme.dart';
 
 typedef ScaleButtonBuilder = Widget Function(
@@ -114,11 +115,17 @@ class _ScaleButtonState extends State<ScaleButton>
         return Transform.scale(
           alignment: Alignment.center,
           scale: _tapAnimation.value,
-          child: GestureDetector(
-            onTapDown: !enabled ? null : _onTapDown,
-            onTapUp: !enabled ? null : _onTapUp,
-            onTapCancel: !enabled ? null : _onTapCancel,
-            child: widget.child ?? widget.builder(context, _tapAnimation.value),
+          child: MouseRegion(
+            cursor: !enabled
+                ? MouseCursor.defer
+                : MaterialStateMouseCursor.clickable,
+            child: GestureDetector(
+              onTapDown: !enabled ? null : _onTapDown,
+              onTapUp: !enabled ? null : _onTapUp,
+              onTapCancel: !enabled ? null : _onTapCancel,
+              child:
+                  widget.child ?? widget.builder(context, _tapAnimation.value),
+            ),
           ),
         );
       },

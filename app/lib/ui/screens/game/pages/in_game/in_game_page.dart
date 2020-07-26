@@ -108,7 +108,9 @@ class _InGamePageState extends State<InGamePage> {
 
   @override
   Widget build(BuildContext context) {
+    final intl = ShiritoriLocalizations.of(context).game;
     final uiIntl = ShiritoriLocalizations.of(context).ui;
+
     final nextCharHint = Tuple(
       _game.startingCharacterForNextGuess,
       _game.language.mapFromLanguage(_game.startingCharacterForNextGuess),
@@ -149,30 +151,12 @@ class _InGamePageState extends State<InGamePage> {
               ),
             ),
           ),
-          if (_game.isFinished) ...[
-            Material(
-              color: AppTheme.blue,
-              child: InkWell(
-                onTap: widget.onRestart,
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 64.0,
-                  child: Center(
-                    child: DefaultTextStyle(
-                      // TODO: Refactor to separate button stuff
-                      style: Theme.of(context).textTheme.button.copyWith(
-                            color: AppTheme.colorButtonForegroundPrimary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
-                          ),
-                      // TODO: intl
-                      child: const Text('Restart'),
-                    ),
-                  ),
-                ),
-              ),
+          if (_game.isFinished)
+            WideButton(
+              onTap: widget.onRestart,
+              child: Text(intl.restart),
             )
-          ] else
+          else
             TextField(
               controller: _textController,
               focusNode: _focusNode,

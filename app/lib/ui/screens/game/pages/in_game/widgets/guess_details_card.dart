@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shiritori/backend/backend.dart';
+import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
 
@@ -156,17 +157,38 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
   }
 
   List<Widget> _buildErrorFooter(BuildContext context) {
+    final intl = ShiritoriLocalizations.of(context).game;
     final textTheme = Theme.of(context).textTheme;
+
+    String reason;
+
+    switch (_guess.validity) {
+      case GuessValidity.doesNotFollowPattern:
+        reason = intl.invalidGuessReasonDoesNotFollowPattern;
+        break;
+      case GuessValidity.invalidWord:
+        reason = intl.invalidGuessReasonInvalidWord;
+        break;
+      case GuessValidity.alreadyGuessed:
+        reason = intl.invalidGuessReasonAlreadyGuessed;
+        break;
+      case GuessValidity.doesNotExist:
+        reason = intl.invalidGuessReasonDoesNotExist;
+        break;
+      default:
+        reason = 'REASON UNKNOWN. THIS MESSAGE SHOULD NOT APPEAR';
+    }
 
     return [
       Text(
-        // TODO: intl
-        'Invalid guess',
+        intl.invalidGuessHeader,
         style: textTheme.headline5,
       ),
       verticalMargin8,
-      // TODO: intl
-      Text('REASON ${_guess.validity}'),
+      Text(
+        reason,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
     ];
   }
 
@@ -277,7 +299,11 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
                           verticalMargin8,
                           if (_guess.wordExists) ..._buildGuessInfo(context),
                           if (_guess.isInvalid) ...[
-                            verticalMargin12,
+                            Divider(
+                              color: adjustedTextColor,
+                              height: 24.0,
+                              thickness: 1.0,
+                            ),
                             ..._buildErrorFooter(context),
                           ],
                         ],
