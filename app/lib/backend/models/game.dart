@@ -51,6 +51,8 @@ class Game extends ChangeNotifier {
   final int startingPlayerIndex;
   final Map<int, Set<Guess>> guessesByPlayerIndex;
 
+  Language get language => settings.dictionary.language;
+
   int get winningPlayerIndex => _winningPlayerIndex;
   int _winningPlayerIndex;
 
@@ -67,8 +69,6 @@ class Game extends ChangeNotifier {
     }
 
     _log(0, 'query: "$query"');
-
-    final language = settings.dictionary.language;
 
     _log(1, 'startingCharacterForNextGuess: $startingCharacterForNextGuess');
     final followsPattern = startingCharacterForNextGuess ==
@@ -141,9 +141,8 @@ class Game extends ChangeNotifier {
           guessesByPlayerIndex[1] = guessesByPlayerIndex[1]
             ..add(
               Guess(
-                query: nextWord.phoneticSpellings
-                    .where(settings.dictionary.language.validate)
-                    .random,
+                query:
+                    nextWord.phoneticSpellings.where(language.validate).random,
                 validity: GuessValidity.valid,
                 entry: nextWord,
               ),
@@ -202,11 +201,10 @@ class Game extends ChangeNotifier {
       return null;
     }
 
-    return settings.dictionary.language
-        .selectEndingCharacter(lastGuess.right.query);
+    return language.selectEndingCharacter(lastGuess.right.query);
   }
 
   String transformGuess(String guess) {
-    return settings.dictionary.language.mapToLanguage(guess);
+    return language.mapToLanguage(guess);
   }
 }

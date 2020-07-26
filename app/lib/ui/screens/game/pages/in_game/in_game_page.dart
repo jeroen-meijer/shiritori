@@ -5,7 +5,12 @@ import 'package:shiritori/ui/screens/game/game.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
 
 class InGamePage extends StatefulWidget {
-  const InGamePage({Key key}) : super(key: key);
+  const InGamePage({
+    Key key,
+    this.onRestart,
+  }) : super(key: key);
+
+  final VoidCallback onRestart;
 
   @override
   _InGamePageState createState() => _InGamePageState();
@@ -59,8 +64,7 @@ class _InGamePageState extends State<InGamePage> {
 
     setState(() {
       _textController.clear();
-      final transformed =
-          _game.settings.dictionary.language.mapToLanguage(value);
+      final transformed = _game.language.mapToLanguage(value);
       _game.addGuess(transformed);
     });
   }
@@ -93,6 +97,10 @@ class _InGamePageState extends State<InGamePage> {
 
   @override
   Widget build(BuildContext context) {
+    final nextCharHint = Tuple(
+      _game.startingCharacterForNextGuess,
+      _game.language.mapFromLanguage(_game.startingCharacterForNextGuess),
+    );
     return Scaffold(
       resizeToAvoidBottomInset: true,
       resizeToAvoidBottomPadding: true,
@@ -114,7 +122,30 @@ class _InGamePageState extends State<InGamePage> {
               ),
             ),
           ),
-          if (!_game.isFinished)
+          if (_game.isFinished) ...[
+            Material(
+              color: AppTheme.blue,
+              child: InkWell(
+                onTap: widget.onRestart,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 64.0,
+                  child: Center(
+                    child: DefaultTextStyle(
+                      // TODO: Refactor to separate button stuff
+                      style: Theme.of(context).textTheme.button.copyWith(
+                            color: AppTheme.colorButtonForegroundPrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0,
+                          ),
+                      // TODO: intl
+                      child: const Text('Restart'),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ] else
             TextField(
               controller: _textController,
               focusNode: _focusNode,
@@ -127,8 +158,9 @@ class _InGamePageState extends State<InGamePage> {
               onEditingComplete: () {
                 // Do nothing. Prevents keyboard from hiding.
               },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
+              decoration: InputDecoration(
+                hintText: nextCharHint.fold((left, right) => '$left/$right'),
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16.0),
                     topRight: Radius.circular(16.0),

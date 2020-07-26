@@ -46,7 +46,7 @@ class CountdownPage extends StatelessWidget {
                   style: textTheme.headline3,
                 ),
                 Text(
-                  game.settings.dictionary.language.name,
+                  game.language.name,
                   style: textTheme.headline4,
                 ),
               ],

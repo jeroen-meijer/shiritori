@@ -52,14 +52,11 @@ class HomeScreen extends StatelessWidget {
                       ),
                       ExpandingRouteButton(
                         routeBuilder: (context) {
-                          return ChangeNotifierProvider(
-                            create: (_) => Game.startNew(
-                              SingleplayerGameSettings(
-                                dictionary: Dictionaries.of(context).japanese,
-                                answeringDuration: const Duration(seconds: 10),
-                              ),
+                          return GameScreen(
+                            settings: SingleplayerGameSettings(
+                              dictionary: Dictionaries.of(context).japanese,
+                              answeringDuration: const Duration(seconds: 10),
                             ),
-                            child: const GameScreen(),
                           );
                         },
                         child: Text(intl.quickPlayButtonTitle),

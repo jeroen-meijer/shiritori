@@ -43,6 +43,12 @@ class Tuple<T1, T2> extends Equatable {
     return Tuple(left, fn(right));
   }
 
+  /// Reduces this [Tuple] to a single value by combining [left] and [right]
+  /// using the provided [fn].
+  R fold<R>(R Function(T1 left, T2 right) fn) {
+    return fn(left, right);
+  }
+
   @override
   bool get stringify => true;
 
