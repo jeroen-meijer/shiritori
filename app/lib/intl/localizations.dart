@@ -11,13 +11,14 @@ class ShiritoriLocalizations {
 
   static Future<ShiritoriLocalizations> load(Locale locale) async {
     final localeString = '$locale';
-    Intl.defaultLocale = localeString;
 
     final name = locale?.countryCode?.isEmpty ?? true
         ? locale.languageCode
         : localeString;
 
     final localeName = Intl.canonicalizedLocale(name);
+
+    Intl.defaultLocale = localeString;
 
     await initializeMessages(localeName);
 

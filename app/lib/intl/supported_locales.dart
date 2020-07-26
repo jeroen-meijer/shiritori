@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+const defaultLocale = Locale('en', '');
+
 const supportedLocales = <Locale>[
-  Locale('en'),
+  defaultLocale,
+  Locale('ja', ''),
 ];

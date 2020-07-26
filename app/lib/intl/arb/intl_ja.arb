@@ -1,0 +1,150 @@
+{
+    "singleplayerTitle": "一人でプレイ",
+    "@singleplayerTitle": {
+        "description": "The header for the Singleplayer page. Usually, this string should be the same as HomeStrings.singleplayerCardTitle.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "multiplayerTitle": "二人でプレイ",
+    "@multiplayerTitle": {
+        "description": "The header for the Multiplayer page. Usually, this string should be the same as HomeStrings.multiplayerCardTitle.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "getReady": "いくぞ〜！",
+    "@getReady": {
+        "description": "Text indicating a match is about to start and the player needs to start paying attention and get themselves ready.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "restart": "またプレイ",
+    "@restart": {
+        "description": "Button text displayed on the restart button that, when pressed, will start a new game with the same settings.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "invalidGuessHeader": "無効名詞",
+    "@invalidGuessHeader": {
+        "description": "The header text shown in a guess card indicating a guess is invalid.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "invalidGuessReasonDoesNotFollowPattern": "この言の最初の文字は先の言の最後の文字と同じくありません。",
+    "@invalidGuessReasonDoesNotFollowPattern": {
+        "description": "Text shown below the invalidGuessHeader explaining the guess is invalid because the guess does not follow the intended pattern.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "invalidGuessReasonInvalidWord": "この言は「ん」と終わります。",
+    "@invalidGuessReasonInvalidWord": {
+        "description": "Text shown below the invalidGuessHeader explaining the guess is invalid because the guess is an invalid word.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "invalidGuessReasonAlreadyGuessed": "この言はすでに入力されていました。",
+    "@invalidGuessReasonAlreadyGuessed": {
+        "description": "Text shown below the invalidGuessHeader explaining the guess is invalid because the guess has already been guessed before.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "invalidGuessReasonDoesNotExist": "この言はアプリの辞書に入っていません。",
+    "@invalidGuessReasonDoesNotExist": {
+        "description": "Text shown below the invalidGuessHeader explaining the guess is invalid because the guessed word does not exist in the dictionary.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "welcomeHeader": "お帰りなさい、\\n{name}さん。",
+    "@welcomeHeader": {
+        "description": "Welcome message displayed at the top of the screen that greets the user.",
+        "type": "text",
+        "placeholders": {
+            "name": {
+                "example": "Jay"
+            }
+        }
+    },
+    "guessesStatisticTitle": "使った言葉",
+    "@guessesStatisticTitle": {
+        "description": "The header for the statistic showing the number of guesses the user has made in total.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "pointsStatisticTitle": "ポイント",
+    "@pointsStatisticTitle": {
+        "description": "The header for the statistic showing the number of points the user has in total.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "rankStatisticTitle": "ランク",
+    "@rankStatisticTitle": {
+        "description": "The header for the statistic showing the rank of the user compared to all other users.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "singleplayerCardTitle": "一人でプレイ",
+    "@singleplayerCardTitle": {
+        "description": "Title on the Singleplayer card that allows the user to start a quick play match.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "singleplayerCardSubtitle": "VS CPU",
+    "@singleplayerCardSubtitle": {
+        "description": "Subtitle on the Singleplayer card that indicates it is a new game mode. Should be all capitals if applicable.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "multiplayerCardTitle": "二人でプレイ",
+    "@multiplayerCardTitle": {
+        "description": "Title on the Multiplayer card that allows the user to start a multiplayer match.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "multiplayerCardSubtitle": "友達と一緒",
+    "@multiplayerCardSubtitle": {
+        "description": "Subtitle on the Multiplayer card that indicates the user can play with friends. Should be all capitals if applicable.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "statsCardTitle": "スタッツ",
+    "@statsCardTitle": {
+        "description": "Title on the Stats card that allows the user to view their stats and rank compared to other users.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "statsCardSubtitle": "ランク",
+    "@statsCardSubtitle": {
+        "description": "Subtitle on the Stats card that indicates the user can see their ranking. Should be all capitals if applicable.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "settingsCardTitle": "設定",
+    "@settingsCardTitle": {
+        "description": "Title on the Settings card that allows the user to view their settings.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "settingsCardSubtitle": "カスタマイズ",
+    "@settingsCardSubtitle": {
+        "description": "Subtitle on the Settings card that indicates the user can customize their settings. Should be all capitals if applicable.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "quickPlayButtonTitle": "クイック・プレイ",
+    "@quickPlayButtonTitle": {
+        "description": "Text on the Quick Play button that instantly starts a singleplayer CPU match.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "snackBarConfirmButton": "OK",
+    "@snackBarConfirmButton": {
+        "description": "Button text displayed on a snackbar that confirms and dismisses it.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "back": "戻る",
+    "@back": {
+        "description": "Button text displayed on back buttons that confirms and dismisses it. Should be all capitals if applicable.",
+        "type": "text",
+        "placeholders": {}
+    }
+}

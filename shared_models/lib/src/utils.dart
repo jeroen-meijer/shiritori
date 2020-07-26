@@ -115,7 +115,7 @@ extension IterableUtils<T> on Iterable<T> {
       return where(test);
       // ignore: avoid_catching_errors
     } on StateError {
-      return <T>[];
+      return [];
     }
   }
 

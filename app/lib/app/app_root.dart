@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class AppRoot extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.themeDataLight,
+        supportedLocales: supportedLocales,
         localizationsDelegates: const [
           ShiritoriLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

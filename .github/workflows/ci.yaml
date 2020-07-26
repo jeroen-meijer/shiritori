@@ -33,7 +33,7 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}
 
       - name: Check intl ARBs
-        run: ./tool/ci/intl_extract_to_arb.sh
+        run: ./tool/ci/verify_intl.sh
 
   dict_parser:
     runs-on: ubuntu-latest
