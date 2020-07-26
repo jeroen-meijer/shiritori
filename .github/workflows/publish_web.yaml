@@ -7,8 +7,10 @@ on:
 jobs:
   publish_web:
     runs-on: ubuntu-latest
+    container:
+      image: google/dart:2.8.4
     env:
-      WORKING_DIRECTORY: ./app/
+      APP_WORKING_DIRECTORY: ./app/
       BUILD_DIR: ./app/build/web/
     steps:
       - name: Checkout
@@ -20,17 +22,20 @@ jobs:
           channel: beta
           flutter-version: 1.20.0-7.2.pre
 
-      - name: Install dependencies
+      - name: Run dict_parser
+        run: ./tool/ci/run_dict_parser.sh
+
+      - name: Install app dependencies
         run: flutter pub get
-        working-directory: ${{ env.WORKING_DIRECTORY }}
+        working-directory: ${{ env.APP_WORKING_DIRECTORY }}
 
       - name: Enable web support
         run: flutter config --enable-web
-        working-directory: ${{ env.WORKING_DIRECTORY }}
+        working-directory: ${{ env.APP_WORKING_DIRECTORY }}
 
       - name: Build
         run: flutter build web --release
-        working-directory: ${{ env.WORKING_DIRECTORY }}
+        working-directory: ${{ env.APP_WORKING_DIRECTORY }}
 
       - name: Publish
         uses: peaceiris/actions-gh-pages@v3
@@ -40,6 +45,7 @@ jobs:
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
+        continue-on-error: true
         with:
           name: web_build
           path: ${{ env.BUILD_DIR }}
