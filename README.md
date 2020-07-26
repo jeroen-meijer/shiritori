@@ -46,15 +46,16 @@
 
 ---
 
-**Proof of concept and work in progress -- does not work yet.**
-
 ## Highlights
 
+- Fully playable.
 - Well-composed [modern UI](https://dribbble.com/shots/5836646-Quiz-iOS-app-Animation).
+- Pretty custom animations.
 - Context-aware theming.
-- Full `intl` localization.
-- Custom animations.
 - Full GitHub CI/CD.
+- Full `intl` localization.
+- Custom dictionary parser.
+- Expandable to any language.
 
 # How to launch
 
@@ -93,8 +94,6 @@ flutter run
 
 Here are some things I still need/want to implement.
 
-- Actually being able to play the game.
-- Kana-insensitive word search (i.e., refactor and improve `package:kana`)
 - Backend integration to play against other players preferably using Firebase.
 - More pretty animations.
 
