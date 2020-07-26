@@ -258,37 +258,32 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
             child: Card(
               shape: widget.shape,
               margin: EdgeInsets.zero,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 500,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: Stack(
-                    children: [
-                      if (widget.index != null)
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: Text('${widget.index + 1}'),
-                        ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            _buildHeader(context),
-                            verticalMargin8,
-                            if (_guess.wordExists) ..._buildGuessInfo(context),
-                            if (_guess.isInvalid) ...[
-                              verticalMargin12,
-                              ..._buildErrorFooter(context),
-                            ],
-                          ],
-                        ),
+              child: Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Stack(
+                  children: [
+                    if (widget.index != null)
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text('${widget.index + 1}'),
                       ),
-                    ],
-                  ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          _buildHeader(context),
+                          verticalMargin8,
+                          if (_guess.wordExists) ..._buildGuessInfo(context),
+                          if (_guess.isInvalid) ...[
+                            verticalMargin12,
+                            ..._buildErrorFooter(context),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

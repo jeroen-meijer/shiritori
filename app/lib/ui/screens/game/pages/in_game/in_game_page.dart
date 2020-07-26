@@ -78,9 +78,7 @@ class _InGamePageState extends State<InGamePage> {
     const sidePadding = 36.0;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-            vertical: 10.0,
-          ) +
+      padding: const EdgeInsets.symmetric(vertical: 10.0) +
           EdgeInsets.only(
             left: playerIndex == 0 ? sidePadding : 0,
             right: playerIndex == 1 ? sidePadding : 0,
@@ -90,14 +88,17 @@ class _InGamePageState extends State<InGamePage> {
         index: index,
         guess: playerGuess.right,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-          topLeft: playerIndex == 1 ? Radius.zero : AppTheme.radiusCardDefault,
-          bottomLeft:
-              playerIndex == 1 ? Radius.zero : AppTheme.radiusCardDefault,
-          topRight: playerIndex == 0 ? Radius.zero : AppTheme.radiusCardDefault,
-          bottomRight:
-              playerIndex == 0 ? Radius.zero : AppTheme.radiusCardDefault,
-        )),
+          borderRadius: BorderRadius.only(
+            topLeft:
+                playerIndex == 1 ? Radius.zero : AppTheme.radiusCardDefault,
+            bottomLeft:
+                playerIndex == 1 ? Radius.zero : AppTheme.radiusCardDefault,
+            topRight:
+                playerIndex == 0 ? Radius.zero : AppTheme.radiusCardDefault,
+            bottomRight:
+                playerIndex == 0 ? Radius.zero : AppTheme.radiusCardDefault,
+          ),
+        ),
         backgroundColor: playerIndex == 1 ? AppTheme.blue : null,
         animationDirection:
             playerIndex.isEven ? AxisDirection.left : AxisDirection.right,
@@ -128,22 +129,23 @@ class _InGamePageState extends State<InGamePage> {
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: SingleChildScrollView(
               controller: _scrollController,
               physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  SizedBox(height: MediaQuery.of(context).padding.top),
-                  verticalMargin48,
-                  for (var index = 0;
-                      index < _game.allGuessesByPlayerIndex.length;
-                      index++)
-                    _buildGuessDetailsCard(index),
-                  verticalMargin16,
-                ],
+              child: SizedBox(
+                child: Column(
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).padding.top),
+                    verticalMargin48,
+                    for (var index = 0;
+                        index < _game.allGuessesByPlayerIndex.length;
+                        index++)
+                      _buildGuessDetailsCard(index),
+                    verticalMargin16,
+                  ],
+                ),
               ),
             ),
           ),
@@ -186,10 +188,6 @@ class _InGamePageState extends State<InGamePage> {
               decoration: InputDecoration(
                 hintText: nextCharHint.fold((left, right) => '$left/$right'),
                 border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16.0),
-                    topRight: Radius.circular(16.0),
-                  ),
                   borderSide: BorderSide(
                     color: AppTheme.blue,
                     width: 4.0,
