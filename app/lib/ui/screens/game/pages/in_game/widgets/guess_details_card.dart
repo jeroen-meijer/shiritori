@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:shiritori/backend/backend.dart';
 import 'package:shiritori/theme/theme.dart';
@@ -10,6 +8,7 @@ class GuessDetailsCard extends StatefulWidget {
     Key key,
     this.index,
     @required this.guess,
+    this.shape,
     this.backgroundColor,
     this.animationDirection = AxisDirection.up,
   })  : assert(animationDirection != null),
@@ -17,6 +16,10 @@ class GuessDetailsCard extends StatefulWidget {
         super(key: key);
 
   final int index;
+
+  final Guess guess;
+
+  final ShapeBorder shape;
 
   /// The background color for the card.
   ///
@@ -27,8 +30,6 @@ class GuessDetailsCard extends StatefulWidget {
   ///
   /// Defaults to [AxisDirection.up].
   final AxisDirection animationDirection;
-
-  final Guess guess;
 
   @override
   _GuessDetailsCardState createState() => _GuessDetailsCardState();
@@ -49,11 +50,6 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
   @override
   void initState() {
     super.initState();
-
-    log(
-      'Animation direction for index ${widget.guess.query} (${widget.index}): '
-      '${widget.animationDirection}',
-    );
 
     _animationController = AnimationController(
       vsync: this,
@@ -260,6 +256,7 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
               );
             },
             child: Card(
+              shape: widget.shape,
               margin: EdgeInsets.zero,
               child: ConstrainedBox(
                 constraints: const BoxConstraints(

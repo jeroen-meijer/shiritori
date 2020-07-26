@@ -28,7 +28,7 @@ class TextButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               DefaultTextStyle(
-                style: Theme.of(context).textTheme.subtitle1,
+                style: Theme.of(context).textTheme.caption,
                 child: child,
               ),
               const SubtitleLine(),

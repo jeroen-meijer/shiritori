@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shiritori/backend/backend.dart';
+import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/theme/theme.dart';
 import 'package:shiritori/ui/screens/game/game.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
@@ -77,8 +79,7 @@ class _InGamePageState extends State<InGamePage> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-            horizontal: 12.0,
-            vertical: 6.0,
+            vertical: 10.0,
           ) +
           EdgeInsets.only(
             left: playerIndex == 0 ? sidePadding : 0,
@@ -88,6 +89,15 @@ class _InGamePageState extends State<InGamePage> {
         key: Key('guess-details-card-$index'),
         index: index,
         guess: playerGuess.right,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          topLeft: playerIndex == 1 ? Radius.zero : AppTheme.radiusCardDefault,
+          bottomLeft:
+              playerIndex == 1 ? Radius.zero : AppTheme.radiusCardDefault,
+          topRight: playerIndex == 0 ? Radius.zero : AppTheme.radiusCardDefault,
+          bottomRight:
+              playerIndex == 0 ? Radius.zero : AppTheme.radiusCardDefault,
+        )),
         backgroundColor: playerIndex == 1 ? AppTheme.blue : null,
         animationDirection:
             playerIndex.isEven ? AxisDirection.left : AxisDirection.right,
@@ -97,14 +107,28 @@ class _InGamePageState extends State<InGamePage> {
 
   @override
   Widget build(BuildContext context) {
+    final uiIntl = ShiritoriLocalizations.of(context).ui;
     final nextCharHint = Tuple(
       _game.startingCharacterForNextGuess,
       _game.language.mapFromLanguage(_game.startingCharacterForNextGuess),
     );
-    return Scaffold(
+
+    final navBarColor = Theme.of(context).brightness == Brightness.light
+        ? AppTheme.white
+        : AppTheme.black;
+
+    return CupertinoPageScaffold(
       resizeToAvoidBottomInset: true,
-      resizeToAvoidBottomPadding: true,
-      body: Column(
+      navigationBar: CupertinoNavigationBar(
+        backgroundColor: navBarColor.withOpacity(0.5),
+        leading: TextButton(
+          color: AppTheme.colorSingleplayer,
+          onTap: Navigator.of(context).pop,
+          child: Text(uiIntl.back),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: SingleChildScrollView(
@@ -113,6 +137,7 @@ class _InGamePageState extends State<InGamePage> {
               child: Column(
                 children: [
                   SizedBox(height: MediaQuery.of(context).padding.top),
+                  verticalMargin48,
                   for (var index = 0;
                       index < _game.allGuessesByPlayerIndex.length;
                       index++)

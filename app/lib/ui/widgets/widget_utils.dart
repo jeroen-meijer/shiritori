@@ -17,6 +17,7 @@ const verticalMargin22 = SizedBox(height: 22.0);
 const verticalMargin24 = SizedBox(height: 24.0);
 const verticalMargin32 = SizedBox(height: 32.0);
 const verticalMargin36 = SizedBox(height: 36.0);
+const verticalMargin48 = SizedBox(height: 48.0);
 
 const horizontalMargin2 = SizedBox(width: 2.0);
 const horizontalMargin4 = SizedBox(width: 4.0);
@@ -29,6 +30,7 @@ const horizontalMargin22 = SizedBox(width: 22.0);
 const horizontalMargin24 = SizedBox(width: 24.0);
 const horizontalMargin32 = SizedBox(width: 32.0);
 const horizontalMargin36 = SizedBox(width: 36.0);
+const horizontalMargin48 = SizedBox(width: 48.0);
 
 const leftSafePadding = _MediaQueryPadding(left: true);
 const topSafePadding = _MediaQueryPadding(top: true);
