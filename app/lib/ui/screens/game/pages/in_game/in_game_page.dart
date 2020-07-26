@@ -50,10 +50,13 @@ class _InGamePageState extends State<InGamePage> {
     );
   }
 
-  void _onSubmitGuess(String value) {
+  void _onSubmitGuess(String text) {
+    final value = text.trim();
+
     if (value == null) {
       return;
     }
+
     setState(() {
       _textController.clear();
       final transformed =
@@ -93,21 +96,6 @@ class _InGamePageState extends State<InGamePage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       resizeToAvoidBottomPadding: true,
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () {
-      //     final startingCharacter = _game.startingCharacterForNextGuess;
-      //     final nextWord = _game.settings.dictionary
-      //         .searchWordsThatStartsWith(startingCharacter)
-      //         .random
-      //         .phoneticSpellings
-      //         .whereOrEmpty(_game.settings.dictionary.language.validate)
-      //         .randomOrNull;
-
-      //     _game.addGuess(nextWord);
-      //   },
-      //   icon: const Icon(Icons.add),
-      //   label: const Text('Random'),
-      // ),
       body: Column(
         children: [
           Expanded(
