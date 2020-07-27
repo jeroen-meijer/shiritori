@@ -14,6 +14,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Create GitHub deployment
+        uses: chrnorm/deployment-action@releases/v1
+        id: deployment
+        with:
+          token: "${{ github.token }}"
+          target_url: https://jeroen-meijer.github.io/shiritori/
+          environment: production
+
+      - name: Set deployment status to pending
+        uses: chrnorm/deployment-action@releases/v1
+        with:
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          token: "${{ github.token }}"
+          target_url: https://jeroen-meijer.github.io/shiritori/
+          environment: production
+          status: pending
+
       - name: Install Flutter
         uses: subosito/flutter-action@v1.3.0
         with:
@@ -29,16 +46,49 @@ jobs:
         working-directory: ${{ env.APP_WORKING_DIRECTORY }}
 
       - name: Build
+        id: build
         run: flutter build web --release
         working-directory: ${{ env.APP_WORKING_DIRECTORY }}
 
+      - name: Set deployment status to in progress
+        uses: chrnorm/deployment-action@releases/v1
+        with:
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          token: "${{ github.token }}"
+          target_url: https://jeroen-meijer.github.io/shiritori/
+          environment: production
+          status: in_progress
+
       - name: Publish
+        id: publish
+        if: steps.build.conclusion == 'success'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ env.BUILD_DIR }}
 
+      - name: Set deployment status to success
+        if: steps.publish.conclusion == 'success'
+        uses: chrnorm/deployment-action@releases/v1
+        with:
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          token: "${{ github.token }}"
+          target_url: https://jeroen-meijer.github.io/shiritori/
+          environment: production
+          status: success
+
+      - name: Set deployment status to failure
+        if: steps.publish.conclusion == 'failure' || steps.build.conclusion == 'failure'
+        uses: chrnorm/deployment-action@releases/v1
+        with:
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          token: "${{ github.token }}"
+          target_url: https://jeroen-meijer.github.io/shiritori/
+          environment: production
+          status: failure
+
       - name: Upload artifacts
+        if: steps.build.conclusion == 'success'
         uses: actions/upload-artifact@v2
         continue-on-error: true
         with:
