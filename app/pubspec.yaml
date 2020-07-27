@@ -15,6 +15,7 @@ dependencies:
     sdk: flutter
   shared_models:
     path: ../shared_models
+  animate_do: 1.7.2
   animations: 1.1.1
   avatar_glow: 1.2.0
   equatable: 1.2.3
@@ -22,6 +23,7 @@ dependencies:
   font_awesome_flutter: 8.8.1
   intl: 0.16.1
   kana_kit: 1.0.4
+  liquid_progress_indicator: 0.3.2
   meta: 1.1.8
   provider: 4.3.1
 

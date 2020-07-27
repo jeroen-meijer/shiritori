@@ -1,4 +1,16 @@
 {
+  "newGame": "New Game",
+  "@newGame": {
+    "description": "The header for the game setup page where settings for a new game can be entered before playing.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "start": "Start",
+  "@start": {
+    "description": "The button text for the start button at the bottom of the game setup page that will start a new game with the selected settings.",
+    "type": "text",
+    "placeholders": {}
+  },
   "singleplayerTitle": "Singleplayer",
   "@singleplayerTitle": {
     "description": "The header for the Singleplayer page. Usually, this string should be the same as HomeStrings.singleplayerCardTitle.",

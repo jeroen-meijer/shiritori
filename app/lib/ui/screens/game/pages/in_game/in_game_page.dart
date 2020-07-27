@@ -109,27 +109,13 @@ class _InGamePageState extends State<InGamePage> {
   @override
   Widget build(BuildContext context) {
     final intl = ShiritoriLocalizations.of(context).game;
-    final uiIntl = ShiritoriLocalizations.of(context).ui;
 
     final nextCharHint = Tuple(
       _game.startingCharacterForNextGuess,
       _game.language.mapFromLanguage(_game.startingCharacterForNextGuess),
     );
 
-    final navBarColor = Theme.of(context).brightness == Brightness.light
-        ? AppTheme.white
-        : AppTheme.black;
-
-    return CupertinoPageScaffold(
-      resizeToAvoidBottomInset: true,
-      navigationBar: CupertinoNavigationBar(
-        backgroundColor: navBarColor.withOpacity(0.5),
-        leading: TextButton(
-          color: AppTheme.colorSingleplayer,
-          onTap: Navigator.of(context).pop,
-          child: Text(uiIntl.back),
-        ),
-      ),
+    return AppScaffold(
       child: Column(
         children: [
           Expanded(

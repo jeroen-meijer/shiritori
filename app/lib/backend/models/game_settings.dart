@@ -1,20 +1,37 @@
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
-import 'package:shiritori/backend/backend.dart';
+import 'package:shiritori/backend/backend.dart' show Dictionary;
 
 @immutable
 abstract class GameSettings {
   const GameSettings({
+    @required this.enemyType,
     @required this.dictionary,
     @required this.answeringDuration,
-    @required this.enemyType,
   })  : assert(dictionary != null),
         assert(answeringDuration != null),
         assert(enemyType != null);
 
+  factory GameSettings.defaultFor({
+    @required GameEnemyType enemyType,
+    @required Dictionary dictionary,
+  }) {
+    return enemyType.isSingleplayer
+        ? SingleplayerGameSettings(
+            dictionary: dictionary,
+            answeringDuration: defaultAnsweringDuration,
+          )
+        : MultiplayerGameSettings(
+            dictionary: dictionary,
+            answeringDuration: defaultAnsweringDuration,
+          );
+  }
+
+  final GameEnemyType enemyType;
   final Dictionary dictionary;
   final Duration answeringDuration;
-  final GameEnemyType enemyType;
+
+  static const Duration defaultAnsweringDuration = Duration(seconds: 10);
 }
 
 @immutable
@@ -28,13 +45,13 @@ class SingleplayerGameSettings implements GameSettings {
         assert(startWithCpuMove != null);
 
   @override
+  final GameEnemyType enemyType = GameEnemyType.singleplayer;
+
+  @override
   final Dictionary dictionary;
 
   @override
   final Duration answeringDuration;
-
-  @override
-  final GameEnemyType enemyType = GameEnemyType.singleplayer;
 
   final bool startWithCpuMove;
 }
@@ -48,13 +65,13 @@ class MultiplayerGameSettings implements GameSettings {
         assert(answeringDuration != null);
 
   @override
+  final GameEnemyType enemyType = GameEnemyType.multiplayer;
+
+  @override
   final Dictionary dictionary;
 
   @override
   final Duration answeringDuration;
-
-  @override
-  final GameEnemyType enemyType = GameEnemyType.multiplayer;
 }
 
 enum GameEnemyType {

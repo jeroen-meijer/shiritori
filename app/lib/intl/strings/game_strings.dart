@@ -1,6 +1,26 @@
 import 'package:intl/intl.dart';
 
 class GameStrings {
+  String get newGame {
+    return Intl.message(
+      'New Game',
+      name: 'newGame',
+      desc: 'The header for the game setup page where '
+          'settings for a new game can be entered before '
+          'playing.',
+    );
+  }
+
+  String get start {
+    return Intl.message(
+      'Start',
+      name: 'start',
+      desc: 'The button text for the start button at the '
+          'bottom of the game setup page that will start '
+          'a new game with the selected settings.',
+    );
+  }
+
   String get singleplayerTitle {
     return Intl.message(
       'Singleplayer',

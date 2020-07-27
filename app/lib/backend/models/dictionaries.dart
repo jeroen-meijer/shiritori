@@ -24,8 +24,8 @@ class Dictionaries {
     return all.map((dict) => dict.language).toList();
   }
 
-  static Dictionaries of(BuildContext context) {
-    return Provider.of<Dictionaries>(context, listen: false);
+  static Dictionaries of(BuildContext context, {bool listen = true}) {
+    return Provider.of<Dictionaries>(context, listen: listen);
   }
 
   static Future<Dictionary> _loadDictionaryFromDisk(Language language) async {

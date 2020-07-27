@@ -10,11 +10,14 @@ import 'package:shiritori/ui/screens/game/pages/pages.dart';
 class GameScreen extends StatefulWidget {
   const GameScreen({
     Key key,
-    @required this.settings,
-  })  : assert(settings != null),
+    this.useDefaultSettings = false,
+    @required this.enemyType,
+  })  : assert(useDefaultSettings != null),
+        assert(enemyType != null),
         super(key: key);
 
-  final GameSettings settings;
+  final bool useDefaultSettings;
+  final GameEnemyType enemyType;
 
   @override
   _GameScreenState createState() => _GameScreenState();
@@ -28,19 +31,34 @@ class _GameScreenState extends State<GameScreen> {
   int _secondsRemaining;
   Timer _playCountdownTimer;
 
-  bool get _showInGame => _secondsRemaining == 0;
+  GameSettings get _settings => _game?.settings;
+  set _settings(GameSettings settings) => _game ??= Game.startNew(settings);
+
+  bool get _isQuickPlay => widget.useDefaultSettings;
+  bool get _showSetup => _settings == null;
+  bool get _showInGame => !_showSetup && _secondsRemaining == 0;
 
   @override
   void initState() {
     super.initState();
-    _game = Game.startNew(widget.settings);
-    _resetTimer();
+
+    if (_isQuickPlay) {
+      _setGameWithDefaultSettings();
+      _resetTimer();
+    }
   }
 
   @override
   void dispose() {
     _playCountdownTimer?.cancel();
     super.dispose();
+  }
+
+  void _setGameWithDefaultSettings() {
+    _settings = GameSettings.defaultFor(
+      enemyType: widget.enemyType,
+      dictionary: Dictionaries.of(context, listen: false).japanese,
+    );
   }
 
   void _resetTimer() {
@@ -63,8 +81,15 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
+  void _onSubmitSettings(GameSettings settings) {
+    _settings = settings;
+    setState(_resetTimer);
+  }
+
   void _onRestart() {
-    _game = Game.startNew(widget.settings);
+    if (_isQuickPlay) {
+      _setGameWithDefaultSettings();
+    }
     setState(_resetTimer);
   }
 
@@ -81,14 +106,18 @@ class _GameScreenState extends State<GameScreen> {
             child: child,
           );
         },
-        child: !_showInGame
-            ? Provider.value(
-                value: _secondsRemaining,
-                child: const CountdownPage(),
+        child: _showSetup
+            ? SetupPage(
+                onSubmit: _onSubmitSettings,
               )
-            : InGamePage(
-                onRestart: _onRestart,
-              ),
+            : !_showInGame
+                ? Provider.value(
+                    value: _secondsRemaining,
+                    child: const CountdownPage(),
+                  )
+                : InGamePage(
+                    onRestart: _onRestart,
+                  ),
       ),
     );
   }

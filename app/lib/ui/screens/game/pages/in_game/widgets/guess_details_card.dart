@@ -279,7 +279,6 @@ class _GuessDetailsCardState extends State<GuessDetailsCard>
             },
             child: Card(
               shape: widget.shape,
-              margin: EdgeInsets.zero,
               child: Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: Stack(

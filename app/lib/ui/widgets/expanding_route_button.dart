@@ -33,8 +33,7 @@ class ExpandingRouteButton extends StatelessWidget {
             !_enabled ? AppTheme.elevationDisabled : AppTheme.elevationDefault,
         closedBuilder: (context, open) {
           return WideButton(
-            backgroundColor: null,
-            backgroundColorDisabled: null,
+            transparent: true,
             onTap: !_enabled ? null : open,
             child: child,
           );

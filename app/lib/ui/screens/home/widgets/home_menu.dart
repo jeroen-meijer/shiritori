@@ -29,11 +29,8 @@ class HomeMenu extends StatelessWidget {
                   color: AppTheme.colorSingleplayer,
                   icon: const Text('遊ぶ'),
                   expandedChildBuilder: (context) {
-                    return GameScreen(
-                      settings: SingleplayerGameSettings(
-                        dictionary: Dictionaries.of(context).japanese,
-                        answeringDuration: const Duration(seconds: 10),
-                      ),
+                    return const GameScreen(
+                      enemyType: GameEnemyType.singleplayer,
                     );
                   },
                 ),
@@ -96,28 +93,31 @@ class _PlayCard extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: Opacity(
-            opacity: expandedChildBuilder != null ? 1.0 : 0.5,
-            child: OpenContainer(
-              tappable: false,
-              transitionDuration: AppTheme.durationAnimationDefault,
-              openBuilder: (context, close) {
-                return expandedChildBuilder?.call(context);
-              },
-              closedColor: cardTheme.color,
-              closedShape: cardTheme.shape,
-              closedElevation: cardTheme.elevation,
-              closedBuilder: (context, open) {
-                return ScaleButton(
-                  onTap: !enabled ? null : open,
-                  child: Material(
-                    type: MaterialType.transparency,
-                    child: DefaultStylingColor(
-                      color: color,
+      child: DefaultStylingColor(
+        color: color,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Opacity(
+              opacity: expandedChildBuilder != null ? 1.0 : 0.5,
+              child: OpenContainer(
+                tappable: false,
+                transitionDuration: AppTheme.durationAnimationDefault,
+                openBuilder: (context, close) {
+                  return DefaultStylingColor(
+                    color: color,
+                    child: expandedChildBuilder?.call(context),
+                  );
+                },
+                closedColor: cardTheme.color,
+                closedShape: cardTheme.shape,
+                closedElevation: cardTheme.elevation,
+                closedBuilder: (context, open) {
+                  return ScaleButton(
+                    onTap: !enabled ? null : open,
+                    child: Material(
+                      type: MaterialType.transparency,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -152,9 +152,9 @@ class _PlayCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ),
