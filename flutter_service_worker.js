@@ -7,7 +7,7 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "manifest.json": "78d4086ae70c66185006553a31abece7",
 "assets/NOTICES": "f55eec090bf2e7d69b47dffaef9cee71",
-"assets/assets/dicts/dict_ja.json": "58c966cc9d055dfcc01681fd50b58482",
+"assets/assets/dicts/dict_ja.json": "7616e274c1f66a2f4d4c749d12213b08",
 "assets/assets/images/png/background_main.png": "344332b848e0323fb1616d581eda1b4f",
 "assets/assets/fonts/HurmeGeometricSans/HurmeGeometricSans_Thin.otf": "615be1d79e6a6fb252d3594561aec966",
 "assets/assets/fonts/HurmeGeometricSans/HurmeGeometricSans_Hairline.otf": "5f0c67466f09c73abf4aea4021f2b0f1",
@@ -32,7 +32,7 @@ const RESOURCES = {
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "index.html": "96a7f3dbcef4359bdc350de9aa01ff3a",
 "/": "96a7f3dbcef4359bdc350de9aa01ff3a",
-"main.dart.js": "9805180317b24cf09996cdc4f2a1c73b",
+"main.dart.js": "e210a0219d4d81259598229dbdbb5986",
 "CNAME": "f8d7c1c5188c3b9c766848af0f1433d0"
 };
 
