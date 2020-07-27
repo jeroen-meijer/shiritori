@@ -1,7 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:shiritori/backend/backend.dart';
 import 'package:shiritori/intl/intl.dart';
 import 'package:shiritori/ui/widgets/widgets.dart';
@@ -19,12 +18,9 @@ class SetupPage extends StatefulWidget {
 }
 
 class _SetupPageState extends State<SetupPage> {
-  final _animationDuration =
-      Duration(milliseconds: (250 * timeDilation).round());
-  final _animationGapDuration =
-      Duration(milliseconds: (150 * timeDilation).round());
-  final _aniamtionInitialDelay =
-      Duration(milliseconds: (150 * timeDilation).round());
+  static const _aniamtionInitialDelay = Duration(milliseconds: 200);
+  static const _animationDuration = Duration(milliseconds: 250);
+  static const _animationGapDuration = Duration(milliseconds: 150);
 
   var _delayFactor = 0;
   var _gameModeIsSingleplayer = true;

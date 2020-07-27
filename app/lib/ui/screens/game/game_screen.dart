@@ -31,8 +31,7 @@ class _GameScreenState extends State<GameScreen> {
   int _secondsRemaining;
   Timer _playCountdownTimer;
 
-  GameSettings get _settings => _game?.settings;
-  set _settings(GameSettings settings) => _game ??= Game.startNew(settings);
+  GameSettings _settings;
 
   bool get _isQuickPlay => widget.useDefaultSettings;
   bool get _showSetup => _settings == null;
@@ -59,6 +58,7 @@ class _GameScreenState extends State<GameScreen> {
       enemyType: widget.enemyType,
       dictionary: Dictionaries.of(context, listen: false).japanese,
     );
+    _game = Game.startNew(_settings);
   }
 
   void _resetTimer() {
@@ -83,13 +83,12 @@ class _GameScreenState extends State<GameScreen> {
 
   void _onSubmitSettings(GameSettings settings) {
     _settings = settings;
+    _game = Game.startNew(_settings);
     setState(_resetTimer);
   }
 
   void _onRestart() {
-    if (_isQuickPlay) {
-      _setGameWithDefaultSettings();
-    }
+    _game = Game.startNew(_settings);
     setState(_resetTimer);
   }
 

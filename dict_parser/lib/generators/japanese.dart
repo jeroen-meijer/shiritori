@@ -22,6 +22,20 @@ final _japanese = Generator._(
         'something worth seeing; sight; spectacle',
       ],
     ),
+    const WordEntry(
+      spellings: ['饂飩'],
+      phoneticSpellings: ['うどん', 'うんどん', 'ウドン'],
+      definitions: [
+        'udon; thick Japanese wheat noodles',
+      ],
+    ),
+    const WordEntry(
+      spellings: ['拉麺'],
+      phoneticSpellings: ['ラーメン', 'らーめん'],
+      definitions: [
+        'ramen; Chinese-style noodles',
+      ],
+    ),
   ],
   generateEntries: (args) async {
     const _nounTag = '&n;';
