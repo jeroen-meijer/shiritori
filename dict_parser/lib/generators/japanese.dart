@@ -36,6 +36,13 @@ final _japanese = Generator._(
         'ramen; Chinese-style noodles',
       ],
     ),
+    const WordEntry(
+      spellings: ['気分'],
+      phoneticSpellings: ['きぶん'],
+      definitions: [
+        'feeling; mood',
+      ],
+    ),
   ],
   generateEntries: (args) async {
     const _nounTag = '&n;';

@@ -87,7 +87,9 @@ class Game extends ChangeNotifier {
       validity = GuessValidity.invalidWord;
     }
 
-    final hasBeenGuessed = allGuessesByPlayerIndex.contains(query);
+    final hasBeenGuessed = allGuessesByPlayerIndex
+        .map((entry) => entry.right.query)
+        .contains(query);
     if (hasBeenGuessed) {
       _log(4, 'alreadyGuessed...');
       validity = GuessValidity.alreadyGuessed;
