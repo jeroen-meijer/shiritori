@@ -58,9 +58,9 @@ class _InGamePageState extends State<InGamePage> {
   }
 
   void _onSubmitGuess(String text) {
-    final value = text.trim();
+    final value = text?.trim();
 
-    if (value == null) {
+    if (value?.isEmpty ?? true) {
       return;
     }
 

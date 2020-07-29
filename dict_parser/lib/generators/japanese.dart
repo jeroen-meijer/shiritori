@@ -43,6 +43,15 @@ final _japanese = Generator._(
         'feeling; mood',
       ],
     ),
+    const WordEntry(
+      spellings: ['日'],
+      phoneticSpellings: ['にち'],
+      definitions: [
+        'day (of the month)​',
+        'counter for days​',
+        'Sunday',
+      ],
+    ),
   ],
   generateEntries: (args) async {
     const _nounTag = '&n;';
